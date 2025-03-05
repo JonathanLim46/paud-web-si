@@ -13,6 +13,7 @@ class DataPribadi extends Model
     public $incrementing = false;
     protected $fillable = [
         'nik', 
+        'pendaftaran_id',
         'nama_lengkap', 
         'jenis_kelamin', 
         'tempat_lahir',

@@ -16,10 +16,6 @@ class Pendaftar extends Model
     protected $fillable = [
         'status_verifikasi',
         'no_telp',
-        'nik',
-        'orangTua_id',
-        'dokumen_id',
-        'npsn'
     ];
 
     public function dataPribadi() : HasOne{ 

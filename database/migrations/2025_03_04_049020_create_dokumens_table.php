@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tb_dokumen', function (Blueprint $table) {
             $table->id('id_dokumen');
+            $table->unsignedBigInteger('pendaftaran_id');
+            $table->foreign('pendaftaran_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
             $table->string('kartu_keluarga');
             $table->string('akta_kelahiran');
             $table->string('surat_pindah')->nullable();

@@ -11,7 +11,7 @@ class Murid extends Model
     protected $table = 'tb_murid';
     protected $primaryKey = 'id_murid';
     protected $fillable = [
-        'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 
+        'nama_lengkap', 'kelas_id', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 
         'agama', 'no_telp_orangTua', 'nama_ayah', 'nama_ibu', 'nama_wali'
     ];
 

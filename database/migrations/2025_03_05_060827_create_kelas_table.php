@@ -14,12 +14,6 @@ return new class extends Migration
         Schema::create('tb_kelas', function (Blueprint $table) {
             $table->id('id_kelas');
             $table->string('tingkat_kelas');
-            $table->unsignedBigInteger('guru_id');
-            $table->foreign('guru_id')->references('id_guru')->on('tb_guru')->onDelete('cascade');
-            $table->unsignedBigInteger('murid_id');
-            $table->foreign('murid_id')->references('id_murid')->on('tb_murid')->onDelete('cascade');
-            $table->unsignedBigInteger('pelajaran_id');
-            $table->foreign('pelajaran_id')->references('id_pelajaran')->on('tb_mata_pelajaran')->onDelete('cascade');
             $table->timestamps();
         });
     }

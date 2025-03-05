@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tb_mata_pelajaran', function (Blueprint $table) {
             $table->id('id_pelajaran');
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id_kelas')->on('tb_kelas')->onDelete('cascade');
             $table->string('nama_pelajaran');
             $table->date('jadwal_pelajaran');
             $table->timestamps();

@@ -11,6 +11,7 @@ class DataOrangTua extends Model
     protected $table = 'tb_data_orang_tua';
     protected $primaryKey = 'id_orangTua';
     protected $fillable = [
+        'pendaftaran_id',
         'nama_ayah', 
         'nik_ayah', 
         'nama_ibu', 

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tb_murid', function (Blueprint $table) {
             $table->id('id_murid');
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id_kelas')->on('tb_kelas')->onDelete('cascade');
             $table->string('nama_lengkap');
             $table->string('jenis_kelamin');
             $table->string('tempat_lahir');

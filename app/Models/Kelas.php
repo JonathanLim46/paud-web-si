@@ -13,7 +13,7 @@ class Kelas extends Model
     protected $table = 'tb_kelas';
     protected $primaryKey = 'id_kelas';
     protected $fillabel = [
-        'tingkat_kelas', 'guru_id', 'murid_id', 'pelajaran_id'
+        'tingkat_kelas'
     ];
 
     public function guru(): HasOne{

@@ -13,6 +13,7 @@ class DataSekolah extends Model
     public $incrementing = false;
     protected $fillable = [
         'npsn',
+        'pendaftaran_id',
         'alamat_sekolah',
         'jenjang_sekolah'
     ];

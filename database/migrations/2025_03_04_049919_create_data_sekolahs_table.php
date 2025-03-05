@@ -11,19 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_data_pribadi', function (Blueprint $table) {
-            $table->string('nik')->unique();
+        Schema::create('tb_data_sekolah', function (Blueprint $table) {
+            $table->string('npsn')->unique()->nullable();
             $table->unsignedBigInteger('pendaftaran_id');
             $table->foreign('pendaftaran_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
-            $table->string('nama_lengkap');
-            $table->string('jenis_kelamin');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->string('agama');
-            $table->integer('anak_ke');
-            $table->float('berat_badan');
-            $table->integer('tinggi_badan');
-            $table->integer('lingkar_kepala');
+            $table->string('alamat_sekolah')->nullable();
+            $table->string('jenjang_sekolah')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_pribadis');
+        Schema::dropIfExists('data_sekolahs');
     }
 };

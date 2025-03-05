@@ -11,6 +11,7 @@ class MataPelajaran extends Model
     protected $primaryKey = 'id_pelajaran';
     protected $fillable = [
         'nama_pelajaran',
+        'kelas_id',
         'jadwal_pelajaran'
     ];
 }

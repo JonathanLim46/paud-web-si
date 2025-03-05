@@ -12,6 +12,7 @@ class Dokumen extends Model
     protected $primaryKey = 'id_dokumen';
     protected $fillable = [
         'kartu_keluarga',
+        'pendaftaran_id',
         'akta_kelahiran', 
         'surat_pindah'
     ];

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_data_sekolah', function (Blueprint $table) {
-            $table->string('npsn')->unique()->nullable();
-            $table->string('alamat_sekolah')->nullable();
-            $table->string('jenjang_sekolah')->nullable();
-            $table->timestamps();
-        });
+    Schema::create('tb_pendaftar', function (Blueprint $table) {
+        $table->id('id_pendaftaran');
+        $table->string('no_telp');
+        $table->boolean('status_verifikasi')->default(false);
+        $table->timestamps(); 
+    });
     }
 
     /**
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_sekolahs');
+        Schema::dropIfExists('pendaftars');
     }
 };
