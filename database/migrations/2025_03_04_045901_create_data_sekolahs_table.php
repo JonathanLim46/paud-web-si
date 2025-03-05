@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_sekolahs', function (Blueprint $table) {
+        Schema::create('tb_data_sekolah', function (Blueprint $table) {
             $table->string('npsn')->unique()->nullable();
             $table->string('alamat_sekolah')->nullable();
             $table->string('jenjang_sekolah')->nullable();

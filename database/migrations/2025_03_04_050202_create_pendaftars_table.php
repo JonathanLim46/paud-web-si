@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('pendaftars', function (Blueprint $table) {
+    Schema::create('tb_pendaftar', function (Blueprint $table) {
         $table->id();
         $table->string('nik');
-        $table->foreign('nik')->references('nik')->on('data_pribadis')->onDelete('cascade');
+        $table->foreign('nik')->references('nik')->on('tb_data_pribadi')->onDelete('cascade');
         $table->unsignedBigInteger('orangTua_id');
-        $table->foreign('orangTua_id')->references('id_orangTua')->on('data_orang_tuas')->onDelete('cascade');
+        $table->foreign('orangTua_id')->references('id_orangTua')->on('tb_data_orang_tua')->onDelete('cascade');
         $table->string('no_telp');
         $table->unsignedBigInteger('dokumen_id');
-        $table->foreign('dokumen_id')->references('id_dokumen')->on('dokumens')->onDelete('cascade');
+        $table->foreign('dokumen_id')->references('id_dokumen')->on('tb_dokumen')->onDelete('cascade');
         $table->string('npsn')->nullable();
-        $table->foreign('npsn')->references('npsn')->on('data_sekolahs')->onDelete('cascade');
+        $table->foreign('npsn')->references('npsn')->on('tb_data_sekolah')->onDelete('cascade');
         $table->boolean('status_verifikasi')->default(false);
         $table->timestamps(); 
     });

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokumens', function (Blueprint $table) {
+        Schema::create('tb_dokumen', function (Blueprint $table) {
             $table->id('id_dokumen');
             $table->string('kartu_keluarga');
             $table->string('akta_kelahiran');
