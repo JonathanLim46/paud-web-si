@@ -7,10 +7,12 @@ use App\Models\Nilai;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Murid extends Model
 {
     //
+    use HasFactory;
     protected $table = 'tb_murid';
     protected $primaryKey = 'id_murid';
     protected $fillable = [
@@ -19,10 +21,10 @@ class Murid extends Model
     ];
 
     public function kelas(): BelongsTo{
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
     public function nilai(): HasMany{
-        return $this->hasMany(Nilai::class);
+        return $this->hasMany(Nilai::class, 'murid_id');
     }
 }

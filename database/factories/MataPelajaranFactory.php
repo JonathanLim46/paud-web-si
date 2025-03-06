@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pendaftar>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MataPelajaran>
  */
-class PendaftarFactory extends Factory
+class MataPelajaranFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +19,9 @@ class PendaftarFactory extends Factory
     {
         return [
             //
-            'status_verifikasi' => false,
-            'no_telp' => fake()->unique()->phoneNumber()
+            'kelas_id' => Kelas::factory(),
+            'nama_pelajaran' => fake()->sentence(2),
+            'jadwal_pelajaran' => fake()->word()
         ];
     }
 }

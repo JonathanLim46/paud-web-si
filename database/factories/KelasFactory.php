@@ -5,10 +5,11 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pendaftar>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Kelas>
  */
-class PendaftarFactory extends Factory
+class KelasFactory extends Factory
 {
+    protected static $toggle = false;
     /**
      * Define the model's default state.
      *
@@ -16,10 +17,12 @@ class PendaftarFactory extends Factory
      */
     public function definition(): array
     {
+        $kelas = self::$toggle ? 'B' : 'A';
+
+        self::$toggle = !self::$toggle;
         return [
             //
-            'status_verifikasi' => false,
-            'no_telp' => fake()->unique()->phoneNumber()
+            'tingkat_kelas' => $kelas
         ];
     }
 }

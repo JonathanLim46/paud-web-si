@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('id_kelas')->on('tb_kelas')->onDelete('cascade');
             $table->string('nama_pelajaran');
-            $table->date('jadwal_pelajaran');
+            $table->string('jadwal_pelajaran');
             $table->timestamps();
         });
     }
