@@ -6,6 +6,8 @@ use App\Models\Guru;
 use App\Models\Murid;
 use App\Models\MataPelajaran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Kelas extends Model
 {

@@ -4,10 +4,14 @@ namespace App\Models;
 
 use App\Models\Pendaftar;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataSekolah extends Model
 {
     //
+    use HasFactory;
+
     protected $table = 'tb_data_sekolah';
     protected $primaryKey = 'npsn';
     public $incrementing = false;
@@ -20,6 +24,6 @@ class DataSekolah extends Model
 
     public function pendaftar() : BelongsTo
     {
-        return $this->belongsTo(Pendaftar::class);
+        return $this->belongsTo(Pendaftar::class, 'pendaftaran_id');
     }
 }

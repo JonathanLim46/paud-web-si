@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tb_statusPPDB', function (Blueprint $table) {
             $table->id();
-            $table->bool('status');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
