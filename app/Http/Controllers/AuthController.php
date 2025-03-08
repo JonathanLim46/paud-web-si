@@ -9,7 +9,7 @@ class AuthController extends Controller
 {
     //
     public function index(){
-        return view('dashboard.dashboard');
+        return view('dashboard.login');
     }
     
     public function authenticate(Request $request){
@@ -20,11 +20,19 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            dd(session()->all());
-
+            return redirect()->intended('dashboard');
         }
 
         dd('failed login');
 
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('login');
     }
 }

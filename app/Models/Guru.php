@@ -14,12 +14,8 @@ class Guru extends Model
     protected $table = 'tb_guru';
     protected $primaryKey = 'id_guru';
     protected $fillable = [
-        'username',
         'kelas_id',
-        'name',
-        'password',
-        'email',
-        'no_telp'
+        'user_id'
     ];
     protected $hidden = ['password']; 
 
