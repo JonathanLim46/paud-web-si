@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    Halaman Dashboard {{ auth()->user()->name }}
+    Halaman Dashboard Admin {{ auth()->user()->name }}
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Logout</button>
