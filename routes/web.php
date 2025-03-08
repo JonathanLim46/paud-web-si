@@ -17,3 +17,7 @@ Route::get('pendaftaran', function() {
 Route::get('kontak', function(){
     return view('kontak');
 });
+
+Route::get('login', function(){
+    return view('dashboard.dashboard');
+});

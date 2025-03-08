@@ -1,0 +1,9 @@
+body{
+    height: 100vh;
+    background-color: #29B5D8;
+}
+
+.container{
+    border-radius: 2%;
+    background-color: #FFFFFF;
+}
