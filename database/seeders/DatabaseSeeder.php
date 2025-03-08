@@ -19,13 +19,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::factory()->count(3)->create();
 
         $this->call([
-            AdminSeeder::class,
             PendaftarSeeder::class,
             KelasSeeder::class
         ]);
