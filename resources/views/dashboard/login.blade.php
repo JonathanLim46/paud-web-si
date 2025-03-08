@@ -12,8 +12,9 @@
         <div class="container h-75 p-5">
             <img src="{{ asset('images/LOGO.png') }}" class="img-fluid mb-4" alt="">
             <div class="content mt-5">
-                <header class="text-center"> 
-                    <h2>LOGIN</h1>
+                <header> 
+                    <h2 class="fw-bold">Login</h1>
+                    <p class="fs-6">Login untuk masuk mis Paud KB AL-HUSNA</p>
                 </header>
                 <form method="POST" action="{{ route('authenticate') }}">
                   @csrf
@@ -25,7 +26,7 @@
                         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                         <label for="floatingPassword">Password</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary w-100 btn-lg mt-2" style="background-color: #F26419;">Log In</button>
                 </form>
             </div>
         </div>

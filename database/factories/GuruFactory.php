@@ -23,7 +23,7 @@ class GuruFactory extends Factory
         return [
             //
             'kelas_id' => Kelas::factory(),
-            'user_id' => User::factory()
+            'user_id' => User::factory()->guru()
         ];
     }
 }
