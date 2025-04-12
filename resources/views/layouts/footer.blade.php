@@ -81,7 +81,7 @@
         }
     }
     .bg-custom {
-    background-image: url("{{ asset('images/background_footer.png') }}");
+    background-image: url("{{ asset('images/page-layout/background_footer.png') }}");
     background-size: cover; 
     background-repeat: no-repeat;
     height: 400px;
@@ -94,7 +94,7 @@
         <div class="row mt-5">
             <!-- School Info Column -->
             <div class="col-md-4 school-info">
-                <img src="{{ asset('images/logo_tidak_text.png') }}" alt="KB AL-HUSNA Logo" class="school-logo">
+                <img src="{{ asset('images/page-layout/logo_tidak_text.png') }}" alt="KB AL-HUSNA Logo" class="school-logo">
                 <h4>KB AL-HUSNA</h4>
                 <p>Kp. Pasir Muncang RT 01</p>
                 <p>RW 03 Desa Sukamanah</p>

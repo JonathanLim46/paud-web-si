@@ -3,7 +3,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="{{ asset('images/logo_dengan_text.png') }}" alt="Logo Sekolah" height="50">
+            <img src="{{ asset('images/page-layout/logo_dengan_text.png') }}" alt="Logo Sekolah" height="50">
         </a>
 
         <!-- Toggle Button (Mobile) -->
@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse flex-grow-1 justify-content-center" id="navbarNav">
             <ul class="navbar-nav gap-4">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,8 +23,8 @@
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="tentangKamiDropdown">
                         <li><a class="dropdown-item py-2" href="/profil">Profil Sekolah</a></li>
+                        <li><a class="dropdown-item py-2" href="/kurikulum">Kurikulum</a></li>
                         <li><a class="dropdown-item py-2" href="/galeri">Galeri</a></li>
-                        <li><a class="dropdown-item py-2" href="/kontak">Kontak</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

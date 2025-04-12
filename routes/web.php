@@ -7,19 +7,29 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return view('CompanyProfile.home');
 });
+Route::get('tentang-kami', function() {
+    return view('tentang');
+});
+Route::get('profil', function() {
+    return view('CompanyProfile/profilSekolah');
+});
 
-// Route::get('tentang-kami', function() {
-//     return view('tentang');
-// });
+Route::get('pendaftaran', function() {
+    return view('CompanyProfile/pendaftaran');
+});
 
-// Route::get('pendaftaran', function() {
-//     return view('pendaftaran');
-// });
-
-// Route::get('kontak', function(){
-//     return view('kontak');
-// });
-
+Route::get('kontak', function(){
+    return view('CompanyProfile/kontak');
+});
+Route::get('kurikulum', function(){
+    return view('CompanyProfile/kurikulum');
+});
+Route::get('galeri', function(){
+    return view('CompanyProfile/galeri');
+});
+Route::get('login', function(){
+    return view('dashboard.dashboard');
+});
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 
