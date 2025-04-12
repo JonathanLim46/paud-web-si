@@ -8,10 +8,13 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
   </head>
   <body class="d-flex justify-content-center align-middle">
+    <div class="circle">
+      
+    </div>
     <div class="align-content-center justify-content-center h-100">
-        <div class="container h-75 p-5">
+        <div class="container p-5">
             <img src="{{ asset('images/LOGO.png') }}" class="img-fluid mb-4" alt="">
-            <div class="content mt-5">
+            <div class="content">
                 <header> 
                     <h2 class="fw-bold">Login</h1>
                     <p class="fs-6">Login untuk masuk mis Paud KB AL-HUSNA</p>
