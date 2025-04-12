@@ -14,14 +14,22 @@ class Guru extends Model
     protected $table = 'tb_guru';
     protected $primaryKey = 'id_guru';
     protected $fillable = [
-        'username',
         'kelas_id',
-        'name',
-        'password',
-        'email',
-        'no_telp'
+        'user_id'
     ];
     protected $hidden = ['password']; 
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($guru) {
+            $user = User::find($guru->user_id);
+            if (!$user || $user->level !== 'guru') {
+                throw new \Exception('User ID harus dari pengguna dengan level guru.');
+            }
+        });
+    }
 
     public function kelas(): BelongsTo{
         return $this->belongsTo(Kelas::class, 'kelas_id');
