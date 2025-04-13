@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CekLevel
@@ -18,6 +19,10 @@ class CekLevel
         if (in_array($request->user()->level, $levels)){
             return $next($request);
         }
-        return redirect('login');
+        if(Auth::check()){
+            return redirect('dashboard');
+        } else {
+            return redirect('login');
+        }
     }
 }
