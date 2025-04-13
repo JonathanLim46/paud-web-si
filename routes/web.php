@@ -33,15 +33,20 @@ Route::get('login', function(){
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// });
+
+Route::middleware(['auth', 'ceklevel:admin,guru'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
-    Route::get('admin', function() {
+Route::middleware(['auth', 'ceklevel:admin'])->group(function(){
+    Route::get('dashboard/admin', function(){
         return view('dashboard.admin.dashboard');
-    });
+    })->name('admin');
 });
 
 

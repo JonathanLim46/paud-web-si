@@ -8,6 +8,10 @@
 </head>
 <body>
     Halaman Dashboard {{ auth()->user()->name }}
+    <br>
+    @if (auth()->user()->level == 'admin')
+        <a href="{{ route('admin') }}">ADMIN</a>
+    @endif
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Logout</button>
