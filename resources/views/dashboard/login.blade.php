@@ -8,16 +8,15 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
   </head>
   <body class="d-flex justify-content-center align-middle">
-    <div class="circle">
-      
-    </div>
+    <div class="circle"></div>
+    <div class="second-circle"></div>
     <div class="align-content-center justify-content-center h-100">
-        <div class="container p-5">
-            <img src="{{ asset('images/LOGO.png') }}" class="img-fluid mb-4" alt="">
+        <div class="container">
+            <img src="{{ asset('images/page-layout/LOGO.png') }}" class="img-fluid mb-4" alt="">
             <div class="content">
                 <header> 
                     <h2 class="fw-bold">Login</h1>
-                    <p class="fs-6">Login untuk masuk mis Paud KB AL-HUSNA</p>
+                    <p class="fs-6">Masuk kedalam akun Anda</p>
                 </header>
                 <form method="POST" action="{{ route('authenticate') }}">
                   @csrf
@@ -29,7 +28,7 @@
                         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                         <label for="floatingPassword">Password</label>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 btn-lg mt-2" style="background-color: #F26419;">Log In</button>
+                    <button type="submit" class="btn btn-primary w-100 btn-lg mt-2">Log In</button>
                 </form>
             </div>
         </div>
