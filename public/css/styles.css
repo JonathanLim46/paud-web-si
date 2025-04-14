@@ -23,7 +23,7 @@ html, body{
     border-radius: 50%;
     z-index: 1;
     top: -825px;
-    right: -150px;
+    right: -230px;
 }
 
 .second-circle{
@@ -41,6 +41,22 @@ html, body{
     background-color: #516abd7f;
 }
 
+.icon-toggle-password{
+    color: rgb(181, 174, 174);
+    position: absolute;
+    right: 25px;
+    top: 18px;
+    cursor: pointer;
+}
+
+.icon-toggle-password:hover{
+    color: rgb(127, 122, 122);
+}
+
+.form-input input{
+    padding: 0.8rem;
+}
+
 @media only screen and (max-width: 600px) {
     .container{
         border: 1px solid red;
@@ -48,6 +64,21 @@ html, body{
         max-height: 90vh;
         min-height: 400px;
         padding: 1rem 2.5rem 1rem 2.5rem;
+    }
+
+    .circle{
+        width: 500px;
+        height: 500px;
+        top: -150px;
+        right: -250px;
+    }
+
+    .second-circle{
+        background-color: #37A4BF;
+        width: 400px;
+        height: 400px;
+        top: 350px;
+        left: -150px;
     }
 }
 
