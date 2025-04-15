@@ -104,7 +104,7 @@
             <div class="card-body p-4">
                 <div class="row">
                     <div class="col-md-3 text-center">
-                        <img src="{{ asset('images/background_bergabung.png') }}" alt="Clipboard Icon" class="img-fluid mb-2 " />
+                        <img src="{{ asset('images/page-pendaftaran/1.png') }}" alt="Clipboard Icon" class="img-fluid mb-2 " />
                         <div class="small text-center">
                             <p class="mb-1 fw-bold">Persyaratan Pendaftaran</p>
                             <p class="small text-muted">Calon Peserta Didik Baru<br>PAUD KB AL HUSNA</p>
@@ -114,7 +114,7 @@
                     <div class="col-md-9">
                         <div class="d-flex align-items-center mb-3">
                             <div class="me-3">
-                                <i class="bi bi-envelope-fill text-danger me-2 fs-5"></i>
+                              <img src="{{ asset('images/page-pendaftaran/2.png') }}" width="35px" height="35px" alt="">
                             </div>
                             <div>
                                 <p class="mb-0">Mengisi formulir pendaftaran Offline/Online</p>
@@ -123,7 +123,7 @@
                         
                         <div class="d-flex align-items-start mb-3">
                             <div class="me-3">
-                                <i class="bi bi-envelope-fill text-danger me-2 fs-5"></i>
+                              <img src="{{ asset('images/page-pendaftaran/3.png') }}" width="35px" height="35px" alt="">
                             </div>
                             <div>
                                 <ul class="list-unstyled mb-0">
@@ -135,7 +135,8 @@
                         
                         <div class="d-flex align-items-center mb-3">
                             <div class="me-3">
-                                <i class="bi bi-envelope-fill text-danger me-2 fs-5"></i>
+                              <img src="{{ asset('images/page-pendaftaran/4.png') }}" width="35px" height="35px" alt="">
+
                             </div>
                             <div>
                                 <p class="mb-0">Menyertakan fotocopy KTP orang tua dan Kartu Keluarga</p>
@@ -144,7 +145,8 @@
                         
                         <div class="d-flex align-items-center mb-0">
                             <div class="me-3">
-                                <i class="bi bi-envelope-fill text-danger me-2 fs-5"></i>
+                              <img src="{{ asset('images/page-pendaftaran/5.png') }}" width="35px" height="35px" alt="">
+
                             </div>
                             <div>
                                 <p class="mb-0">Membayar biaya pendaftaran + infaq bangunan sebesar Rp. 250.000</p>
@@ -159,7 +161,7 @@
         <h2 class="blue my-5">
             Penerimaan Siswa Baru 
         </h2>
-        <img src="{{ asset('images/pendaftaran_poster.png') }}" class="penerimaan-img"  alt="">
+        <img src="{{ asset('images/page-pendaftaran/pendaftaran_poster.png') }}" class="penerimaan-img"  alt="">
     </div>
 
     <div class="container py-5">
