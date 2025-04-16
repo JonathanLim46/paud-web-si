@@ -1,0 +1,102 @@
+body{
+    overflow: hidden;
+}
+
+.header-text{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: black;
+}
+
+.sidebar{
+    height: 100vh;
+    background-color: white;
+}
+
+aside .nav-item{
+    margin-top: 2.5rem;
+}
+    
+    
+aside .nav-item a{
+    text-decoration: none;
+    color: black
+}
+
+aside .nav-item a:hover{
+    color: rgba(0, 0, 0, 0.579);
+}
+
+aside .dropdown-menu .dropdown-item{
+    color: red;
+    margin-top: 0.2rem;
+}
+
+main{
+    background-color: #FAFBFC;
+
+    padding: 0px !important;
+}
+
+main .navbar{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+main .nav-profil{
+    color:#516ABD;
+}
+
+main .fa-circle-user{
+    font-size: 1.5rem;
+}
+
+main .search-bar{
+    width: 350px;
+    background-color: rgba(245, 246, 251, 1);
+}
+
+main .search-icon{
+    position: absolute;
+    left: 320px;
+    top: 16px;
+}
+
+.info-dashboard{
+    width: 78vw;
+    height: 35vh;
+    background-color: #FFFFFF;
+}
+
+.header-info{
+    color: #05004E;
+}
+
+.title-info{
+    color: #737791;
+}
+
+.card header{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.card .title-card {
+    color: white;
+    font-size: 1rem;
+}
+
+main section .card {
+    font-weight: bold;
+    color: white;
+    width: 350px;
+    height: 120px;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+
+@media only screen and (max-width: 992px) {
+    .content-large{
+        display: none;
+    }
+}
