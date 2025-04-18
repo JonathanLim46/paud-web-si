@@ -28,7 +28,6 @@ Route::get('kurikulum', function(){
 Route::get('galeri', function(){
     return view('CompanyProfile/galeri');
 });
-
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 
