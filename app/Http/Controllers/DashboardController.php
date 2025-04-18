@@ -22,4 +22,26 @@ class DashboardController extends Controller
             return view('dashboard.dashboard');
         }
     }
+    public function update(Request $request, $id){
+        $request->validate([
+            'image' => 'image|mimes:jpeg,jpg,png',
+            'nama' => 'required',
+            'username' => 'required',
+            'email' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if($request->hasFile('image')){
+
+        } else {
+            $user->update([
+                'name' => $request->nama,
+                'username' => $request->username,
+                'email' => $request->email,
+            ]);
+        }
+
+        return redirect()->route('')->with(['success' => 'Data berhasil disimpan']);
+    }
 }
