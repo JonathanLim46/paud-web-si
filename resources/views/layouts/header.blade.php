@@ -1,47 +1,3 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-    <div class="container">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="{{ asset('images/page-layout/logo_dengan_text.png') }}" alt="Logo Sekolah" height="50">
-        </a>
-
-        <!-- Toggle Button (Mobile) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Menu -->
-        <div class="collapse navbar-collapse flex-grow-1 justify-content-center" id="navbarNav">
-            <ul class="navbar-nav gap-4">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tentang Kami
-                    </a>
-                    <ul class="dropdown-menu shadow border-0" aria-labelledby="tentangKamiDropdown">
-                        <li><a class="dropdown-item py-2" href="/profil">Profil Sekolah</a></li>
-                        <li><a class="dropdown-item py-2" href="/kurikulum">Kurikulum</a></li>
-                        <li><a class="dropdown-item py-2" href="/galeri">Galeri</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/pendaftaran">Pendaftaran</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/kontak">Kontak</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Tombol Daftar -->
-        <a href="/daftar" class="btn btn-daftar d-none d-lg-block">DAFTAR MURID</a>
-        <a href="/daftar" class="btn btn-daftar w-100 mt-3 d-lg-none">DAFTAR MURID</a>
-    </div>
-</nav>
-
 <style>
     /* Navbar Styling */
     .navbar {
@@ -176,6 +132,52 @@
         }
     }
 </style>
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="{{ asset('images/page-layout/logo_dengan_text.png') }}" alt="Logo Sekolah" height="50">
+        </a>
+
+        <!-- Toggle Button (Mobile) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse flex-grow-1 justify-content-center" id="navbarNav">
+            <ul class="navbar-nav gap-4">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tentang Kami
+                    </a>
+                    <ul class="dropdown-menu shadow border-0" aria-labelledby="tentangKamiDropdown">
+                        <li><a class="dropdown-item py-2" href="/profil">Profil Sekolah</a></li>
+                        <li><a class="dropdown-item py-2" href="/kurikulum">Kurikulum</a></li>
+                        <li><a class="dropdown-item py-2" href="/galeri">Galeri</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pendaftaran">Pendaftaran</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/kontak">Kontak</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tombol Daftar -->
+        <a href="/daftar" class="btn btn-daftar d-none d-lg-block">DAFTAR MURID</a>
+        <a href="/daftar" class="btn btn-daftar w-100 mt-3 d-lg-none">DAFTAR MURID</a>
+    </div>
+</nav>
+
 
 <script>
     // Add shrink effect on scroll
