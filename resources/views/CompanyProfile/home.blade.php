@@ -20,45 +20,84 @@
         
         /* Hero section */
         .hero-section {
-            background-color: #42a5f5;
-            color: white;
-            padding: 80px 0;
-            position: relative;
-            text-align: left;
-            overflow: hidden;
-            height: 87vh;
-        }
-        .hero-text {
-            max-width: 500px;
-            margin-left: 50px;
-        }
-        .hero-title {
-            font-weight: bold;
-            font-size: 2rem;
-        }
-        .hero-subtitle {
-            font-size: 1.2rem;
-        }
-        .hero-image {
-            position: absolute;
-            bottom: 0;
-            right: 50px;
-            max-width: 300px;
-        }
-        
-        /* Decorative elements */
-        .decorative {
-            position: absolute;
-        }
-        .cloud {
-            width: 100px;
-        }
-        .rocket {
-            width: 80px;
-            top: 20px;
-            right: 20px;
-        }
-        
+  position: relative;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  width: 400px;
+  z-index: 1;
+}
+
+.cloud-left {
+  top: -100px;
+  left: -50px;
+}
+
+.cloud-right {
+  top: 300px;
+  right: -50px;
+}
+.cloud-right-top {
+  top: -50px;
+  right: 10%;
+}
+.rocket {
+  position: absolute;
+  top: -20px ;
+  right: 5%;
+  width: 300px;
+  z-index: 1;
+  animation: float 5s ease-in-out infinite;
+}
+
+.star {
+  position: absolute;
+  width: 30px;
+  z-index: 1;
+}
+
+.star-1 {
+  top: 40%;
+  left: 60%;
+  width: 70px;
+}
+
+.star-2 {
+  top: 22%;
+  right: 18%;
+  width: 60px;
+}
+.star-3 {
+  top: 35%;
+  right: 0;
+  width: 60px;
+}
+.hill {
+    position: absolute;
+  bottom: 0;
+  right: 0;      
+  left: auto;    
+  width: 70%;    
+  z-index: 0;
+}
+
+.plant {
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  width: 500px;
+  z-index: 2;
+}
+
+.floating-kids {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  max-height: 70vh;
+}
         /* Tentang section */
         .tentang-section {
             padding: 50px 0;
@@ -248,14 +287,30 @@
     @include('layouts.header')
     
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container position-relative">
-            <div class="hero-text">
-                <h1 class="hero-title">Selamat Datang Di <br> <span class="text-warning">PAUD KB AL-HUSNA</span></h1>
-                <p class="hero-subtitle">Membuat Anak Bahagia, dengan Permainan yang Bermakna</p>
+    <section class="hero-section position-relative overflow-hidden text-white" style="background-color: #2bb7df; height: 90vh;">
+        <!-- Background decorations -->
+        <img src="{{ asset("images/page-home/awan-kiri.png") }}" class="cloud cloud-left" alt="">
+        <img src="{{ asset("images/page-home/awan-kanan.png") }}" class="cloud cloud-right" alt="">
+        <img src="{{ asset("images/page-home/awan-kanan.png") }}" class="cloud cloud-right-top" alt="">
+        <img src="{{ asset("images/page-home/rokey.png") }}" class="rocket" alt="">
+        <img src="{{ asset("images/page-home/bintang.png") }}" class="star star-1" alt="">
+        <img src="{{ asset("images/page-home/bintang.png") }}" class="star star-2" alt="">
+        <img src="{{ asset("images/page-home/bintang.png") }}" class="star star-3" alt="">
+        <img src="{{ asset("images/page-home/tanaman.png") }}" class="plant" alt="">
+        <img src="{{ asset("images/page-home/bukit.png") }}" class="hill" alt="">
+        <img src="{{ asset("images/page-home/foto-anak.png") }}" alt="Kids Reading" class="img-fluid floating-kids">
+        <!-- Main content -->
+        <div class="container h-100 d-flex align-items-center">
+          <div class="row w-100">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+              <h1 class="fw-bold display-5">Selamat Datang Di<br>PAUD KB AL-HUSNA</h1>
+              <p class="fs-5 text-white mt-3">Membuat Anak Bahagia, dengan Permainan yang Bermakna</p>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
+      
+      
 
     <!-- Tentang Section -->
     <div class="container tentang-section">

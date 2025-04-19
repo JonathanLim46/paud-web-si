@@ -70,7 +70,7 @@
             <div class="registration-section position-relative">
                 <div class="row g-0 align-items-center">
                     <div class="col-md-5 image-container">
-                        <img class="children-image" src="{{ asset('images/page-layout/bergabung_sebelum_footer.png') }}" alt="">
+                        <img class="children-image" src="{{ asset('images/page-layout/joinus.png') }}" alt="">
                     </div>
                     <div class="col-md-7 registration-text">
                         <h2 class="registration-heading">Ingin Bergabung dengan Kami?</h2>
