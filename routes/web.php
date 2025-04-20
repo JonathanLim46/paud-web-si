@@ -9,25 +9,28 @@ use App\Http\Controllers\GalleryController;
 Route::get('/', function () {
     return view('CompanyProfile.home');
 });
-Route::get('tentang-kami', function() {
+Route::get('tentang-kami', function () {
     return view('tentang');
 });
-Route::get('profil', function() {
+Route::get('profil', function () {
     return view('CompanyProfile/profilSekolah');
 });
 
-Route::get('pendaftaran', function() {
+Route::get('pendaftaran', function () {
     return view('CompanyProfile/pendaftaran');
 });
 
-Route::get('kontak', function(){
+Route::get('kontak', function () {
     return view('CompanyProfile/kontak');
 });
-Route::get('kurikulum', function(){
+Route::get('kurikulum', function () {
     return view('CompanyProfile/kurikulum');
 });
-Route::get('galeri', function(){
+Route::get('galeri', function () {
     return view('CompanyProfile/galeri');
+});
+Route::get('formdaftar', function () {
+    return view('CompanyProfile/formPendaftar');
 });
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -49,5 +52,3 @@ Route::middleware(['auth', 'ceklevel:admin'])->group(function(){
     Route::get('dashboard/profilsekolah/galeri', App\LiveWire\Dashboard\Gallery::class)->name('admin.profilsekolah.gallery');
     Route::get('dashboard/profilsekolah/aktivitas', App\LiveWire\Dashboard\Activity::class)->name('admin.profilsekolah.aktivitas');
 });
-
-
