@@ -30,11 +30,13 @@
             <li><a class="dropdown-item" href="">Content 3</a></li>
           </ul>
         </li>
+        @if (Auth::user()->level == "admin")
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa-solid fa-bars"></i>
-                <span class="ms-2">Profil Sekolah</span>
-            </a>
-        </li>
+          <a class="nav-link" href="{{ route('admin.profilsekolah') }}">
+              <i class="fa-solid fa-bars"></i>
+              <span class="ms-2">Profil Sekolah</span>
+          </a>
+        </li> 
+        @endif
     </ul>
 </aside>

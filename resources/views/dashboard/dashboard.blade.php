@@ -15,46 +15,14 @@
         <div class="row">
             <x-sidebar></x-sidebar>
             <main class="col-lg-10 content">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                      <form class="d-flex" role="search">
-                        <div class="search-container d-flex">
-                          <input class="form-control me-2 rounded-pill search-bar" type="search" placeholder="Search" aria-label="Search">
-                          <span class="search-icon">
-                              <i class="fa-solid fa-magnifying-glass"></i>
-                          </span>
-                        </div>
-                      </form>
-                      <ul class="navbar-nav ms-auto d-flex flex-row">
-                        <li class="nav-item dropdown me-4">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center nav-profil" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              @if (Auth::user()->image != null)
-                              <img src="{{ asset(Auth::user()->image) }}" alt="" class="img-profile me-3">
-                              @else
-                              <i class="fa-solid fa-circle-user fs-3 me-3"></i>
-                              @endif
-                              <span class="me-5">{{Auth::user()->name}}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="{{ route('ubah_akun', Auth::user()->id) }}">Ubah Akun</a></li>
-                              <li>
-                                <form action="{{ route('logout') }}" method="POST" class="dropdown-item" id="logout">
-                                  @csrf
-                                  <a href="#" onclick="document.getElementById('logout').submit(); return false" style="text-decoration: none; color: black;">Keluar</a>
-                                </form>
-                              </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item me-4">
-                          <a class="nav-link" href="#">
-                              <i class="fa-solid fa-bell"></i>
-                          </a>
-                        </li>
-                    </ul>
-                    </div>
-                </nav>
+                <x-navbar-dashboard></x-navbar-dashboard>
                 <div class="container-fluid p-4">
                   <header class="fs-3 fw-bold">Dashboard</header>
+                  @if (session('success'))
+                  <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <strong>{{ session('success') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>                  @endif
                   @if (Auth::user()->level == "admin")
                     <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
                       <header class="fw-bold fs-5 header-info">Total Murid-Guru</header>
@@ -94,7 +62,97 @@
                     </section>
                   @endif
                   @if (Auth::user()->level == "guru")
-                  GURU
+                  <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
+                    <header class="fw-bold fs-5 header-info">Jadwal Mengajar</header>
+                    <table class="mt-4 table table-bordered">
+                      <thead>
+                        <th scope="col" class="col">Hari</th>
+                        <th scope="col" class="col">A Mandiri</th>
+                        <th scope="col" class="col">A Kreatif</th>
+                        <th scope="col" class="col">B Ceria</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Senin</th>
+                          <td>Bu Hera & Bu Nining</td>
+                          <td>Bu Lulu</td>
+                          <td>Bu Emy</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Selasa</th>
+                          <td>Bu Hera & Bu Nining</td>
+                          <td>Bu Lulu</td>
+                          <td>Bu Emy</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Rabu</th>
+                          <td>Bu Hera & Bu Nining</td>
+                          <td>Bu Lulu</td>
+                          <td>Bu Emy</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Kamis</th>
+                          <td>Bu Emy</td>
+                          <td>Bu Hera & Bu Nining</td>
+                          <td>Bu Lulu</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Jumat</th>
+                          <td>Bu Lulu</td>
+                          <td>Bu Emy</td>
+                          <td>Bu Hera & Bu Nining</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
+                  <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
+                    <header class="fw-bold fs-5 header-info">Metode Pembelajaran Per-Bulan</header>
+                    <table class="mt-4 table table-bordered table-metode w-50">
+                      <thead>
+                        <th scope="col" class="col">Minggu</th>
+                        <th scope="col" class="col">Metode</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>STEAM</td>
+                        </tr>
+                          <th scope="row">2</th>
+                          <td>Sentra (bahan alam, persiapan, imtak)</td>
+                        </tr>
+                          <th scope="row">3</th>
+                          <td>STEAM</td>
+                        </tr>
+                          <th scope="row">4</th>
+                          <td>Sentra (bahan alam, persiapan, imtak)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
+                  <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
+                    <header class="fw-bold fs-5 header-info">Jadwal Sastra</header>
+                    <table class="mt-4 table table-bordered table-metode w-50">
+                      <thead>
+                        <th scope="col" class="col">Minggu</th>
+                        <th scope="col" class="col">Metode</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>STEAM</td>
+                        </tr>
+                          <th scope="row">2</th>
+                          <td>Sentra (bahan alam, persiapan, imtak)</td>
+                        </tr>
+                          <th scope="row">3</th>
+                          <td>STEAM</td>
+                        </tr>
+                          <th scope="row">4</th>
+                          <td>Sentra (bahan alam, persiapan, imtak)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
                   @endif
                 </div>
             </main>

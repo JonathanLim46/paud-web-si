@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleryController;
 
 Route::get('/', function () {
     return view('CompanyProfile.home');
@@ -39,14 +40,17 @@ Route::post('authenticate', [AuthController::class, 'authenticate'])->name('auth
 Route::middleware(['auth', 'ceklevel:admin,guru'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('dashboard/profile/edit/{id}', [UserController::class, 'index'])->name('ubah_akun');
-    Route::put('dashboard/profile/edit', [UserController::class, 'update'])->name('update_akun');
+    Route::get('dashboard/profile/{id}/edit', [UserController::class, 'edit'])->name('akun.edit');
+    Route::put('dashboard/profile/{id}', [UserController::class, 'update'])->name('akun.update');
 });
 
 Route::middleware(['auth', 'ceklevel:admin'])->group(function(){
-    Route::get('dashboard/admin', function(){
-        return view('dashboard.admin.dashboard');
-    })->name('admin');
+    Route::get('dashboard/profilsekolah', function(){
+        return view('dashboard.ProfilSekolah.profilSekolah');
+    })->name('admin.profilsekolah');
+    Route::get('dashboard/profilsekolah/galeri', [GalleryController::class, 'index'])->name('admin.profilsekolah.galeri');
+    Route::post('dashboard/profilsekolah/galeri/tambah', [GalleryController::class, 'add'])->name('admin.galeri.add');
+    Route::put('dashboard/profilsekolah/galeri/tambah/{$id}', [GalleryController::class, 'update'])->name('admin.galeri.update');
 });
 
 
