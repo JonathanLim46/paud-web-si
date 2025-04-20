@@ -38,19 +38,16 @@ Route::post('authenticate', [AuthController::class, 'authenticate'])->name('auth
 // });
 
 Route::middleware(['auth', 'ceklevel:admin,guru'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', App\Livewire\Dashboard\Index::class)->name('dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('dashboard/profile/{id}/edit', [UserController::class, 'edit'])->name('akun.edit');
     Route::put('dashboard/profile/{id}', [UserController::class, 'update'])->name('akun.update');
 });
 
 Route::middleware(['auth', 'ceklevel:admin'])->group(function(){
-    Route::get('dashboard/profilsekolah', function(){
-        return view('dashboard.ProfilSekolah.profilSekolah');
-    })->name('admin.profilsekolah');
-    Route::get('dashboard/profilsekolah/galeri', [GalleryController::class, 'index'])->name('admin.profilsekolah.galeri');
-    Route::post('dashboard/profilsekolah/galeri/tambah', [GalleryController::class, 'add'])->name('admin.galeri.add');
-    Route::put('dashboard/profilsekolah/galeri/tambah/{$id}', [GalleryController::class, 'update'])->name('admin.galeri.update');
+    Route::get('dashboard/profilsekolah', App\LiveWire\Dashboard\Profil::class)->name('admin.profilsekolah');
+    Route::get('dashboard/profilsekolah/galeri', App\LiveWire\Dashboard\Gallery::class)->name('admin.profilsekolah.gallery');
+    Route::get('dashboard/profilsekolah/aktivitas', App\LiveWire\Dashboard\Activity::class)->name('admin.profilsekolah.aktivitas');
 });
 
 
