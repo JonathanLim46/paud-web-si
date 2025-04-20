@@ -67,7 +67,7 @@ class Gallery extends Component
 
     public function delete($id){
         $data = Galeri::findOrFail($id);
-        Storage::delete('public/galeri'.$data->foto_galeri);
+        Storage::disk('public')->delete('galeri/'.$data->foto_galeri);
         $data->delete();
         session()->flash('success', 'Data berhasil dihapus');
         return redirect('dashboard/profilsekolah/galeri');
