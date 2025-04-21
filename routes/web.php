@@ -51,4 +51,5 @@ Route::middleware(['auth', 'ceklevel:admin'])->group(function(){
     Route::get('dashboard/profilsekolah', App\LiveWire\Dashboard\Profil::class)->name('admin.profilsekolah');
     Route::get('dashboard/profilsekolah/galeri', App\LiveWire\Dashboard\Gallery::class)->name('admin.profilsekolah.gallery');
     Route::get('dashboard/profilsekolah/aktivitas', App\LiveWire\Dashboard\Activity::class)->name('admin.profilsekolah.aktivitas');
+    Route::get('dashboard/profilsekolah/faq', App\LiveWire\Dashboard\Faqs::class)->name('admin.profilsekolah.faq');
 });

@@ -5,7 +5,7 @@
 <div>
     <div class="row mt-5 pe-3">
         <div class="col text-center shadow-sm rounded border border-secondary-subtle p-4 menu"
-            style="cursor: pointer;">
+            style="cursor: pointer;" onclick="window.location.href='{{ route('admin.profilsekolah.faq') }}'">
             <i class="fa-solid fa-question fa-5x"></i>
             <header class="fw-300 fs-2 mt-2">FAQ</header>
             <p class="mt-2">Gunakan menu ini untuk melakukan perubahan dan pembaruan pada bagian FAQ situs PAUD KB AL-HUSNA.</p>

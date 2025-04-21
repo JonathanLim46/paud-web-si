@@ -22,9 +22,9 @@
               <img src="{{ asset('storage/galeri/'.$galeri->foto_galeri) }}" class="card-img-top img-card" alt="...">
               <div class="card-body text-center">
                 <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusGambar"
-                wire:click="openHapusModal({{ $galeri->id }})">Hapus Foto</a>
+                wire:click="openModal({{ $galeri->id }})">Hapus Foto</a>
                 <a href="#" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#modalEditGambar" 
-                wire:click="openEditModal({{ $galeri->id }})">Ganti Foto</a>
+                wire:click="openModal({{ $galeri->id }})">Ganti Foto</a>
               </div>
           </div>
       </div>
