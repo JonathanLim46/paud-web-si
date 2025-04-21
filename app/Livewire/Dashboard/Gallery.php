@@ -35,16 +35,11 @@ class Gallery extends Component
         return redirect('dashboard/profilsekolah/galeri');
     }
 
-    public function openEditModal($id){
+    public function openModal($id){
         $data = Galeri::findOrFail($id);
         $this->idImage = $data;
     }
-
-    public function openHapusModal($id){
-        $data = Galeri::findOrFail($id);
-        $this->idImage = $data;
-    }
-
+    
     public function update($id){
         $this->validate();
 

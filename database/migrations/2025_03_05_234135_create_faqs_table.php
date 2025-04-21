@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tb_faq', function (Blueprint $table) {
             $table->id();
             $table->string('judul_FAQ');
-            $table->string('isi_FAQ');
+            $table->longText('isi_FAQ');
             $table->timestamps();
         });
     }
