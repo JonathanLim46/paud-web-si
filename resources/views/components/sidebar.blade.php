@@ -10,7 +10,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{ route('admin.PPDB') }}">
             <i class="fa-solid fa-table-cells-large"></i>
             <span class="ms-2">PPDB</span>
           </a>
@@ -23,11 +23,9 @@
             <span class="ms-2">Data Sekolah</span>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Content 1</a></li>
+            <li><a class="dropdown-item" href="{{ route("admin.guru") }}">Guru</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="">Content 2</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="">Content 3</a></li>
+            <li><a class="dropdown-item" href="{{ route("admin.kelas") }}">Kelas</a></li>
           </ul>
         </li>
         @if (Auth::user()->level == "admin")
