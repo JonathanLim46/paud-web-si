@@ -19,10 +19,11 @@ class PendaftarSeeder extends Seeder
     {
         //
         Pendaftar::factory()
-            ->has(DataPribadi::factory(), 'dataPribadi')
-            ->has(DataOrangTua::factory(), 'dataOrangTua')
-            ->has(Dokumen::factory(), 'dokumen')
-            ->count(5)
-            ->create();
+        ->count(5)
+        ->state(['diterima' => false])
+        ->has(DataPribadi::factory(), 'dataPribadi')
+        ->has(DataOrangTua::factory(), 'dataOrangTua')
+        ->has(Dokumen::factory(), 'dokumen')
+        ->create();
     }
 }

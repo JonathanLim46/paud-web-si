@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_guru', function (Blueprint $table) {
-            $table->id('id_guru');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::create('tb_hari', function (Blueprint $table) {
+            $table->id('id_hari');
+            $table->string('nama_hari');
             $table->timestamps();
         });
-    }   
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('gurus');
+        Schema::dropIfExists('haris');
     }
 };

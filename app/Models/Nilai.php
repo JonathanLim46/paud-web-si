@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Murid;
+use App\Models\Pendaftar;
 use App\Models\KategoriNilai;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,6 +21,6 @@ class Nilai extends Model
     }
 
     public function murids(): BelongsTo{
-        return $this->belongsTo(Murid::class);
+        return $this->belongsTo(Pendaftar::class);
     }
 }

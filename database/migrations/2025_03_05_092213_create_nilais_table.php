@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id');
             $table->foreign('kategori_id')->references('id_kategori')->on('tb_kategori_nilai')->onDelete('cascade');
             $table->unsignedBigInteger('murid_id');
-            $table->foreign('murid_id')->references('id_murid')->on('tb_murid')->onDelete('cascade');
+            $table->foreign('murid_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
             $table->timestamps();
         });
     }
