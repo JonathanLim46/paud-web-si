@@ -47,8 +47,19 @@ Route::middleware(['auth', 'ceklevel:admin,guru'])->group(function () {
     Route::put('dashboard/profile/{id}', [UserController::class, 'update'])->name('akun.update');
 });
 
-Route::middleware(['auth', 'ceklevel:admin'])->group(function(){
+Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
     Route::get('dashboard/profilsekolah', App\LiveWire\Dashboard\Profil::class)->name('admin.profilsekolah');
+    Route::get('dashboard/PPDB', App\Livewire\Dashboard\PPDB::class)->name('admin.PPDB');
+    Route::get('dashboard/PPDBDetail', App\Livewire\Dashboard\PPDBDetail::class)->name('admin.PPDBDetail');
+    Route::get('dashboard/Guru', App\Livewire\Dashboard\Guru::class)->name('admin.guru');
+    Route::get('dashboard/Kelas', App\Livewire\Dashboard\Kelas::class)->name('admin.kelas');
+    Route::get('dashboard/KelasDetail', App\Livewire\Dashboard\KelasDetail::class)->name('admin.detail-kelas');
+    Route::get('dashboard/DetailMurid', App\Livewire\Dashboard\DetailMurid::class)->name('admin.detail-murid');
+    
+
+
+
+
     Route::get('dashboard/profilsekolah/galeri', App\LiveWire\Dashboard\Gallery::class)->name('admin.profilsekolah.gallery');
     Route::get('dashboard/profilsekolah/aktivitas', App\LiveWire\Dashboard\Activity::class)->name('admin.profilsekolah.aktivitas');
     Route::get('dashboard/profilsekolah/faq', App\LiveWire\Dashboard\Faqs::class)->name('admin.profilsekolah.faq');
