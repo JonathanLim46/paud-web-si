@@ -2,14 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Hari;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use App\Models\Kelas;
+use Illuminate\Support\Str;
+use App\Models\JadwalPelajaran;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\KelasSeeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\PendaftarSeeder;
 
@@ -47,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PendaftarSeeder::class,
-            KelasSeeder::class
+            KelasSeeder::class,
         ]);
     }
 }

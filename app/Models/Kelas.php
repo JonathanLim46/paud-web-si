@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Guru;
-use App\Models\Murid;
+use App\Models\Pendaftar;
 use App\Models\MataPelajaran;
+use App\Models\JadwalPelajaran;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kelas extends Model
@@ -21,15 +22,19 @@ class Kelas extends Model
         'tingkat_kelas'
     ];
 
-    public function guru(): HasOne{
-        return $this->hasOne(Guru::class, 'kelas_id');
-    }
+    // public function guru(): HasOne{
+    //     return $this->hasOne(Guru::class, 'kelas_id');
+    // }
 
     public function murids(): HasMany{
-        return $this->hasMany(Murid::class, 'kelas_id');
+        return $this->hasMany(Pendaftar::class, 'kelas_id');
     }
 
     public function pelajarans(): HasMany{
         return $this->hasMany(MataPelajaran::class, 'kelas_id');
+    }
+
+    public function jadwals(): HasMany{
+        return $this->hasMany(JadwalPelajaran::class, 'kelas_id');
     }
 }

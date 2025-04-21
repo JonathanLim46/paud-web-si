@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\JadwalPelajaran;
 
 class Guru extends Model
 {
@@ -14,8 +14,7 @@ class Guru extends Model
     protected $table = 'tb_guru';
     protected $primaryKey = 'id_guru';
     protected $fillable = [
-        'kelas_id',
-        'user_id'
+        'user_id',
     ];
     protected $hidden = ['password']; 
 
@@ -31,7 +30,7 @@ class Guru extends Model
         });
     }
 
-    public function kelas(): BelongsTo{
-        return $this->belongsTo(Kelas::class, 'kelas_id');
+    public function jadwals(): HasMany{
+        return $this->hasMany(JadwalPelajaran::class, 'guru_id');
     }
 }
