@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Dashboard;
 
-use Livewire\Component;
-use App\Models\Murid;
 use App\Models\Guru;
+use Livewire\Component;
+use App\Models\Pendaftar;
+use App\Models\JadwalPelajaran;
 
 class Index extends Component
 {
@@ -13,8 +14,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.dashboard.index')->with([
-            'murids' => Murid::count(),
+            'murids' => Pendaftar::where('diterima', true)->count(),
             'gurus' => Guru::count(),
+            'jadwals' => JadwalPelajaran::all(),
         ])->layout('components.layouts.app', ['title' => $this->title]);
     }
 }

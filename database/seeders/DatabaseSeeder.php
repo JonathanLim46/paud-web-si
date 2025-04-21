@@ -26,6 +26,24 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(3)->create();
 
+        // DB::table('tb_hari')->insert([
+        //     [
+        //         'nama_hari' => 'Senin',
+        //     ],
+        //     [
+        //         'nama_hari' => 'Selasa',
+        //     ],
+        //     [
+        //         'nama_hari' => 'Rabu',
+        //     ],
+        //     [
+        //         'nama_hari' => 'Kamis',
+        //     ],
+        //     [
+        //         'nama_hari' => 'Jumat',
+        //     ],
+        // ]);
+
         DB::table('users')->insert([
             [
                 'name' => fake()->name(),
