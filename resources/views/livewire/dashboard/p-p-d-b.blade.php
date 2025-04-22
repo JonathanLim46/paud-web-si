@@ -180,12 +180,16 @@
             </div>
             <div class="col-md-6 d-flex justify-content-between">
                 <!-- Search Bar -->
-                <div class="search-container d-flex">
-                    <input type="text" class="form-control search-input fs-5" placeholder="Cari nama atau NIS..." style="height: 50px;">
-                    <div class="search-icon" style="height: 50px; display: flex; align-items: center;">
-                        <i class="bi bi-search fs-4"></i>
+                <form wire:submit="search">
+                    <div class="search-container d-flex">
+                        <input type="text" wire:model="query"
+                        class="form-control search-input fs-5" placeholder="Cari nama atau NIS..." style="height: 50px;">
+                        <div class="search-icon" style="height: 50px; display: flex; align-items: center;">
+                            <i class="bi bi-search fs-4"></i>
+                        </div>
                     </div>
-                </div>
+                    <button type="submit">Search</button>
+                </form>
         
                 <!-- Switch On/Off with Highlighted Status -->
                 <div class="form-check form-switch ms-3 d-flex align-items-center">
@@ -206,7 +210,7 @@
             <table class="table table-custom">
                 <thead>
                     <tr>
-                        <th>NIS</th>
+                        <th>NIK</th>
                         <th>Nama Murid</th>
                         <th>Tanggal Daftar</th>
                         <th>Status</th>
@@ -216,7 +220,7 @@
                 <tbody class="text-center">
                     @foreach ($pendaftars as $pendaftar)
                     <tr>
-                        <td><span class="fw-medium">2025-001A</span></td>
+                        <td><span class="fw-medium">{{$pendaftar->dataPribadi->nik}}</span></td>
                         <td>{{ $pendaftar->dataPribadi->nama_lengkap }}</td>
                         <td>{{ $pendaftar->created_at->format('d-m-Y') }}</td>
                         <td>
