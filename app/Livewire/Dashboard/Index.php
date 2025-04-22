@@ -12,11 +12,23 @@ use Illuminate\Support\Facades\DB;
 class Index extends Component
 {
     public $title = 'Dashboard';
+    public $step = 'Minggu2';
+
+    public function setStep($step)
+    {
+        $this->step = $step;
+    }
     
     public function render()
     {
         $urutanHari = [
-            'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
+            'Senin',
+            'Selasa',
+            'Rabu',
+            'Kamis',
+            'Jumat',
+            'Sabtu',
+            'Minggu'
         ];
 
         return view('livewire.dashboard.index')->with([

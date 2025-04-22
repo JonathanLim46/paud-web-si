@@ -12,6 +12,12 @@ class PendaftaranForm extends Component
     {
         $this->step = $step;
     }
+    public $counter = 0;
+
+    public function increment()
+    {
+        $this->counter++;
+    }
 
     public function nextStep()
     {

@@ -4,6 +4,7 @@
         <h2 class="judul">FORM PENDAFTARAN ONLINE</h2>
         <h2 class="judul">PAID KB AL HUSNA</h2>
 
+
         <nav class="form-nav">
             <a href="#" wire:click.prevent="setStep('ketentuan')" class="nav-link {{ $step === 'ketentuan' ? 'active' : '' }}">Ketentuan</a>
             <a href="#" wire:click.prevent="setStep('data')" class="nav-link {{ $step === 'data' ? 'active' : '' }}">Data Siswa</a>

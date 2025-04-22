@@ -1,3 +1,4 @@
+@section("styles")
 <style>
     :root {
         --primary: #4361ee;
@@ -161,28 +162,40 @@
         background-color: var(--gray-100);
         border-color: var(--gray-400);
     }
+    
 </style>
+@endsection
 
+@section("styles")
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+@endsection
 
 <div>
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-outline ms-2">
-                    <i class="bi bi-funnel me-1"></i> Filter
+                <button class="btn btn-outline-primary ms-2 btn-lg shadow-sm fw-bold px-4 py-2">
+                    <i class="bi bi-funnel me-2 fs-5"></i> Filter
                 </button>
             </div>
             <div class="col-md-6 d-flex justify-content-between">
+                <!-- Search Bar -->
                 <div class="search-container d-flex">
-                    <input type="text" class="form-control search-input" placeholder="Cari nama atau NIS...">
-                    <div class="search-icon">
-                        <i class="bi bi-search"></i>
+                    <input type="text" class="form-control search-input fs-5" placeholder="Cari nama atau NIS..." style="height: 50px;">
+                    <div class="search-icon" style="height: 50px; display: flex; align-items: center;">
+                        <i class="bi bi-search fs-4"></i>
                     </div>
                 </div>
-                <button class="btn btn-primary ms-2">
-                    <i class="bi bi-plus me-1"></i> Tambah
-                </button>
+        
+                <!-- Switch On/Off with Highlighted Status -->
+                <div class="form-check form-switch ms-3 d-flex align-items-center">
+                    <input wire:click="toggleSwitch" class="form-check-input custom-switch" type="checkbox" id="customSwitch" @checked($isOn) style="transform: scale(1.3); margin-right: 12px;">
+                    <label class="form-check-label" for="customSwitch">
+                        <span id="switchStatus" class="fs-5 fw-bold px-3 py-2 rounded-pill {{ $isOn ? 'bg-success text-white' : 'bg-danger text-white' }} shadow-sm">
+                            {{ $isOn ? 'Pendaftaran PPDB Dibuka' : 'Pendaftaran PPDB Ditutup' }}
+                        </span>
+                    </label>
+                </div>
             </div>
         </div>
         
