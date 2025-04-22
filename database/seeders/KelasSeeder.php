@@ -24,7 +24,7 @@ class KelasSeeder extends Seeder
     {
         //
         $kelasList = Kelas::factory()
-        ->count(2)
+        ->count(3)
         ->has(
             Pendaftar::factory()
                 ->count(8)
@@ -41,7 +41,6 @@ class KelasSeeder extends Seeder
             JadwalPelajaran::factory()
                 ->count(5)
                 ->for($kelas)
-                ->for(Guru::factory())
                 ->create();
         }
     }

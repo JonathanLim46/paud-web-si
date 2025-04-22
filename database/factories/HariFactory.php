@@ -21,12 +21,11 @@ class HariFactory extends Factory
     public function definition(): array
     {
 
-        static $hariKe = 0;
         $namaHari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'];
-        return [
-            'nama_hari' => $namaHari[$hariKe],
-        ];
 
-        $hariKe++;
+        static $index = 0;
+        return [
+            'nama_hari' => $namaHari[$index % 5],
+        ];
     }
 }
