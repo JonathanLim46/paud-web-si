@@ -43,41 +43,27 @@
     <table class="mt-4 table table-bordered">
       <thead>
         <th scope="col" class="col">Hari</th>
-        <th scope="col" class="col">A Mandiri</th>
-        <th scope="col" class="col">A Kreatif</th>
-        <th scope="col" class="col">B Ceria</th>
+        @foreach ($jadwals->unique('kelas_id') as $kelas)
+        <th scope="col" class="col">{{ $kelas->kelas->tingkat_kelas }}</th>
+        @endforeach
       </thead>
       <tbody>
+        @foreach($jadwals->groupBy('hari_id') as $hari_id => $jadwalGroup)
         <tr>
-          <th scope="row">Senin</th>
-          <td>Bu Hera & Bu Nining</td>
-          <td>Bu Lulu</td>
-          <td>Bu Emy</td>
+            <td>{{ $jadwals->firstWhere('hari_id', $hari_id)->hari->nama_hari }}</td>
+            @foreach($jadwals->unique('kelas_id') as $kelas)
+                <td>
+                    @foreach($jadwalGroup->where('kelas_id', $kelas->kelas_id) as $jadwal)
+                        @if($loop->first)
+                            <p style="display:inline;">{{ $jadwal->guru->user->name }}</p>
+                        @elseif($loop->parent->first)
+                            <p style="display:inline;">& {{ $jadwal->guru->user->name }}</p>
+                        @endif
+                    @endforeach
+                </td>
+            @endforeach
         </tr>
-        <tr>
-          <th scope="row">Selasa</th>
-          <td>Bu Hera & Bu Nining</td>
-          <td>Bu Lulu</td>
-          <td>Bu Emy</td>
-        </tr>
-        <tr>
-          <th scope="row">Rabu</th>
-          <td>Bu Hera & Bu Nining</td>
-          <td>Bu Lulu</td>
-          <td>Bu Emy</td>
-        </tr>
-        <tr>
-          <th scope="row">Kamis</th>
-          <td>Bu Emy</td>
-          <td>Bu Hera & Bu Nining</td>
-          <td>Bu Lulu</td>
-        </tr>
-        <tr>
-          <th scope="row">Jumat</th>
-          <td>Bu Lulu</td>
-          <td>Bu Emy</td>
-          <td>Bu Hera & Bu Nining</td>
-        </tr>
+    @endforeach
       </tbody>
     </table>
   </section>
