@@ -28,7 +28,14 @@ class KelasSeeder extends Seeder
         ->has(
             Pendaftar::factory()
                 ->count(8)
-                ->state(['diterima' => true, 'status_verifikasi' => true,])
+                ->state(function (array $attributes) {
+                    $diterima = fake()->randomElement([true, false, null]);
+    
+                    return [
+                        'diterima' => $diterima,
+                        'status_verifikasi' => $diterima === true ? true : false,
+                    ];
+                })
                 ->has(DataPribadi::factory(), 'dataPribadi')
                 ->has(DataOrangTua::factory(), 'dataOrangTua')
                 ->has(Dokumen::factory(), 'dokumen'),

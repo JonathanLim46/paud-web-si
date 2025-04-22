@@ -173,8 +173,9 @@
         </div>
 
         <!-- Tombol Daftar -->
-        <a href="/daftar" class="btn btn-daftar d-none d-lg-block">DAFTAR MURID</a>
-        <a href="/daftar" class="btn btn-daftar w-100 mt-3 d-lg-none">DAFTAR MURID</a>
+        <a href="{{ route('company.formDaftar') }}" class="btn btn-daftar d-none d-lg-block">DAFTAR MURID</a>
+        <a href="{{ route('company.formDaftar') }}" class="btn btn-daftar w-100 mt-3 d-lg-none">DAFTAR MURID</a>
+
     </div>
 </nav>
 

@@ -15,7 +15,7 @@ return new class extends Migration
         $table->id('id_pendaftaran');
         $table->string('no_telp');
         $table->boolean('status_verifikasi')->default(false);
-        $table->boolean('diterima')->nullable()->default(false);
+        $table->boolean('diterima')->nullable()->default(null);
         $table->unsignedBigInteger('kelas_id')->nullable()->default(null);
         $table->foreign('kelas_id')->references('id_kelas')->on('tb_kelas')->onDelete('cascade');
         $table->timestamps(); 
