@@ -30,8 +30,8 @@ Route::get('galeri', function () {
     return view('CompanyProfile/galeri');
 });
 Route::get('formdaftar', function () {
-    return view('CompanyProfile/formPendaftar');
-});
+    return view('CompanyProfile.formPendaftar');
+})->name('company.formDaftar');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 

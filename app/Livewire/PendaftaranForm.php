@@ -3,9 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\StatusPPDB;
 
 class PendaftaranForm extends Component
 {
+
+    public $statusPPDB;
+
     public $step = 'ketentuan'; // default step
 
     public function setStep($step)
@@ -39,6 +43,7 @@ class PendaftaranForm extends Component
 
     public function render()
     {
+        $this->statusPPDB = StatusPPDB::first()->status;
         return view('livewire.pendaftaran-form');
     }
 }

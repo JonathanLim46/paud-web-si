@@ -189,9 +189,11 @@
         
                 <!-- Switch On/Off with Highlighted Status -->
                 <div class="form-check form-switch ms-3 d-flex align-items-center">
-                    <input wire:click="toggleSwitch" class="form-check-input custom-switch" type="checkbox" id="customSwitch" @checked($isOn) style="transform: scale(1.3); margin-right: 12px;">
-                    <label class="form-check-label" for="customSwitch">
-                        <span id="switchStatus" class="fs-5 fw-bold px-3 py-2 rounded-pill {{ $isOn ? 'bg-success text-white' : 'bg-danger text-white' }} shadow-sm">
+                    <input wire:click="toggleSwitch" class="form-check-input custom-switch" 
+                    type="checkbox" id="customSwitch" @checked($isOn) style="transform: scale(1.3); margin-right: 12px;">
+                    <label class="form-check-label" for="customSwitch" wire:click="sendPPDBStatus">
+                        <span id="switchStatus" 
+                        class="fs-5 fw-bold px-3 py-2 rounded-pill {{ $isOn ? 'bg-success text-white' : 'bg-danger text-white' }} shadow-sm">
                             {{ $isOn ? 'Pendaftaran PPDB Dibuka' : 'Pendaftaran PPDB Ditutup' }}
                         </span>
                     </label>
@@ -212,27 +214,27 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
+                    @foreach ($pendaftars as $pendaftar)
                     <tr>
                         <td><span class="fw-medium">2025-001A</span></td>
-                        <td>Zayn Malik</td>
-                        <td>4 Maret 2025</td>
-                        <td><span class="status-badge status-diterima">Diterima</span></td>
+                        <td>{{ $pendaftar->dataPribadi->nama_lengkap }}</td>
+                        <td>{{ $pendaftar->created_at->format('d-m-Y') }}</td>
+                        <td>
+                            @if ($pendaftar->diterima === 1)
+                            <span class="status-badge status-diterima">Diterima</span>
+                            @elseif ($pendaftar->diterima === 0)
+                            <span class="status-badge status-ditolak">Tidak Diterima</span>
+                            @else
+                            <span class="status-badge status-pending">Tahap Verifikasi</span>
+                            @endif
+                        </td>
                         <td><a href="{{ route('admin.PPDBDetail') }}" class="btn btn-warning"><i class="bi bi-eye me-1"></i> Detail</a></td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
 
-        <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-chevron-left"></i></a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
-            </ul>
-        </nav>
+        {{ $pendaftars->links('custom-pagination-links') }}
     </section>
 </div>

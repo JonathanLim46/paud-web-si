@@ -20,7 +20,7 @@ class PendaftarFactory extends Factory
             //
             'status_verifikasi' => false,
             'no_telp' => fake()->unique()->phoneNumber(),
-            'diterima' => fake()->boolean(80),
+            'diterima' => fake()->randomElement([true, false, null]),
         ];
     }
 }
