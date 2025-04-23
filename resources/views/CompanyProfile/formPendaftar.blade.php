@@ -8,6 +8,9 @@
     <title>Kontak</title>
 </head>
 <style>
+    body{
+        height: 100vh;
+    }
         .judul {
             color: #0099cc;
             font-weight: 700;
@@ -196,9 +199,68 @@
             border-radius: 5px;
             padding: 15px;
         }
-        
+        .ppdb-closed-container {
+        background: linear-gradient(to right, #f8f9fa, #ffffff);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        padding: 30px;
+        margin-top: 80px;
+        max-width: 700px;
+        border-top: 4px solid #ff0101;
+    }
+    
+    .ppdb-closed-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .ppdb-icon {
+        background-color: #ebf5ff;
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .ppdb-icon i {
+        font-size: 2.5rem;
+        color: #3b82f6;
+    }
+    
+    .ppdb-title {
+        color: #1e3a8a;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    
+    .ppdb-message {
+        color: #4b5563;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    /* Animation for subtle attention */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    .ppdb-icon {
+        animation: pulse 2s infinite ease-in-out;
+    }
 </style>
 @livewireStyles
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <body>
     @include('layouts.header')
