@@ -20,84 +20,84 @@
         
         /* Hero section */
         .hero-section {
-  position: relative;
-  overflow: hidden;
-}
+        position: relative;
+        overflow: hidden;
+        }
 
-.cloud {
-  position: absolute;
-  width: 400px;
-  z-index: 1;
-}
+        .cloud {
+        position: absolute;
+        width: 400px;
+        z-index: 1;
+        }
 
-.cloud-left {
-  top: -100px;
-  left: -50px;
-}
+        .cloud-left {
+        top: -100px;
+        left: -50px;
+        }
 
-.cloud-right {
-  top: 300px;
-  right: -50px;
-}
-.cloud-right-top {
-  top: -50px;
-  right: 10%;
-}
-.rocket {
-  position: absolute;
-  top: -20px ;
-  right: 5%;
-  width: 300px;
-  z-index: 1;
-  animation: float 5s ease-in-out infinite;
-}
+        .cloud-right {
+        top: 300px;
+        right: -50px;
+        }
+        .cloud-right-top {
+        top: -50px;
+        right: 10%;
+        }
+        .rocket {
+        position: absolute;
+        top: -20px ;
+        right: 5%;
+        width: 300px;
+        z-index: 1;
+        animation: float 5s ease-in-out infinite;
+        }
 
-.star {
-  position: absolute;
-  width: 30px;
-  z-index: 1;
-}
+        .star {
+        position: absolute;
+        width: 30px;
+        z-index: 1;
+        }
 
-.star-1 {
-  top: 40%;
-  left: 60%;
-  width: 70px;
-}
+        .star-1 {
+        top: 40%;
+        left: 60%;
+        width: 70px;
+        }
 
-.star-2 {
-  top: 22%;
-  right: 18%;
-  width: 60px;
-}
-.star-3 {
-  top: 35%;
-  right: 0;
-  width: 60px;
-}
-.hill {
-    position: absolute;
-  bottom: 0;
-  right: 0;      
-  left: auto;    
-  width: 70%;    
-  z-index: 0;
-}
+        .star-2 {
+        top: 22%;
+        right: 18%;
+        width: 60px;
+        }
+        .star-3 {
+        top: 35%;
+        right: 0;
+        width: 60px;
+        }
+        .hill {
+            position: absolute;
+        bottom: 0;
+        right: 0;      
+        left: auto;    
+        width: 70%;    
+        z-index: 0;
+        }
 
-.plant {
-  position: absolute;
-  bottom: 0;
-  left: 45%;
-  width: 500px;
-  z-index: 2;
-}
+        .plant {
+        position: absolute;
+        bottom: 0;
+        left: 45%;
+        width: 500px;
+        z-index: 2;
+        }
 
-.floating-kids {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 3;
-  max-height: 70vh;
-}
+        .floating-kids {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 3;
+        max-height: 70vh;
+        }
         /* Tentang section */
         .tentang-section {
             padding: 50px 0;
@@ -472,26 +472,7 @@
         </div>
     </div>
     
-    <div class="logos container-fluid my-5 p-5">
-        <div class="logos-slide">
-            <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Activity 1"> 
-            <img src="{{ asset('images/page-home/tentang2.png') }}" alt="Activity 2"> 
-            <img src="{{ asset('images/page-home/tentang3.png') }}" alt="Activity 3"> 
-            <img src="{{ asset('images/page-home/tentang4.png') }}" alt="Activity 4"> 
-            <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Activity 5"> 
-            <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Activity 6"> 
-            <img src="{{ asset('images/page-home/tentang4.png') }}" alt="Activity 7"> 
-        </div>
-        <div class="logos-slide">
-            <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Activity 8"> 
-            <img src="{{ asset('images/page-home/tentang2.png') }}" alt="Activity 9"> 
-            <img src="{{ asset('images/page-home/tentang3.png') }}" alt="Activity 10"> 
-            <img src="{{ asset('images/page-home/tentang4.png') }}" alt="Activity 11"> 
-            <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Activity 12"> 
-            <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Activity 13"> 
-            <img src="{{ asset('images/page-home/tentang4.png') }}" alt="Activity 14">  
-        </div>
-    </div>
+    <livewire:company.showactivity/>
 
     <!-- Fasilitas Section -->
     <div class="container tentang-section">

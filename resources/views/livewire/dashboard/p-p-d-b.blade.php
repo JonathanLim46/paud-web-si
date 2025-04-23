@@ -339,7 +339,7 @@
                   <select wire:model="filter.status" class="form-select">
                     <option value="">Semua</option>
                     <option value="diterima">Diterima</option>
-                    <option value="menunggu">Menunggu</option>
+                    <option value="menunggu">Tahap Verifikasi</option>
                     <option value="ditolak">Ditolak</option>
                   </select>
                 </div>
@@ -351,7 +351,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-primary" wire:click="applyFilter">Terapkan</button>
+              <button type="button" class="btn btn-primary" wire:click="applyFilter" data-bs-dismiss="modal">Terapkan</button>
             </div>
           </div>
         </div>

@@ -64,54 +64,7 @@
         </div>
     </div>
     <section class="gallery-section">
-        <div class="container">
-            <div class="row">
-                <!-- Image 1 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('images/page-galeri/background_bergabung.png') }}" class="card-img" alt="Gallery Image 1">
-                    </div>
-                </div>
-                
-                <!-- Image 2 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('images/page-galeri/background_bergabung.png') }}" class="card-img" alt="Gallery Image 2">
-                    </div>
-                </div>
-                
-                <!-- Image 3 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('images/page-galeri/background_bergabung.png') }}" class="card-img" alt="Gallery Image 3">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Second row of images -->
-            <div class="row mt-4">
-                <!-- Image 4 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('images/page-galeri/background_bergabung.png') }}" class="card-img" alt="Gallery Image 4">
-                    </div>
-                </div>
-                
-                <!-- Image 5 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('images/page-galeri/background_bergabung.png') }}" class="card-img" alt="Gallery Image 5">
-                    </div>
-                </div>
-                
-                <!-- Image 6 -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('images/page-galeri/background_bergabung.png') }}" class="card-img" alt="Gallery Image 6">
-                    </div>
-                </div>
-            </div>
-        </div>
+        <livewire:company.showgaleri/>
     </section>
     <div class="container my-5">
         <iframe width="100%" height="630" src="https://www.youtube.com/embed/-cNjpeVgHUA?si=umtlJKlbtg_x-KeR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
