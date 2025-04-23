@@ -1,18 +1,28 @@
 <div>
     {{-- Step Navigation --}}
-    <div class="text-center mb-4">
+    <div class="text-center mb-4 mt-5">
         <h2 class="judul">FORM PENDAFTARAN ONLINE</h2>
         <h2 class="judul">PAID KB AL HUSNA</h2>
 
         @if ($statusPPDB === 0)
-            <p>belom ada</p>
+        <div class="ppdb-closed-container container text-center">
+            <div class="ppdb-closed-content">
+                <div class="ppdb-icon">
+                    <i class="bi bi-lock"></i>
+                </div>
+                <h3 class="ppdb-title">PPDB Belum Dibuka</h3>
+                <p class="ppdb-message">Pendaftaran Peserta Didik Baru saat ini belum dibuka. Silahkan kembali lagi nanti.</p>
+            </div>
+        </div>
+        <div class="container text-center mt-5">
+            <img src="{{ asset('images/page-pendaftaran/pendaftaran_poster.png') }}" class="penerimaan-img"  alt="">
+        </div>
         @else
         <nav class="form-nav">
             <a href="#" wire:click.prevent="setStep('ketentuan')" class="nav-link {{ $step === 'ketentuan' ? 'active' : '' }}">Ketentuan</a>
             <a href="#" wire:click.prevent="setStep('data')" class="nav-link {{ $step === 'data' ? 'active' : '' }}">Data Siswa</a>
             <a href="#" wire:click.prevent="setStep('konfirmasi')" class="nav-link {{ $step === 'konfirmasi' ? 'active' : '' }}">Konfirmasi</a>
         </nav>
-        @endif
     </div>
 {{-- Step Content --}}
     @if ($step === 'ketentuan')
@@ -175,4 +185,5 @@
         </div>
     </div>
 </div>
+@endif
 </div>

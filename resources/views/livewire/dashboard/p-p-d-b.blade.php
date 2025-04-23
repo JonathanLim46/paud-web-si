@@ -163,6 +163,79 @@
         border-color: var(--gray-400);
     }
     
+    .search-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .search-container {
+        display: flex;
+        position: relative;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .search-container:focus-within {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 15px 20px;
+        font-size: 1rem;
+        border: 1px solid #e2e8f0;
+        border-right: none;
+        border-radius: 50px 0 0 50px;
+        outline: none;
+        transition: border 0.3s ease;
+    }
+    
+    .search-input:focus {
+        border-color: #4299e1;
+    }
+    
+    .search-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        background: #4299e1;
+        color: white;
+        border: none;
+        border-radius: 0 50px 50px 0;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .search-button:hover {
+        background: #3182ce;
+    }
+    
+    .search-button i {
+        font-size: 1.25rem;
+        margin-right: 5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .search-button-text {
+            display: none;
+        }
+        
+        .search-button {
+            padding: 0 15px;
+        }
+        
+        .search-button i {
+            margin-right: 0;
+        }
+        
+        .search-input {
+            padding: 12px 15px;
+        }
+    }
 </style>
 @endsection
 
@@ -174,21 +247,28 @@
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-outline-primary ms-2 btn-lg shadow-sm fw-bold px-4 py-2">
+                <button class="btn btn-outline-primary ms-2 btn-lg shadow-sm fw-bold px-4 py-2" data-bs-toggle="modal" data-bs-target="#filterModal">
                     <i class="bi bi-funnel me-2 fs-5"></i> Filter
-                </button>
+                  </button>
+                  
             </div>
             <div class="col-md-6 d-flex justify-content-between">
                 <!-- Search Bar -->
-                <form wire:submit="search">
-                    <div class="search-container d-flex">
-                        <input type="text" wire:model="query"
-                        class="form-control search-input fs-5" placeholder="Cari nama atau NIS..." style="height: 50px;">
-                        <div class="search-icon" style="height: 50px; display: flex; align-items: center;">
-                            <i class="bi bi-search fs-4"></i>
-                        </div>
+                <form wire:submit="search" class="search-form">
+                    <div class="search-container">
+                        <input 
+                            type="text" 
+                            wire:model.debounce.300ms="query"
+                            class="search-input" 
+                            placeholder="Cari nama atau NIS..." 
+                            aria-label="Search"
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="search-button">
+                            <i class="bi bi-search"></i>
+                            <span class="search-button-text">Cari</span>
+                        </button>
                     </div>
-                    <button type="submit">Search</button>
                 </form>
         
                 <!-- Switch On/Off with Highlighted Status -->
@@ -241,4 +321,39 @@
 
         {{ $pendaftars->links('custom-pagination-links') }}
     </section>
+
+
+    {{-- modal --}}
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="filterModalLabel">Filter Pendaftaran</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Isi filter: jenis kelamin, status diterima, tanggal, dll -->
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Status</label>
+                  <select wire:model="filter.status" class="form-select">
+                    <option value="">Semua</option>
+                    <option value="diterima">Diterima</option>
+                    <option value="menunggu">Menunggu</option>
+                    <option value="ditolak">Ditolak</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Tanggal Daftar</label>
+                  <input type="date" wire:model="filter.tanggal" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-primary" wire:click="applyFilter">Terapkan</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
