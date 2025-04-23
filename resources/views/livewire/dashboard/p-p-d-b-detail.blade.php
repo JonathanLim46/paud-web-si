@@ -1,3 +1,4 @@
+@section("styles")
 <style>
     .card-profile {
       background: white;
@@ -44,15 +45,42 @@
     .data-row {
       margin-bottom: 0.75rem;
     }
-  </style>
+    .status-diterima {
+    background-color: #c6f6d5 !important;
+    color: #276749 !important;
+}
 
+  .status-ditolak {
+      background-color: #fed7d7 !important;
+      color: #c53030 !important;
+  }
+
+  .status-pending {
+      background-color: #e9e9e9 !important;
+      color: #718096 !important;
+  }
+  </style>
+@endsection
 <div>
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="card-profile">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h4 class="fw-semibold mb-0">Data Pribadi</h4>
-              <button class="status-btn">Status: --</button>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-semibold mb-0">Data Pribadi</h4>
+        
+            <div class="dropdown">
+                <button class="btn dropdown-toggle {{ 
+                    $status === 'Diterima' ? 'status-diterima' : 
+                    ($status === 'Ditolak' ? 'status-ditolak' : 'status-pending') 
+                }}" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Status: {{ $status ?? '--' }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                    <li><a class="dropdown-item" wire:click="setStatus('Diterima')">Diterima</a></li>
+                    <li><a class="dropdown-item" wire:click="setStatus('Ditolak')">Ditolak</a></li>
+                    <li><a class="dropdown-item" wire:click="setStatus('Tahap Verifikasi')">Tahap Verifikasi</a></li>
+                </ul>
             </div>
+        </div>
         
             <!-- Data Pribadi -->
             <div class="row">
