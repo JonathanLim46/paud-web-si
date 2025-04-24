@@ -1,3 +1,4 @@
+@section('styles')
 <style>
     :root {
         --primary: #4361ee;
@@ -25,28 +26,78 @@
     }
 
     /* Search styling */
+    .search-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
     .search-container {
+        display: flex;
         position: relative;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+        overflow: hidden;
+        transition: all 0.3s ease;
     }
+    
+    .search-container:focus-within {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
     .search-input {
-        padding-left: 15px;
-        padding-right: 40px;
-        border-radius: 10px;
-        border: 1px solid var(--gray-300);
-        height: 48px;
-        transition: all 0.2s;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        flex: 1;
+        padding: 15px 20px;
+        font-size: 1rem;
+        border: 1px solid #e2e8f0;
+        border-right: none;
+        border-radius: 50px 0 0 50px;
+        outline: none;
+        transition: border 0.3s ease;
     }
+    
     .search-input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        border-color: #4299e1;
     }
-    .search-icon {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--gray-600);
+    
+    .search-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        background: #4299e1;
+        color: white;
+        border: none;
+        border-radius: 0 50px 50px 0;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .search-button:hover {
+        background: #3182ce;
+    }
+    
+    .search-button i {
+        font-size: 1.25rem;
+        margin-right: 5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .search-button-text {
+            display: none;
+        }
+        
+        .search-button {
+            padding: 0 15px;
+        }
+        
+        .search-button i {
+            margin-right: 0;
+        }
+        
+        .search-input {
+            padding: 12px 15px;
+        }
     }
 
     /* Button styling */
@@ -163,25 +214,38 @@
     }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+@endsection
+
 
 <div>
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-outline ms-2">
-                    <i class="bi bi-funnel me-1"></i> Filter
+                <button class="btn btn-outline-primary ms-2 btn-lg shadow-sm fw-bold px-4 py-2" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    <i class="bi bi-funnel me-2 fs-5"></i> Filter
                 </button>
             </div>
             <div class="col-md-6 d-flex justify-content-between">
-                <div class="search-container d-flex">
-                    <input type="text" class="form-control search-input" placeholder="Cari nama atau NIS...">
-                    <div class="search-icon">
-                        <i class="bi bi-search"></i>
+                <form wire:submit="search" class="search-form">
+                    <div class="search-container">
+                        <input 
+                            type="text" 
+                            wire:model.debounce.300ms="query"
+                            class="search-input" 
+                            placeholder="Cari nama atau NIS..." 
+                            aria-label="Search"
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="search-button">
+                            <i class="bi bi-search"></i>
+                            <span class="search-button-text">Cari</span>
+                        </button>
                     </div>
-                </div>
+                </form>
                 <!-- Tombol Tambah Kelas -->
                 <button type="button" class="btn btn-outline-success mt-2"
-                    data-bs-toggle="modal" data-bs-target="#modalTambahKelas">
+                    data-bs-toggle="modal" data-bs-target="#modalTambahKelas"
+                    wire:click="openModal">
                     <i class="fa-solid fa-plus"></i>
                     Buat Kelas
                 </button>
@@ -199,36 +263,27 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
+                    @foreach ($kelass as $kelas)
                     <tr>
-                        <td>Ceria</td>
-                        <td>A</td>
-                        <td>Hera Miranti</td>
+                        <td>{{ $kelas->nama_kelas }}</td>
+                        <td>{{ $kelas->tingkat_kelas }}</td>
+                        <td>{{ $kelas->wali_murid }}</td>
                         <td>
-                            <a href="{{ route("admin.detail-kelas") }}" class="btn btn-primary"><i class="bi bi-eye"></i> Detail</a>
+                            <a href="{{ route("admin.detail-kelas") }}" class="btn btn-primary"><i class="bi bi-eye"></i>Detail</a>
                             <a href="#" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
                             <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
-                    <!-- Add more rows as necessary -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
 
-        <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-chevron-left"></i></a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
-            </ul>
-        </nav>
+        {{ $kelass->links('custom-pagination-links') }}
     </section>
 
     <!-- Modal Tambah Kelas -->
-    <div class="modal fade" id="modalTambahKelas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTambahKelasLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalTambahKelas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTambahKelasLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -236,28 +291,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
-                        @csrf
+                    <form wire:submit="store">
                         <div class="mb-4">
                             <label for="namaKelas" class="form-label fw-bold">Nama Kelas</label>
-                            <input type="text" class="form-control" id="namaKelas" name="namaKelas" placeholder="contoh. Kelas 1A" required>
+                            <input type="text" class="form-control" id="namaKelas" name="namaKelas" 
+                            placeholder="contoh. Kelas 1A" wire:model="nama_kelas" required>
                         </div>
                         <div class="mb-4">
                             <label for="kelas" class="form-label fw-bold">Kelas</label>
-                            <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas berapa?" required>
+                            <input type="text" class="form-control" id="kelas" name="kelas" 
+                            placeholder="Kelas berapa?" wire:model="tingkat_kelas" required>
                         </div>
+                        @if ($gurus)
                         <div class="mb-4">
-                            <label for="pilihGuru" class="form-label fw-bold">Pilih Guru</label>
-                            <select class="form-select" id="pilihGuru" name="pilihGuru" required>
+                            <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
+                            <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="wali_murid" required>
                                 <option value="" disabled selected>Select</option>
-                                <option value="H. Muhammad Zein">H. Muhammad Zein</option>
-                                <option value="Irma Kusumawati">Irma Kusumawati</option>
-                                <option value="Lulu Zaima Awaly">Lulu Zaima Awaly</option>
-                                <option value="Emy Liriyanti">Emy Liriyanti</option>
-                                <option value="Hera Miranti">Hera Miranti</option>
-                                <option value="Nining Mulyani">Nining Mulyani</option>
+                                @foreach ($gurus as $guru)
+                                <option value="{{ $guru->user->name }}">{{ $guru->user->name }}</option>
+                                @endforeach
                             </select>
                         </div>
+                        @endif
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Buat Kelas</button>

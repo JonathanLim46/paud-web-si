@@ -18,8 +18,10 @@ class Kelas extends Model
     use HasFactory;
     protected $table = 'tb_kelas';
     protected $primaryKey = 'id_kelas';
-    protected $fillabel = [
-        'tingkat_kelas'
+    protected $fillable = [
+        'nama_kelas',
+        'tingkat_kelas',
+        'wali_murid',
     ];
 
     // public function guru(): HasOne{
