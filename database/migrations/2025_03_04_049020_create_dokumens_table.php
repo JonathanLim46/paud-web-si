@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('pendaftaran_id');
             $table->foreign('pendaftaran_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
             $table->string('kartu_keluarga');
+            $table->string('ktp_ayah');
+            $table->string('ktp_ibu');
             $table->string('akta_kelahiran');
             $table->string('surat_pindah')->nullable();
             $table->timestamps();

@@ -30,6 +30,12 @@ class DataPribadiFactory extends Factory
             'berat_badan' => fake()->randomFloat(2, 9, 25),
             'tinggi_badan' => fake()->numberBetween(70,100),
             'lingkar_kepala' => fake()->numberBetween(40, 55),
+            'alamat_rumah' => fake()->streetAddress(),
+            'desa_kelurahan' => fake()->citySuffix(),
+            'kecamatan' => fake()->streetSuffix(),
+            'kota_kabupaten' => fake()->city(),
+            'provinsi' => fake()->state(),
+            'kode_pos' => fake()->postcode(),
         ];
     }
 }

@@ -22,7 +22,9 @@ class DokumenFactory extends Factory
             'kartu_keluarga' => fake()->filePath(),
             'pendaftaran_id' => Pendaftar::factory(),
             'akta_kelahiran' => fake()->filePath(),
-            'surat_pindah' => fake()->filePath()
+            'surat_pindah' => fake()->filePath(),
+            'ktp_ayah' => fake()->filePath(),
+            'ktp_ibu' => fake()->filePath(),
         ];
     }
 }

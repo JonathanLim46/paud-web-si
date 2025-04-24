@@ -65,6 +65,10 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        DB::table('tb_statusppdb')->insert([
+            'status' => false,
+        ]);
+
         $this->call([
             PendaftarSeeder::class,
             KelasSeeder::class,

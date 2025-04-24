@@ -312,7 +312,7 @@
                             <span class="status-badge status-pending">Tahap Verifikasi</span>
                             @endif
                         </td>
-                        <td><a href="{{ route('admin.PPDBDetail') }}" class="btn btn-warning"><i class="bi bi-eye me-1"></i> Detail</a></td>
+                        <td><a href="{{ route('admin.ppdb.detail', $pendaftar->id_pendaftaran) }}" class="btn btn-warning"><i class="bi bi-eye me-1"></i> Detail</a></td>
                     </tr>
                     @endforeach
                 </tbody>

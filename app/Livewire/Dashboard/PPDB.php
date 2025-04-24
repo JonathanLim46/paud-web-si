@@ -35,7 +35,7 @@ class PPDB extends Component
             StatusPPDB::create([
                 'status' => $this->isOn,
             ]);
-        }
+        }                            
     }
 
     public function search()
