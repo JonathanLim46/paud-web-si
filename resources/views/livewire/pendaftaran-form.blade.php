@@ -40,15 +40,36 @@
                     <!-- NIS and NIK -->
                     <div class="mb-3">
                         <label for="nis" class="form-label">NIS</label>
-                        <input type="text" class="form-control" id="nis" placeholder="2025-ABCD">
+                        <input type="text" class="form-control" id="nis" placeholder="2025-ABCD"
+                            wire:model="form.nis">
+                        @error('form.nis')
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong>{{ $message }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>                  
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama-lengkap">
+                        <input type="text" class="form-control" id="nama_lengkap"
+                            wire:model="form.nama_lengkap">
+                        @error('form.nama_lengkap')
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong>{{ $message }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>                  
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="text" class="form-control" id="nik">
+                        <input type="text" class="form-control" id="nik"
+                            wire:model="form.nik">
+                        @error('form.nik')
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong>{{ $message }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>                  
+                        @endif
                     </div>
 
                     <!-- Data Ibu -->
