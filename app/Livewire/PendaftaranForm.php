@@ -10,17 +10,13 @@ class PendaftaranForm extends Component
 
     public $statusPPDB;
 
-    public $step = 'ketentuan'; // default step
+    public $step = 'ketentuan';
+
+    public $form = [];
 
     public function setStep($step)
     {
         $this->step = $step;
-    }
-    public $counter = 0;
-
-    public function increment()
-    {
-        $this->counter++;
     }
 
     public function nextStep()
