@@ -24,6 +24,12 @@ return new class extends Migration
             $table->float('berat_badan');
             $table->integer('tinggi_badan');
             $table->integer('lingkar_kepala');
+            $table->string('alamat_rumah');
+            $table->string('desa_kelurahan');
+            $table->string('kecamatan');
+            $table->string('kota_kabupaten');
+            $table->string('provinsi');
+            $table->string('kode_pos');
             $table->timestamps();
         });
     }

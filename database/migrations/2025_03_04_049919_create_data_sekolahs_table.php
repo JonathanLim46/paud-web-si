@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('npsn')->unique()->nullable();
             $table->unsignedBigInteger('pendaftaran_id');
             $table->foreign('pendaftaran_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
+            $table->string('nama_sekolah')->nullable();
             $table->string('alamat_sekolah')->nullable();
             $table->string('jenjang_sekolah')->nullable();
             $table->timestamps();

@@ -18,6 +18,7 @@ class DataSekolah extends Model
     protected $fillable = [
         'npsn',
         'pendaftaran_id',
+        'nama_sekolah',
         'alamat_sekolah',
         'jenjang_sekolah'
     ];

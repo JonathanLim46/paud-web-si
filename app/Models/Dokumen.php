@@ -18,7 +18,9 @@ class Dokumen extends Model
         'kartu_keluarga',
         'pendaftaran_id',
         'akta_kelahiran', 
-        'surat_pindah'
+        'surat_pindah',
+        'ktp_ayah',
+        'ktp_ibu',
     ];
 
     // Relasi ke Pendaftar

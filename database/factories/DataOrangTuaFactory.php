@@ -22,8 +22,10 @@ class DataOrangTuaFactory extends Factory
             'pendaftaran_id' => Pendaftar::factory(),
             'nama_ayah' => fake()->name($gender = 'male'),
             'nik_ayah' => fake()->nik(),
+            'pekerjaan_ayah' => fake()->jobTitle(),
             'nama_ibu' => fake()->name($gender = 'female'),
             'nik_ibu' => fake()->nik(),
+            'pekerjaan_ibu' => fake()->jobTitle(),
             'nama_wali' => fake()->name(),
             'nik_wali' => fake()->nik()
         ];

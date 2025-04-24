@@ -17,8 +17,10 @@ class DataOrangTua extends Model
         'pendaftaran_id',
         'nama_ayah', 
         'nik_ayah', 
+        'pekerjaan_ayah',
         'nama_ibu', 
-        'nik_ibu', 
+        'nik_ibu',
+        'pekerjaan_ibu',
         'nama_wali', 
         'nik_wali'
     ];

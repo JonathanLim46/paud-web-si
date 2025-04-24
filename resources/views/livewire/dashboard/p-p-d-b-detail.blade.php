@@ -48,7 +48,7 @@
     .status-diterima {
     background-color: #c6f6d5 !important;
     color: #276749 !important;
-}
+    }
 
   .status-ditolak {
       background-color: #fed7d7 !important;
@@ -75,9 +75,9 @@
                     Status: {{ $status ?? '--' }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="statusDropdown">
-                    <li><a class="dropdown-item" wire:click="setStatus('Diterima')">Diterima</a></li>
-                    <li><a class="dropdown-item" wire:click="setStatus('Ditolak')">Ditolak</a></li>
-                    <li><a class="dropdown-item" wire:click="setStatus('Tahap Verifikasi')">Tahap Verifikasi</a></li>
+                    <li><a class="dropdown-item" wire:click="setStatus('Diterima', {{ $pendaftar->id_pendaftaran }})">Diterima</a></li>
+                    <li><a class="dropdown-item" wire:click="setStatus('Ditolak', {{ $pendaftar->id_pendaftaran }})">Ditolak</a></li>
+                    <li><a class="dropdown-item" wire:click="setStatus('Tahap Verifikasi', {{ $pendaftar->id_pendaftaran }})">Tahap Verifikasi</a></li>
                 </ul>
             </div>
         </div>
@@ -85,35 +85,86 @@
             <!-- Data Pribadi -->
             <div class="row">
               <div class="col-md-6 data-row"><span class="data-label">NIS</span><br><span class="data-value">2025-002A</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Nama Lengkap</span><br><span class="data-value">Ahmad Fadillah</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">NIK</span><br><span class="data-value">3201234567890001</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Jenis Kelamin</span><br><span class="data-value">Laki-laki</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Tempat Lahir</span><br><span class="data-value">Bogor</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Tanggal Lahir</span><br><span class="data-value">12 Maret 2020</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Agama</span><br><span class="data-value">Islam</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Anak Ke</span><br><span class="data-value">2</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Berat Badan</span><br><span class="data-value">14 kg</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Tinggi Badan</span><br><span class="data-value">95 cm</span></div>
-              <div class="col-md-6 data-row"><span class="data-label">Lingkar Kepala</span><br><span class="data-value">48 cm</span></div>
-              <div class="col-md-12 data-row"><span class="data-label">Alamat</span><br><span class="data-value">Jl. Merdeka No.10</span></div>
-              <div class="col-md-3 data-row"><span class="data-label">Desa</span><br><span class="data-value">Sukasari</span></div>
-              <div class="col-md-3 data-row"><span class="data-label">Kecamatan</span><br><span class="data-value">Megamendung</span></div>
-              <div class="col-md-3 data-row"><span class="data-label">Kabupaten</span><br><span class="data-value">Bogor</span></div>
-              <div class="col-md-3 data-row"><span class="data-label">Provinsi</span><br><span class="data-value">Sukasari</span></div>
+              <div class="col-md-6 data-row"><span class="data-label">Nama Lengkap</span><br><span class="data-value">{{ $pendaftar->dataPribadi->nama_lengkap }}</span></div>
+              <div class="col-md-6 data-row"><span class="data-label">NIK</span><br><span class="data-value">{{ $pendaftar->dataPribadi->nik }}</span></div>
+              <div class="col-md-6 data-row"><span class="data-label">Jenis Kelamin</span><br><span class="data-value">{{ $pendaftar->dataPribadi->jenis_kelamin }}</span></div>
+              <div class="col-md-6 data-row"><span class="data-label">Tempat Lahir</span><br><span class="data-value">{{ $pendaftar->dataPribadi->tempat_lahir }}</span></div>
+              <div class="col-md-6 data-row">
+                <span class="data-label">Tanggal Lahir</span><br>
+                <span class="data-value">{{ \Carbon\Carbon::parse($pendaftar->dataPribadi->tanggal_lahir)->translatedFormat('F d, Y') }}</span></div>
+              <div class="col-md-6 data-row"><span class="data-label">Agama</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->agama }}</span>
+              </div>
+              <div class="col-md-6 data-row"><span class="data-label">Anak Ke</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->anak_ke }}</span>
+              </div>
+              <div class="col-md-6 data-row"><span class="data-label">Berat Badan</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->berat_badan }} kg</span>
+              </div>
+              <div class="col-md-6 data-row"><span class="data-label">Tinggi Badan</span><br>
+                <span class="data-value">
+                  {{ $pendaftar->dataPribadi->tinggi_badan }} cm
+                </span>
+              </div>
+              <div class="col-md-6 data-row"><span class="data-label">Lingkar Kepala</span><br>
+                <span class="data-value">
+                  {{ $pendaftar->dataPribadi->lingkar_kepala }} cm
+                </span>
+              </div>
+              <div class="col-md-12 data-row"><span class="data-label">Alamat</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->alamat_rumah }}</span>
+              </div>
+              <div class="col-md-3 data-row"><span class="data-label">Desa atau Kelurahan</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->desa_kelurahan }}</span>
+              </div>
+              <div class="col-md-3 data-row"><span class="data-label">Kecamatan</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->kecamatan }}</span>
+              </div>
+              <div class="col-md-3 data-row"><span class="data-label">Kabupaten atau Kota</span><br>
+                <span class="data-value">{{ $pendaftar->dataPribadi->kota_kabupaten }}</span></div>
+              <div class="col-md-3 data-row"><span class="data-label">Provinsi</span><br>
+                <span class="data-value">
+                  {{ $pendaftar->dataPribadi->provinsi }}
+                </span>
+              </div>
             </div>
         
             <!-- Orang Tua -->
             <div class="section-title">Orang Tua</div>
             <div class="row">
               <div class="col-md-6">
-                <div class="data-row"><span class="data-label">Nama Ayah</span><br><span class="data-value">Budi Santoso</span></div>
-                <div class="data-row"><span class="data-label">NIK</span><br><span class="data-value">3201234567890011</span></div>
-                <div class="data-row"><span class="data-label">Pekerjaan</span><br><span class="data-value">Pegawai Swasta</span></div>
+                <div class="data-row"><span class="data-label">Nama Ayah</span><br>
+                  <span class="data-value">
+                    {{ $pendaftar->dataOrangTua->nama_ayah }}
+                  </span>
+                </div>
+                <div class="data-row"><span class="data-label">NIK</span><br>
+                  <span class="data-value">
+                    {{ $pendaftar->dataOrangTua->nik_ayah }}
+                  </span>
+                </div>
+                <div class="data-row"><span class="data-label">Pekerjaan</span><br>
+                  <span class="data-value">
+                    {{ $pendaftar->dataOrangTua->pekerjaan_ayah }}
+                  </span>
+                </div>
               </div>
               <div class="col-md-6">
-                <div class="data-row"><span class="data-label">Nama Ibu</span><br><span class="data-value">Siti Aminah</span></div>
-                <div class="data-row"><span class="data-label">NIK</span><br><span class="data-value">3201234567890022</span></div>
-                <div class="data-row"><span class="data-label">Pekerjaan</span><br><span class="data-value">Ibu Rumah Tangga</span></div>
+                <div class="data-row"><span class="data-label">Nama Ibu</span><br>
+                  <span class="data-value">
+                    {{ $pendaftar->dataOrangTua->nama_ibu }}
+                  </span>
+                </div>
+                <div class="data-row"><span class="data-label">NIK</span><br>
+                  <span class="data-value">
+                    {{ $pendaftar->dataOrangTua->nik_ibu }}
+                  </span>
+                </div>
+                <div class="data-row"><span class="data-label">Pekerjaan</span><br>
+                  <span class="data-value">
+                    {{ $pendaftar->dataOrangTua->pekerjaan_ibu }}
+                  </span>
+                </div>
               </div>
             </div>
         

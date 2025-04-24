@@ -26,7 +26,13 @@ class DataPribadi extends Model
         'anak_ke', 
         'berat_badan',
         'tinggi_badan', 
-        'lingkar_kepala'
+        'lingkar_kepala',
+        'alamat_rumah',
+        'desa_kelurahan',
+        'kecamatan',
+        'kota_kabupaten',
+        'provinsi',
+        'kode_pos',
     ];
 
     public function pendaftar() : BelongsTo {
