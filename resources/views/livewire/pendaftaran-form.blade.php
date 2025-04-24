@@ -71,6 +71,103 @@
                         </div>                  
                         @endif
                     </div>
+                    <!-- Jenis Kelamin -->
+<div class="mb-3">
+    <label class="form-label d-block">Jenis Kelamin</label>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="jk-l" value="Laki-laki" wire:model="form.jenis_kelamin">
+        <label class="form-check-label" for="jk-l">Laki-laki</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="jk-p" value="Perempuan" wire:model="form.jenis_kelamin">
+        <label class="form-check-label" for="jk-p">Perempuan</label>
+    </div>
+</div>
+
+<!-- Tempat Lahir -->
+<div class="mb-3">
+    <label for="tempat-lahir" class="form-label">Tempat Lahir</label>
+    <input type="text" class="form-control" id="tempat-lahir" wire:model="form.tempat_lahir">
+</div>
+
+<!-- Tanggal Lahir (Tahun, Bulan, Tanggal) -->
+<div class="mb-3">
+    <label class="form-label d-block">Tanggal Lahir</label>
+    <div class="d-flex gap-2">
+        <input type="text" class="form-control" placeholder="Tahun" wire:model="form.tahun_lahir">
+        <input type="text" class="form-control" placeholder="Bulan" wire:model="form.bulan_lahir">
+        <input type="text" class="form-control" placeholder="Tanggal" wire:model="form.tanggal_lahir">
+    </div>
+</div>
+
+<!-- Agama -->
+<div class="mb-3">
+    <label for="agama" class="form-label">Agama</label>
+    <input type="text" class="form-control" id="agama" wire:model="form.agama" placeholder="Pilih agama yang dianut">
+</div>
+
+<!-- Anak ke -->
+<div class="mb-3">
+    <label for="anak-ke" class="form-label">Anak Ke</label>
+    <input type="number" class="form-control" id="anak-ke" wire:model="form.anak_ke">
+</div>
+
+<!-- Berat Badan -->
+<div class="mb-3">
+    <label for="berat-badan" class="form-label">Berat Badan</label>
+    <input type="text" class="form-control" id="berat-badan" wire:model="form.berat_badan">
+</div>
+
+<!-- Tinggi Badan -->
+<div class="mb-3">
+    <label for="tinggi-badan" class="form-label">Tinggi Badan</label>
+    <input type="text" class="form-control" id="tinggi-badan" wire:model="form.tinggi_badan">
+</div>
+
+<!-- Lingkar Kepala -->
+<div class="mb-3">
+    <label for="lingkar-kepala" class="form-label">Lingkar Kepala</label>
+    <input type="text" class="form-control" id="lingkar-kepala" wire:model="form.lingkar_kepala">
+</div>
+
+<!-- Alamat -->
+<div class="mb-3">
+    <label for="alamat" class="form-label">Alamat</label>
+    <input type="text" class="form-control" id="alamat" wire:model="form.alamat">
+</div>
+
+<div class="mb-3">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Desa" wire:model="form.desa">
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Kecamatan" wire:model="form.kecamatan">
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Kabupaten" wire:model="form.kabupaten">
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Provinsi" wire:model="form.provinsi">
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Kode Pos" wire:model="form.kode_pos">
+        </div>
+    </div>
+</div>
+<h4>Data Ayah</h4>
+                    <div class="mb-3">
+                        <label for="nama-ibu" class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nama-ibu">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nik-ibu" class="form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik-ibu">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pekerjaan-ibu" class="form-label">Pekerjaan</label>
+                        <input type="text" class="form-control" id="pekerjaan-ibu">
+                    </div>
 
                     <!-- Data Ibu -->
                     <h4>Data Ibu</h4>
@@ -133,7 +230,11 @@
                         <label for="npsn" class="form-label">NPSN</label>
                         <input type="text" class="form-control" id="npsn">
                     </div>
-
+                    <div class="mb-3">
+                        <label for="npsn" class="form-label">Lokasi Sekolah</label>
+                        <input type="text" class="form-control" id="npsn">
+                    </div>
+                    
                     <!-- File Uploads -->
                     <h4>Unggah Dokumen Persyaratan</h4>
                     <div class="mb-3">

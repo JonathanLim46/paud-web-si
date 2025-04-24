@@ -169,9 +169,11 @@
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-outline ms-2">
+                <a href=""  data-bs-toggle="modal" data-bs-target="#filterGuruModal"class="btn btn-outline ms-2" >
+
                     <i class="bi bi-funnel me-1"></i> Filter
-                </button>
+                </a>
+
             </div>
             <div class="col-md-6 d-flex justify-content-between">
                 <div class="search-container d-flex">
@@ -207,8 +209,8 @@
                         <td>Kp. Pasir Muncang</td>
                         <td>S1</td>
                         <td>
-                            <a href="#" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditGuru"  class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteGuru"  class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -227,6 +229,8 @@
             </ul>
         </nav>
     </section>
+
+    {{-- modal tambah guru --}}
     <div class="modal fade" id="modalTambahGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTambahGuruLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -262,7 +266,107 @@
             </div>
         </div>
     </div>
-</div>
 
-{{-- Modal Tambah Guru --}}
+    {{-- modal edit guru --}}
+    <div class="modal fade" id="modalEditGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditGuruLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalTambahGuruLabel">Edit Guru</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="namaGuru" class="form-label fw-bold">Nama Guru</label>
+                            <input type="text" class="form-control" id="namaGuru" name="namaGuru" placeholder="Masukkan nama guru" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="jabatan" class="form-label fw-bold">Jabatan</label>
+                            <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan jabatan guru" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="alamat" class="form-label fw-bold">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="pendidikan" class="form-label fw-bold">Pendidikan</label>
+                            <input type="text" class="form-control" id="pendidikan" name="pendidikan" placeholder="Masukkan pendidikan terakhir" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Tambah Guru</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal delete  --}}
+    <div class="modal fade" id="modalDeleteGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteGuru" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeleteGuruLabel">Konfirmasi Hapus</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fs-5">Apakah Anda yakin ingin menghapus data guru ini?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form> --}}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{-- modal filter --}}
+    <div class="modal fade" id="filterGuruModal" tabindex="-1" aria-labelledby="filterGuruModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="filterModalLabel">Filter Guru</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Isi filter: jenis kelamin, status diterima, tanggal, dll -->
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Jabatan</label>
+                  <select wire:model="filter.status" class="form-select">
+                    <option value="">Semua</option>
+                    <option value="KetuaYayasan">Ketua yayasan</option>
+                    <option value="Guru">Guru</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Pendidikan</label>
+                  <select wire:model="filter.status" class="form-select">
+                    <option value="">Semua</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="S3">S3</option>
+                  </select>
+                </div>
+                
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-primary" wire:click="applyFilter" data-bs-dismiss="modal">Terapkan</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+</div>
 

@@ -31,6 +31,8 @@
 }
 
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 @endsection
 <div>
     @if (Auth::user()->level == "admin")
@@ -75,12 +77,18 @@
   @if (Auth::user()->level == "guru")
   <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
     <header class="fw-bold fs-5 header-info">Jadwal Mengajar</header>
-    <table class="mt-4 table table-bordered">
+    <button type="button" class="btn btn-outline-success mt-2"
+                    data-bs-toggle="modal" data-bs-target="#modalAddKelas">
+                    <i class="fa-solid fa-plus"></i>
+                    Tambah Jadwal
+                </button>
+    <table class="mt-4 table table-bordered text-center align-middle" >
       <thead>
         <th scope="col" class="col">Hari</th>
         @foreach ($jadwals->unique('kelas_id') as $kelas)
         <th scope="col" class="col">{{ $kelas->kelas->tingkat_kelas }}</th>
         @endforeach
+        <th scope="col" class="col">Aksi</th>
       </thead>
       <tbody>
         @foreach($jadwals->groupBy('hari_id') as $hari_id => $jadwalGroup)
@@ -97,6 +105,11 @@
                     @endforeach
                 </td>
             @endforeach
+            <td>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditKelas"  class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteJadwal"  class="btn btn-danger"><i class="bi bi-trash"></i></a>
+
+            </td>
         </tr>
     @endforeach
       </tbody>
@@ -206,4 +219,135 @@
   </section>
   @endif
 
+{{-- add modal --}}
+<div class="modal fade" id="modalAddKelas" tabindex="-1" aria-labelledby="modalAddKelas" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="filterModalLabel">Tambah Jadwal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Hari</label>
+            <select  class="form-select">
+              <option value="">Senin</option>
+              <option value="">Selasa</option>
+              <option value="">Rabu</option>
+              <option value="">Kamis</option>
+              <option value="">Jumat</option>
+              <option value="">Sabtu</option>
+              <option value="">Minggu</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Nama Kelas</label>
+            <select  class="form-select">
+              <option value="">A</option>
+              <option value="">B</option>
+              <option value="">C</option>
+            
+            </select>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">Nama Guru</label>
+            <select  class="form-select">
+              <option value="">Tirtayasa Kenes Saragih S.Sos</option>
+              <option value="">Mustofa Gamblang Rajata S.Pt	</option>
+            
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-primary" wire:click="applyFilter" data-bs-dismiss="modal">Tambah</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- edit modal --}}
+<div class="modal fade" id="modalEditKelas" tabindex="-1" aria-labelledby="modalEditKelas" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="filterModalLabel">Edit Jadwal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label class="form-label">Hari</label>
+            <select  class="form-select">
+              <option value="">Senin</option>
+              <option value="">Selasa</option>
+              <option value="">Rabu</option>
+              <option value="">Kamis</option>
+              <option value="">Jumat</option>
+              <option value="">Sabtu</option>
+              <option value="">Minggu</option>
+            </select>
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">Nama Guru Kelas A</label>
+            <select  class="form-select">
+              <option value="">Tirtayasa Kenes Saragih S.Sos</option>
+              <option value="">Mustofa Gamblang Rajata S.Pt	</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">Nama Guru Kelas B</label>
+            <select  class="form-select">
+              <option value="">Tirtayasa Kenes Saragih S.Sos</option>
+              <option value="">Mustofa Gamblang Rajata S.Pt	</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">Nama Guru Kelas C</label>
+            <select  class="form-select">
+              <option value="">Tirtayasa Kenes Saragih S.Sos</option>
+              <option value="">Mustofa Gamblang Rajata S.Pt	</option>
+            </select>
+          </div>
+          
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-primary" wire:click="applyFilter" data-bs-dismiss="modal">Tambah</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- modal delete --}}
+<div class="modal fade" id="modalDeleteJadwal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteJadwal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeleteGuruLabel">Konfirmasi Hapus</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fs-5">Apakah Anda yakin ingin menghapus data Jadwal ini?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form> --}}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

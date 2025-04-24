@@ -221,9 +221,6 @@
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-outline-primary ms-2 btn-lg shadow-sm fw-bold px-4 py-2" data-bs-toggle="modal" data-bs-target="#filterModal">
-                    <i class="bi bi-funnel me-2 fs-5"></i> Filter
-                </button>
             </div>
             <div class="col-md-6 d-flex justify-content-between">
                 <form wire:submit="search" class="search-form">
