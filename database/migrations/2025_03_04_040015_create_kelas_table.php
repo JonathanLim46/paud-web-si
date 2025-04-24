@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('tb_kelas', function (Blueprint $table) {
             $table->id('id_kelas');
+            $table->string('nama_kelas');
             $table->string('tingkat_kelas');
+            $table->string('wali_murid');
             $table->timestamps();
         });
     }

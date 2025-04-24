@@ -49,12 +49,12 @@ Route::middleware(['auth', 'ceklevel:admin,guru'])->group(function () {
 
 Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
     Route::get('dashboard/profilsekolah', App\LiveWire\Dashboard\Profil::class)->name('admin.profilsekolah');
-    Route::get('dashboard/PPDB', App\Livewire\Dashboard\PPDB::class)->name('admin.PPDB');
-    Route::get('dashboard/PPDBDetail/{id}', App\Livewire\Dashboard\PPDBDetail::class)->name('admin.ppdb.detail');
-    Route::get('dashboard/Guru', App\Livewire\Dashboard\Guru::class)->name('admin.guru');
-    Route::get('dashboard/Kelas', App\Livewire\Dashboard\Kelas::class)->name('admin.kelas');
-    Route::get('dashboard/KelasDetail', App\Livewire\Dashboard\KelasDetail::class)->name('admin.detail-kelas');
-    Route::get('dashboard/DetailMurid', App\Livewire\Dashboard\DetailMurid::class)->name('admin.detail-murid');
+    Route::get('dashboard/ppdb', App\Livewire\Dashboard\PPDB::class)->name('admin.PPDB');
+    Route::get('dashboard/ppdbetail/{id}', App\Livewire\Dashboard\PPDBDetail::class)->name('admin.ppdb.detail');
+    Route::get('dashboard/guru', App\Livewire\Dashboard\Guru::class)->name('admin.guru');
+    Route::get('dashboard/kelas', App\Livewire\Dashboard\AllClass::class)->name('admin.kelas');
+    Route::get('dashboard/kelasdetail', App\Livewire\Dashboard\KelasDetail::class)->name('admin.detail-kelas');
+    Route::get('dashboard/detailmurid', App\Livewire\Dashboard\DetailMurid::class)->name('admin.detail-murid');
     Route::get('dashboard/profilsekolah/galeri', App\LiveWire\Dashboard\Gallery::class)->name('admin.profilsekolah.gallery');
     Route::get('dashboard/profilsekolah/aktivitas', App\LiveWire\Dashboard\Activity::class)->name('admin.profilsekolah.aktivitas');
     Route::get('dashboard/profilsekolah/faq', App\LiveWire\Dashboard\Faqs::class)->name('admin.profilsekolah.faq');

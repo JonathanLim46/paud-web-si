@@ -22,7 +22,9 @@ class KelasFactory extends Factory
         self::$toggle = !self::$toggle;
         return [
             //
-            'tingkat_kelas' => $kelas
+            'nama_kelas' => fake()->name(),
+            'tingkat_kelas' => $kelas,
+            'wali_murid' => fake()->firstNameFemale(),
         ];
     }
 }
