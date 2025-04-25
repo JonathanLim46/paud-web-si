@@ -237,8 +237,8 @@
         }
     }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @endsection
 
 
@@ -246,8 +246,7 @@
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <a href=""  data-bs-toggle="modal" data-bs-target="#filterModal" class="btn btn-outline ms-2" >
-
+                <a href=""   data-bs-toggle="modal" data-bs-target="#filterModal" class="btn btn-secondary ms-2" >
                     <i class="bi bi-funnel me-1"></i> Filter
                 </a>
 
@@ -324,7 +323,7 @@
 
 
     {{-- modal filter --}}
-    <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">

@@ -1,3 +1,4 @@
+@section("styles")
 <style>
     :root {
         --primary: #4361ee;
@@ -65,19 +66,6 @@
         background-color: var(--gray-100);
     }
 
-    .btn-warning {
-        background-color: var(--primary);
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 8px;
-        transition: 0.3s ease;
-    }
-
-    .btn-warning:hover {
-        background-color: var(--primary-hover);
-        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.2);
-    }
 
     /* Table styling */
     .table-custom {
@@ -161,19 +149,19 @@
         background-color: var(--gray-100);
         border-color: var(--gray-400);
     }
+    
+    
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+@endsection
 
 <div>
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="row mb-4 align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <a href=""  data-bs-toggle="modal" data-bs-target="#filterGuruModal"class="btn btn-outline ms-2" >
-
-                    <i class="bi bi-funnel me-1"></i> Filter
+                <a href=""  data-bs-toggle="modal" data-bs-target="#filterGuruModal"class="btn btn-secondary ms-2" >
+                    <i class="bi bi-funnel me-1"></i> Filters
                 </a>
-
             </div>
             <div class="col-md-6 d-flex justify-content-between">
                 <div class="search-container d-flex">
@@ -338,7 +326,6 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <!-- Isi filter: jenis kelamin, status diterima, tanggal, dll -->
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label">Jabatan</label>

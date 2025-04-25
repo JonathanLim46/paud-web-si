@@ -1,219 +1,220 @@
 @section('styles')
-<style>
-    :root {
-        --primary: #4361ee;
-        --primary-hover: #3a56d4;
-        --gray-100: #f7fafc;
-        --gray-200: #edf2f7;
-        --gray-300: #e2e8f0;
-        --gray-400: #cbd5e0;
-        --gray-500: #a0aec0;
-        --gray-600: #718096;
-        --text-dark: #2d3748;
-    }
-    .info-dashboard {
-        background-color: #fff;
-        border-radius: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    }
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-hover: #3a56d4;
+            --gray-100: #f7fafc;
+            --gray-200: #edf2f7;
+            --gray-300: #e2e8f0;
+            --gray-400: #cbd5e0;
+            --gray-500: #a0aec0;
+            --gray-600: #718096;
+            --text-dark: #2d3748;
+        }
 
-    .section-title {
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 1.5rem;
-    }
+        .info-dashboard {
+            background-color: #fff;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
 
-    /* Search styling */
-    .search-form {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .search-container {
-        display: flex;
-        position: relative;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 50px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    
-    .search-container:focus-within {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    
-    .search-input {
-        flex: 1;
-        padding: 15px 20px;
-        font-size: 1rem;
-        border: 1px solid #e2e8f0;
-        border-right: none;
-        border-radius: 50px 0 0 50px;
-        outline: none;
-        transition: border 0.3s ease;
-    }
-    
-    .search-input:focus {
-        border-color: #4299e1;
-    }
-    
-    .search-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 20px;
-        background: #4299e1;
-        color: white;
-        border: none;
-        border-radius: 0 50px 50px 0;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-    
-    .search-button:hover {
-        background: #3182ce;
-    }
-    
-    .search-button i {
-        font-size: 1.25rem;
-        margin-right: 5px;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 576px) {
-        .search-button-text {
-            display: none;
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
         }
-        
-        .search-button {
-            padding: 0 15px;
+
+        /* Search styling */
+        .search-form {
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .search-button i {
-            margin-right: 0;
+
+        .search-container {
+            display: flex;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
-        
+
+        .search-container:focus-within {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
         .search-input {
-            padding: 12px 15px;
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 1px solid #e2e8f0;
+            border-right: none;
+            border-radius: 50px 0 0 50px;
+            outline: none;
+            transition: border 0.3s ease;
         }
-    }
 
-    /* Button styling */
-    .btn-outline {
-        border: 1px solid var(--gray-400);
-        background-color: white;
-        color: var(--gray-600);
-        border-radius: 10px;
-        padding: 10px 20px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
+        .search-input:focus {
+            border-color: #4299e1;
+        }
 
-    .btn-outline:hover {
-        border-color: var(--gray-500);
-        background-color: var(--gray-100);
-    }
+        .search-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-    .btn-warning {
-        background-color: var(--primary);
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 8px;
-        transition: 0.3s ease;
-    }
+        .search-button:hover {
+            background: #3182ce;
+        }
 
-    .btn-warning:hover {
-        background-color: var(--primary-hover);
-        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.2);
-    }
+        .search-button i {
+            font-size: 1.25rem;
+            margin-right: 5px;
+        }
 
-    /* Table styling */
-    .table-custom {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        background-color: white;
-        overflow: hidden;
-        border-radius: 12px;
-    }
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .search-button-text {
+                display: none;
+            }
 
-    .table-custom thead th {
-        background-color: var(--gray-100);
-        color: var(--gray-600);
-        font-weight: 600;
-        font-size: 13px;
-        text-transform: uppercase;
-        padding: 16px;
-        border-bottom: 2px solid var(--gray-300);
-    }
+            .search-button {
+                padding: 0 15px;
+            }
 
-    .table-custom tbody tr {
-        transition: background-color 0.3s;
-    }
+            .search-button i {
+                margin-right: 0;
+            }
 
-    .table-custom tbody tr:hover {
-        background-color: var(--gray-200);
-    }
+            .search-input {
+                padding: 12px 15px;
+            }
+        }
 
-    .table-custom td {
-        padding: 16px 14px;
-        color: var(--text-dark);
-        vertical-align: middle;
-    }
+        /* Button styling */
+        .btn-outline {
+            border: 1px solid var(--gray-400);
+            background-color: white;
+            color: var(--gray-600);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
 
-    .table-custom tbody tr:nth-child(even) {
-        background-color: #fafafa;
-    }
+        .btn-outline:hover {
+            border-color: var(--gray-500);
+            background-color: var(--gray-100);
+        }
 
-    .status-badge {
-        padding: 6px 16px;
-        font-size: 13px;
-        font-weight: 500;
-        border-radius: 999px;
-    }
+        .btn-warning {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
 
-    .status-diterima {
-        background-color: #c6f6d5;
-        color: #276749;
-    }
+        .btn-warning:hover {
+            background-color: var(--primary-hover);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.2);
+        }
 
-    .status-ditolak {
-        background-color: #fed7d7;
-        color: #c53030;
-    }
+        /* Table styling */
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: white;
+            overflow: hidden;
+            border-radius: 12px;
+        }
 
-    .status-pending {
-        background-color: #e9e9e9;
-        color: #718096;
-    }
+        .table-custom thead th {
+            background-color: var(--gray-100);
+            color: var(--gray-600);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 16px;
+            border-bottom: 2px solid var(--gray-300);
+        }
 
-    .pagination {
-        gap: 5px;
-    }
+        .table-custom tbody tr {
+            transition: background-color 0.3s;
+        }
 
-    .page-item .page-link {
-        border-radius: 8px;
-        padding: 8px 14px;
-        border: 1px solid var(--gray-300);
-        color: var(--gray-600);
-        transition: 0.2s ease;
-    }
+        .table-custom tbody tr:hover {
+            background-color: var(--gray-200);
+        }
 
-    .page-item.active .page-link {
-        background-color: var(--primary);
-        border-color: var(--primary);
-        color: white;
-    }
+        .table-custom td {
+            padding: 16px 14px;
+            color: var(--text-dark);
+            vertical-align: middle;
+        }
 
-    .page-item .page-link:hover:not(.active) {
-        background-color: var(--gray-100);
-        border-color: var(--gray-400);
-    }
-</style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 999px;
+        }
+
+        .status-diterima {
+            background-color: #c6f6d5;
+            color: #276749;
+        }
+
+        .status-ditolak {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+
+        .status-pending {
+            background-color: #e9e9e9;
+            color: #718096;
+        }
+
+        .pagination {
+            gap: 5px;
+        }
+
+        .page-item .page-link {
+            border-radius: 8px;
+            padding: 8px 14px;
+            border: 1px solid var(--gray-300);
+            color: var(--gray-600);
+            transition: 0.2s ease;
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .page-item .page-link:hover:not(.active) {
+            background-color: var(--gray-100);
+            border-color: var(--gray-400);
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @endsection
 
 
@@ -225,14 +226,8 @@
             <div class="col-md-6 d-flex justify-content-between">
                 <form wire:submit="search" class="search-form">
                     <div class="search-container">
-                        <input 
-                            type="text" 
-                            wire:model.debounce.300ms="query"
-                            class="search-input" 
-                            placeholder="Cari nama atau NIS..." 
-                            aria-label="Search"
-                            autocomplete="off"
-                        >
+                        <input type="text" wire:model.debounce.300ms="query" class="search-input"
+                            placeholder="Cari nama atau NIS..." aria-label="Search" autocomplete="off">
                         <button type="submit" class="search-button">
                             <i class="bi bi-search"></i>
                             <span class="search-button-text">Cari</span>
@@ -240,9 +235,8 @@
                     </div>
                 </form>
                 <!-- Tombol Tambah Kelas -->
-                <button type="button" class="btn btn-outline-success mt-2"
-                    data-bs-toggle="modal" data-bs-target="#modalTambahKelas"
-                    wire:click="openModal">
+                <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
+                    data-bs-target="#modalTambahKelas" wire:click="openModal">
                     <i class="fa-solid fa-plus"></i>
                     Buat Kelas
                 </button>
@@ -261,16 +255,20 @@
                 </thead>
                 <tbody class="text-center">
                     @foreach ($kelass as $kelas)
-                    <tr>
-                        <td>{{ $kelas->nama_kelas }}</td>
-                        <td>{{ $kelas->tingkat_kelas }}</td>
-                        <td>{{ $kelas->wali_murid }}</td>
-                        <td>
-                            <a href="{{ route("admin.detail-kelas") }}" class="btn btn-primary"><i class="bi bi-eye"></i>Detail</a>
-                            <a href="#" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $kelas->nama_kelas }}</td>
+                            <td>{{ $kelas->tingkat_kelas }}</td>
+                            <td>{{ $kelas->wali_murid }}</td>
+                            <td>
+                                <a href="{{ route('admin.detail-kelas') }}" class="btn btn-primary"><i
+                                        class="bi bi-eye"></i>Detail</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditKelas"
+                                    class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteKelas"
+                                    class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -280,7 +278,8 @@
     </section>
 
     <!-- Modal Tambah Kelas -->
-    <div wire:ignore.self class="modal fade" id="modalTambahKelas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTambahKelasLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalTambahKelas" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="modalTambahKelasLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -291,30 +290,97 @@
                     <form wire:submit="store">
                         <div class="mb-4">
                             <label for="namaKelas" class="form-label fw-bold">Nama Kelas</label>
-                            <input type="text" class="form-control" id="namaKelas" name="namaKelas" 
-                            placeholder="contoh. Kelas 1A" wire:model="nama_kelas" required>
+                            <input type="text" class="form-control" id="namaKelas" name="namaKelas"
+                                placeholder="contoh. Kelas 1A" wire:model="nama_kelas" required>
                         </div>
                         <div class="mb-4">
                             <label for="kelas" class="form-label fw-bold">Kelas</label>
-                            <input type="text" class="form-control" id="kelas" name="kelas" 
-                            placeholder="Kelas berapa?" wire:model="tingkat_kelas" required>
+                            <input type="text" class="form-control" id="kelas" name="kelas"
+                                placeholder="Kelas berapa?" wire:model="tingkat_kelas" required>
                         </div>
                         @if ($gurus)
-                        <div class="mb-4">
-                            <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
-                            <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="wali_murid" required>
-                                <option value="" disabled selected>Select</option>
-                                @foreach ($gurus as $guru)
-                                <option value="{{ $guru->user->name }}">{{ $guru->user->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            <div class="mb-4">
+                                <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
+                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="wali_murid"
+                                    required>
+                                    <option value="" disabled selected>Select</option>
+                                    @foreach ($gurus as $guru)
+                                        <option value="{{ $guru->user->name }}">{{ $guru->user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         @endif
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Buat Kelas</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div wire:ignore.self class="modal fade" id="modalEditKelas" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="modalEditKelasLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalTambahKelasLabel">Edit Kelas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit="store">
+                        <div class="mb-4">
+                            <label for="namaKelas" class="form-label fw-bold">Nama Kelas</label>
+                            <input type="text" class="form-control" id="namaKelas" name="namaKelas"
+                                placeholder="contoh. Kelas 1A" wire:model="nama_kelas" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="kelas" class="form-label fw-bold">Kelas</label>
+                            <input type="text" class="form-control" id="kelas" name="kelas"
+                                placeholder="Kelas berapa?" wire:model="tingkat_kelas" required>
+                        </div>
+                        @if ($gurus)
+                            <div class="mb-4">
+                                <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
+                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="wali_murid"
+                                    required>
+                                    <option value="" disabled selected>Select</option>
+                                    @foreach ($gurus as $guru)
+                                        <option value="{{ $guru->user->name }}">{{ $guru->user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Buat Kelas</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- modal delete --}}
+    <div class="modal fade" id="modalDeleteKelas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalDeleteKelasLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeleteGuruLabel">Konfirmasi Hapus</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fs-5">Apakah Anda yakin ingin menghapus data kelas ini?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form> --}}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
                 </div>
             </div>
         </div>
