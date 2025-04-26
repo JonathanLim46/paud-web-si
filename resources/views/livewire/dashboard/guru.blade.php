@@ -280,14 +280,20 @@
                 </thead>
                 <tbody class="text-center">
                     @foreach ($gurus as $guru)
-                    <tr wire:key="{{ $guru->id }}">
+                    <tr wire:key="{{ $guru->id_guru }}">
                         <td><span class="fw-medium">{{ $guru->user->name }}</span></td>
                         <td>{{ $guru->jabatan }}</td>
                         <td>{{ $guru->alamat_guru }}</td>
                         <td>{{ $guru->pendidikan }}</td>
                         <td>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditGuru"  class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteGuru"  class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditGuru" 
+                            class="btn btn-warning" wire:click="openModal({{ $guru->id_guru }})">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteGuru" 
+                            class="btn btn-danger" wire:click="openModal({{ $guru->id_guru }})">
+                                <i class="bi bi-trash"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -419,7 +425,7 @@
     </div>
 
     {{-- modal edit guru --}}
-    <div class="modal fade" id="modalEditGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditGuruLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalEditGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditGuruLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -427,36 +433,123 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
-                        @csrf
+                    @if ($selectedIdGuru)
+                    <form wire:submit="update({{ $selectedIdGuru->id_guru }})">
+                        <div class="mb-4">
+                            @if ($imageGuru)
+                                <img src="{{ $imageGuru->temporaryUrl() }}" class="img-thumbnail img-preview" alt="preview">
+                            @elseif($selectedIdGuru)
+                                <img src="{{ asset('storage/user/'.$selectedIdGuru->user->id.'/'.$selectedIdGuru->user->image) }}" class="img-thumbnail img-preview"
+                                alt="preview">
+                            @else
+                            <img src="{{ asset('images/dashboard/blankImage.jpg') }}" class="img-thumbnail img-preview"
+                            alt="preview">
+                            @endif
+                        </div>
+                        <div class="mb-4">
+                            @error('imageGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                            <input type="file" class="form-control mt-4 mb-4" id="image-input" name="image"
+                                wire:model="imageGuru">
+                        </div>
+                        <div class="mb-4">
+                            <label for="usernameGuru" class="form-label fw-bold">Username Guru</label>
+                            <input type="text" class="form-control" id="usernameGuru" name="usernameGuru" placeholder="Masukkan username guru" required
+                                wire:model="usernameGuru">
+                            @error('usernameGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
                         <div class="mb-4">
                             <label for="namaGuru" class="form-label fw-bold">Nama Guru</label>
-                            <input type="text" class="form-control" id="namaGuru" name="namaGuru" placeholder="Masukkan nama guru" required>
+                            <input type="text" class="form-control" id="namaGuru" name="namaGuru" placeholder="Masukkan nama guru" required
+                                wire:model="namaGuru">
+                            @error('namaGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="emailGuru" class="form-label fw-bold">Email Guru</label>
+                            <input type="email" class="form-control" id="emailGuru" name="emailGuru" placeholder="Masukkan Email Guru" required
+                                wire:model="emailGuru">
+                            @error('emailGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="jabatan" class="form-label fw-bold">Jabatan</label>
-                            <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan jabatan guru" required>
+                            <select wire:model="jabatanGuru" class="form-select">
+                                <option value="" selected>Pilih Jabatan</option>
+                                <option value="Guru">Guru</option>
+                            </select>
+                            @error('jabatanGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="alamat" class="form-label fw-bold">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat" required>
+                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat" required
+                                wire:model="alamatGuru">
+                            @error('alamatGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="pendidikan" class="form-label fw-bold">Pendidikan</label>
-                            <input type="text" class="form-control" id="pendidikan" name="pendidikan" placeholder="Masukkan pendidikan terakhir" required>
+                            <select wire:model="pendidikanGuru" class="form-select">
+                                <option value="" selected>Pilih Pendidikan</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D3">D3</option>
+                                <option value="D4">D4</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                            </select>      
+                            @error('pendidikanGuru')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror                 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Tambah Guru</button>
                         </div>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
     {{-- modal delete  --}}
-    <div class="modal fade" id="modalDeleteGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteGuru" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalDeleteGuru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteGuru" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -467,14 +560,12 @@
                     <p class="fs-5">Apakah Anda yakin ingin menghapus data guru ini?</p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+                    @if ($selectedIdGuru)
+                    <form wire:submit="delete({{ $selectedIdGuru->id_guru }})">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-danger">Hapus</button>
-                    </form> --}}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>  
+                    @endif
                 </div>
             </div>
         </div>
