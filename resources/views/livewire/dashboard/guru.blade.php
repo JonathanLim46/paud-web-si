@@ -324,7 +324,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif
+                            @enderror
                             <input type="file" class="form-control mt-4 mb-4" id="image-input" name="image"
                                 wire:model="imageGuru">
                         </div>
@@ -338,7 +338,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="namaGuru" class="form-label fw-bold">Nama Guru</label>
@@ -350,7 +350,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="emailGuru" class="form-label fw-bold">Email Guru</label>
@@ -362,12 +362,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="jabatan" class="form-label fw-bold">Jabatan</label>
                             <select wire:model="jabatanGuru" class="form-select">
-                                <option value="">Jabatan</option>
+                                <option value="" selected>Pilih Jabatan</option>
                                 <option value="Guru">Guru</option>
                             </select>
                             @error('jabatanGuru')
@@ -376,7 +376,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="alamat" class="form-label fw-bold">Alamat</label>
@@ -388,11 +388,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="pendidikan" class="form-label fw-bold">Pendidikan</label>
                             <select wire:model="pendidikanGuru" class="form-select">
+                                <option value="" selected>Pilih Pendidikan</option>
                                 <option value="SMA">SMA</option>
                                 <option value="D3">D3</option>
                                 <option value="D4">D4</option>
@@ -405,7 +406,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            @endif                  
+                            @enderror                 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
