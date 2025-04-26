@@ -51,7 +51,7 @@ Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
     Route::get('dashboard/profilsekolah', App\LiveWire\Dashboard\Profil::class)->name('admin.profilsekolah');
     Route::get('dashboard/ppdb', App\Livewire\Dashboard\PPDB::class)->name('admin.PPDB');
     Route::get('dashboard/ppdbetail/{id}', App\Livewire\Dashboard\PPDBDetail::class)->name('admin.ppdb.detail');
-    Route::get('dashboard/guru', App\Livewire\Dashboard\Guru::class)->name('admin.guru');
+    Route::get('dashboard/guru', App\Livewire\Dashboard\GuruPage::class)->name('admin.guru');
     Route::get('dashboard/kelas', App\Livewire\Dashboard\AllClass::class)->name('admin.kelas');
     Route::get('dashboard/kelasdetail', App\Livewire\Dashboard\KelasDetail::class)->name('admin.detail-kelas');
     Route::get('dashboard/detailmurid', App\Livewire\Dashboard\DetailMurid::class)->name('admin.detail-murid');

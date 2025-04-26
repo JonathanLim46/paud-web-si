@@ -263,10 +263,16 @@
                                 <a href="{{ route('admin.detail-kelas') }}" class="btn btn-primary"><i
                                         class="bi bi-eye"></i>Detail</a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditKelas"
-                                    class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                                    class="btn btn-warning"
+                                    wire:click="openModalEdit({{ $kelas->id_kelas }})">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
 
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteKelas"
-                                    class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                                    class="btn btn-danger"
+                                    wire:click="openModalDelete({{ $kelas->id_kelas }})">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -319,6 +325,7 @@
             </div>
         </div>
     </div>
+
     <div wire:ignore.self class="modal fade" id="modalEditKelas" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="modalEditKelasLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -328,7 +335,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit="store">
+                    @if ($selectedKelas)
+                    <form wire:submit="update({{ $selectedKelas->id_kelas }})">
                         <div class="mb-4">
                             <label for="namaKelas" class="form-label fw-bold">Nama Kelas</label>
                             <input type="text" class="form-control" id="namaKelas" name="namaKelas"
@@ -356,12 +364,14 @@
                             <button type="submit" class="btn btn-primary">Buat Kelas</button>
                         </div>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+
     {{-- modal delete --}}
-    <div class="modal fade" id="modalDeleteKelas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div wire:ignore.self class="modal fade" id="modalDeleteKelas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalDeleteKelasLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -373,16 +383,15 @@
                     <p class="fs-5">Apakah Anda yakin ingin menghapus data kelas ini?</p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+                    @if ($selectedKelas)
+                    <form wire:submit="delete({{ $selectedKelas->id_kelas }})">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-danger">Hapus</button>
-                    </form> --}}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>    
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+
 </div>

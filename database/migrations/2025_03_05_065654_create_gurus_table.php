@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('tb_guru', function (Blueprint $table) {
             $table->id('id_guru');
             $table->unsignedBigInteger('user_id');
+            $table->string('jabatan');
+            $table->string('alamat_guru');
+            $table->string('pendidikan');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

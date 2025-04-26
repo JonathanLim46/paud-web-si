@@ -34,7 +34,7 @@ class Index extends Component
         return view('livewire.dashboard.index')->with([
             'murids' => Pendaftar::where('diterima', true)->count(),
             'gurus' => Guru::count(),
-            'jadwals' => JadwalPelajaran::all(),
+            'jadwals' => JadwalPelajaran::with(['kelas', 'guru.user', 'hari'])->get(),
         ])->layout('components.layouts.app', ['title' => $this->title]);
     }
 }

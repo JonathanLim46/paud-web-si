@@ -21,6 +21,8 @@ class Allclass extends Component
 
     public $wali_murid = '';
 
+    public $selectedKelas;
+
     public function search()
     {
         $this->resetPage();
@@ -29,6 +31,20 @@ class Allclass extends Component
     public function openModal()
     {
         $this->gurus = Guru::all();
+    }
+
+    public function openModalEdit($id)
+    {
+        $this->gurus = Guru::all();
+        $this->selectedKelas = Kelas::findOrFail($id);
+        $this->nama_kelas = $this->selectedKelas->nama_kelas;
+        $this->tingkat_kelas = $this->selectedKelas->tingkat_kelas;
+        $this->wali_murid = $this->selectedKelas->wali_murid;
+    }
+
+    public function openModalDelete($id)
+    {
+        $this->selectedKelas = Kelas::findOrFail($id);
     }
 
     public function store()
@@ -42,6 +58,30 @@ class Allclass extends Component
         Kelas::create($validated);
 
         session()->flash('success', 'Kelas berhasil ditambah');
+        return redirect('dashboard/kelas');
+    }
+
+    public function update($id)
+    {
+        $validated = $this->validate([
+            'nama_kelas' => 'required',
+            'tingkat_kelas' => 'required',
+            'wali_murid' => 'required',
+        ]);
+
+        $data = Kelas::findOrFail($id);
+
+        $data->update($validated);
+        
+        session()->flash('success', 'Kelas '.$data->nama_kelas.' berhasil diupdate');
+        return redirect('dashboard/kelas');
+    }
+
+    public function delete($id)
+    {
+        $data = Kelas::findOrFail($id);
+        $data->delete();
+        session()->flash('success', 'Kelas berhasil dihapus');
         return redirect('dashboard/kelas');
     }
 
