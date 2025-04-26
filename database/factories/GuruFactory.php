@@ -21,7 +21,14 @@ class GuruFactory extends Factory
     {
         return [
             //
-            'user_id' => User::factory()->guru()
+            'user_id' => User::factory()->guru(),
+            'jabatan' => fake()->randomElement([
+                'Guru', 'Staff'
+            ]),
+            'alamat_guru' => fake()->streetAddress(),
+            'pendidikan' => fake()->randomElement([
+                'S1', 'S2', 'SMA', 'D4', 'D3'
+            ]),
         ];
     }
 }
