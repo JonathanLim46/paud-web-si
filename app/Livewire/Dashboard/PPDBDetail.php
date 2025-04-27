@@ -14,7 +14,7 @@ class PPDBDetail extends Component
 
     public function mount($id)
     {
-        $this->pendaftar = Pendaftar::findOrFail($id);
+        $this->pendaftar = Pendaftar::with('dataPribadi', 'dataOrangTua', 'dokumen', 'dataSekolah')->findOrFail($id);
 
         if (is_null($this->pendaftar->diterima)) {
             $this->status = "Tahap Verifikasi"; 
@@ -39,6 +39,7 @@ class PPDBDetail extends Component
 
         $data_pendaftar->update([
             'diterima' => $statusValue,
+            'status_verifikasi' => $statusValue, 
         ]);
     }
 

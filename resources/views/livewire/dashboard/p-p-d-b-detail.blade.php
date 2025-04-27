@@ -89,7 +89,7 @@
             <!-- Data Pribadi -->
             <div class="row">
                 <div class="col-md-6 data-row"><span class="data-label">NIS</span><br><span
-                        class="data-value">2025-002A</span></div>
+                        class="data-value">{{ $pendaftar->dataPribadi->nis }}</span></div>
                 <div class="col-md-6 data-row"><span class="data-label">Nama Lengkap</span><br><span
                         class="data-value">{{ $pendaftar->dataPribadi->nama_lengkap }}</span></div>
                 <div class="col-md-6 data-row"><span class="data-label">NIK</span><br><span
@@ -150,12 +150,12 @@
                             {{ $pendaftar->dataOrangTua->nama_ayah }}
                         </span>
                     </div>
-                    <div class="data-row"><span class="data-label">NIK</span><br>
+                    <div class="data-row"><span class="data-label">NIK Ayah</span><br>
                         <span class="data-value">
                             {{ $pendaftar->dataOrangTua->nik_ayah }}
                         </span>
                     </div>
-                    <div class="data-row"><span class="data-label">Pekerjaan</span><br>
+                    <div class="data-row"><span class="data-label">Pekerjaan Ayah</span><br>
                         <span class="data-value">
                             {{ $pendaftar->dataOrangTua->pekerjaan_ayah }}
                         </span>
@@ -167,45 +167,75 @@
                             {{ $pendaftar->dataOrangTua->nama_ibu }}
                         </span>
                     </div>
-                    <div class="data-row"><span class="data-label">NIK</span><br>
+                    <div class="data-row"><span class="data-label">NIK Ibu</span><br>
                         <span class="data-value">
                             {{ $pendaftar->dataOrangTua->nik_ibu }}
                         </span>
                     </div>
-                    <div class="data-row"><span class="data-label">Pekerjaan</span><br>
+                    <div class="data-row"><span class="data-label">Pekerjaan Ibu</span><br>
                         <span class="data-value">
                             {{ $pendaftar->dataOrangTua->pekerjaan_ibu }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="data-row"><span class="data-label">Nama Wali</span><br>
+                        <span class="data-value">
+                            {{ $pendaftar->dataOrangTua->nama_wali }}
+                        </span>
+                    </div>
+                    <div class="data-row"><span class="data-label">NIK Wali</span><br>
+                        <span class="data-value">
+                            {{ $pendaftar->dataOrangTua->nik_wali }}
+                        </span>
+                    </div>
+                    <div class="data-row"><span class="data-label">Pekerjaan Wali</span><br>
+                        <span class="data-value">
+                            {{ $pendaftar->dataOrangTua->pekerjaan_wali }}
                         </span>
                     </div>
                 </div>
             </div>
 
             <!-- Data Sekolah -->
+            @if ($pendaftar->dataSekolah)
             <div class="section-title">Data Sekolah</div>
             <div class="row">
-                <div class="col-md-4 data-row"><span class="data-label">Asal Sekolah</span><br><span
-                        class="data-value">Sekolah 1</span></div>
                 <div class="col-md-4 data-row"><span class="data-label">NPSN</span><br><span
-                        class="data-value">12345678</span></div>
-                <div class="col-md-4 data-row"><span class="data-label">Jenjang</span><br><span
-                        class="data-value">Megamendung</span></div>
-                <div class="col-md-6 data-row"><span class="data-label">Lokasi Sekolah</span><br><span
-                        class="data-value">Megamendung</span></div>
-                <div class="col-md-6 data-row"><span class="data-label">Status Sekolah</span><br><span
-                        class="data-value">Bogor</span></div>
+                        class="data-value">{{ $pendaftar->dataSekolah->npsn }}</span></div>
+                <div class="col-md-4 data-row"><span class="data-label">Nama Sekolah</span><br><span
+                        class="data-value">{{ $pendaftar->dataSekolah->nama_sekolah }}</span></div>
+                <div class="col-md-4 data-row"><span class="data-label">Status Sekolah</span><br><span
+                        class="data-value">{{ $pendaftar->dataSekolah->status_sekolah }}</span></div>
+                <div class="col-md-6 data-row"><span class="data-label">Alamat Sekolah</span><br><span
+                        class="data-value">{{ $pendaftar->dataSekolah->alamat_sekolah }}</span></div>
             </div>
+            @endif
 
             <!-- Dokumen Persyaratan -->
             <div class="section-title">Dokumen Persyaratan</div>
             <div class="row">
-                <div class="col-md-6 data-row"><span class="data-label">Kartu Keluarga (KK)</span><br><a
-                        href="#" class="link-blue">Lihat</a></div>
-                <div class="col-md-6 data-row"><span class="data-label">Akta Kelahiran</span><br><a href="#"
+                <div class="col-md-6 data-row"><span class="data-label">Kartu Keluarga (KK)</span><br>
+                    <a
+                        href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->kartu_keluarga) }}" 
+                        class="link-blue">Lihat
+                    </a>
+                </div>
+                <div class="col-md-6 data-row"><span class="data-label">Akta Kelahiran</span><br>
+                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->akta_kelahiran) }}" 
+                        class="link-blue">Lihat</a>
+                    </div>
+                <div class="col-md-6 data-row"><span class="data-label">KTP Ayah</span><br>
+                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ayah) }}" 
                         class="link-blue">Lihat</a></div>
-                <div class="col-md-6 data-row"><span class="data-label">KTP Orang Tua</span><br><a href="#"
+                <div class="col-md-6 data-row"><span class="data-label">KTP Ibu</span><br>
+                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ibu) }}" 
                         class="link-blue">Lihat</a></div>
-                <div class="col-md-6 data-row"><span class="data-label">Surat Rekomendasi Pindah</span><br><span
-                        class="data-value">-</span></div>
+                @if ($pendaftar->dokumen->surat_pindah)
+                <div class="col-md-6 data-row"><span class="data-label">Surat Pindah</span><br>
+                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->surat_pindah) }}" 
+                        class="link-blue">Lihat</a></div>
+                @endif
             </div>
         </div>
     </section>
