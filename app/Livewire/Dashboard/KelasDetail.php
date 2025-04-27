@@ -21,7 +21,7 @@ class KelasDetail extends Component
 
     public $filterGender = '';
 
-    public $selectedData, $isSekolahChecked, $kelasId, $data;
+    public $selectedData, $isSekolahChecked, $kelasId, $data, $pendaftar;
 
     public $statusSekolah = 'tutup';
 
@@ -150,6 +150,63 @@ class KelasDetail extends Component
         $this->selectedData = Pendaftar::findOrFail($id);
     }
 
+    public function openModalEdit($id)
+    {
+        $this->pendaftar = Pendaftar::findOrFail($id);
+
+        $this->no_telp = $this->pendaftar->no_telp;
+        $this->kelas_id = $this->pendaftar->kelas_id;
+
+        $this->data_murid = [
+            'nik' => $this->pendaftar->dataPribadi->nik,
+            'nama_lengkap' => $this->pendaftar->dataPribadi->nama_lengkap,
+            'jenis_kelamin' => $this->pendaftar->dataPribadi->jenis_kelamin,
+            'tempat_lahir' => $this->pendaftar->dataPribadi->tempat_lahir,
+            'tanggal_lahir' => $this->pendaftar->dataPribadi->tanggal_lahir,
+            'agama' => $this->pendaftar->dataPribadi->agama,
+            'anak_ke' => $this->pendaftar->dataPribadi->anak_ke,
+            'berat_badan' => $this->pendaftar->dataPribadi->berat_badan,
+            'tinggi_badan' => $this->pendaftar->dataPribadi->tinggi_badan,
+            'lingkar_kepala' => $this->pendaftar->dataPribadi->lingkar_kepala,
+            'alamat_rumah' => $this->pendaftar->dataPribadi->alamat_rumah,
+            'desa_kelurahan' => $this->pendaftar->dataPribadi->desa_kelurahan,
+            'kecamatan' => $this->pendaftar->dataPribadi->kecamatan,
+            'kota_kabupaten' => $this->pendaftar->dataPribadi->kota_kabupaten,
+            'provinsi' => $this->pendaftar->dataPribadi->provinsi,
+            'kode_pos' => $this->pendaftar->dataPribadi->kode_pos,
+        ];
+
+        $this->data_orang_tua_wali = [
+            'nama_ayah' => $this->pendaftar->dataOrangTua->nama_ayah,
+            'nik_ayah' => $this->pendaftar->dataOrangTua->nik_ayah,
+            'pekerjaan_ayah' => $this->pendaftar->dataOrangTua->pekerjaan_ayah,
+            'nama_ibu' => $this->pendaftar->dataOrangTua->nama_ibu,
+            'nik_ibu' => $this->pendaftar->dataOrangTua->nik_ibu,
+            'pekerjaan_ibu' => $this->pendaftar->dataOrangTua->pekerjaan_ibu,
+            'nama_wali' => $this->pendaftar->dataOrangTua->nama_wali,
+            'nik_wali' => $this->pendaftar->dataOrangTua->nik_wali,
+            'pekerjaan_wali' => $this->pendaftar->dataOrangTua->pekerjaan_wali,
+        ];
+
+        $this->data_sekolah = [
+            'npsn' => $this->pendaftar->dataSekolah->npsn ?? '',
+            'nama_sekolah' => $this->pendaftar->dataSekolah->nama_sekolah ?? '',
+            'alamat_sekolah' => $this->pendaftar->dataSekolah->alamat_sekolah ?? '',
+            'status_sekolah' => $this->pendaftar->dataSekolah->status_sekolah ?? '',
+        ];
+    }
+
+    public function resetForm()
+    {
+        $this->reset([
+            'no_telp',
+            'data_murid',
+            'data_orang_tua_wali',
+            'data_sekolah',
+            'data_dokumen',
+        ]);
+    }
+
     public function generateNis(): string
     {
         $tahunAwal = date('y');
@@ -218,6 +275,54 @@ class KelasDetail extends Component
         return redirect()->route('admin.detail-kelas', ['id' => $kelas_id]);
     }
 
+    public function update($id)
+    {
+        $validatedData = $this->validate();
+
+        $pendaftar = Pendaftar::findOrFail($id);
+
+        $pendaftar->update([
+            'no_telp' => $this->no_telp,
+        ]);
+
+        $pendaftar->dataPribadi->update($this->data_murid);
+
+        $pendaftar->dataOrangTua->update($this->data_orang_tua_wali);
+
+        $pendaftar->dataSekolah()->updateOrCreate(
+            ['pendaftaran_id' => $pendaftar->id_pendaftaran], 
+            $this->data_sekolah 
+        );
+
+        $kelas_id = $pendaftar->kelas_id;
+        $namaMurid = str_replace(' ', '_', $this->data_murid['nik']);
+        $folderPath = "data_kelas/{$kelas_id}/{$namaMurid}/dokumen";
+
+        $dokumenUpdate = [];
+
+        foreach ($this->data_dokumen as $field => $file) {
+            if ($file) {
+                $oldFile = $pendaftar->dokumen->$field;
+                if ($oldFile && Storage::disk('public')->exists("{$folderPath}/{$oldFile}")) {
+                    Storage::disk('public')->delete("{$folderPath}/{$oldFile}");
+                }
+
+                $filename = $file->hashName();
+                $file->storeAs($folderPath, $filename, 'public');
+
+                $dokumenUpdate[$field] = $filename;
+            }
+        }
+
+        if (!empty($dokumenUpdate)) {
+            $pendaftar->dokumen->update($dokumenUpdate);
+        }
+
+        session()->flash('success', 'Data berhasil diperbarui.');
+
+        return redirect()->route('admin.detail-kelas', ['id' => $pendaftar->kelas_id]);
+    }
+
     public function delete($id)
     {
         $data_target = Pendaftar::findOrFail($id);
@@ -236,6 +341,11 @@ class KelasDetail extends Component
     
         session()->flash('success', 'Data berhasil dihapus');
         return redirect()->route('admin.detail-kelas', ['id' => $id_kelas]);
+    }
+
+    public function muridDetail($id_kelas, $id_murid)
+    {
+        return redirect()->route('admin.detail-murid', ['id_kelas' => $id_kelas, 'id_murid' => $id_murid]);
     }
 
     public function render()

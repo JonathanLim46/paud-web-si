@@ -268,7 +268,7 @@
                 </form>
                 <!-- Tombol Tambah Murid -->
                 <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
-                    data-bs-target="#modalTambahSiswa">
+                    data-bs-target="#modalTambahSiswa" wire:click="resetForm">
                     <i class="fa-solid fa-plus"></i>
                     Tambah Murid
                 </button>
@@ -294,10 +294,12 @@
                         <td>{{$murid->dataPribadi->jenis_kelamin}}</td>
                         <td>{{$murid->dataPribadi->alamat_rumah}}</td>
                         <td>
-                            <a href="{{ route('admin.detail-murid') }}" class="btn btn-primary"><i
-                                    class="bi bi-eye"></i> Detail</a>
+                            <a wire:click="muridDetail({{ $murid->kelas_id }}, {{ $murid->id_pendaftaran }})" class="btn btn-primary">
+                                <i class="bi bi-eye"></i> Detail
+                            </a>
+
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditSiswa"
-                                class="btn btn-warning">
+                                class="btn btn-warning" wire:click="openModalEdit({{ $murid->id_pendaftaran }})">
                                 <i class="bi bi-pencil"></i>
                             </a>
 
@@ -327,12 +329,12 @@
                 </div>
                 <div class="modal-body">
                     <form wire:submit="store">
-                        <h5 class="mb-3">Data Siswa {{$kelasId}}</h5>
+                        <h5 class="mb-3">Data Siswa</h5>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="nik" class="form-label">NIK</label>
                                 <input type="text" class="form-control" id="nik"
-                                wire:model="data_murid.nik">
+                                wire:model.defer="data_murid.nik">
                                 @error('data_murid.nik')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -344,7 +346,7 @@
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="nama-lengkap"
-                                wire:model="data_murid.nama_lengkap">
+                                wire:model.defer="data_murid.nama_lengkap">
                                 @error('data_murid.nama_lengkap')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -356,7 +358,7 @@
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">No Telepon</label>
                                 <input type="text" class="form-control" id="no_telepon"
-                                wire:model="no_telp">
+                                wire:model.defer="no_telp">
                                 @error('no_telp')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -369,12 +371,12 @@
                                 <label class="form-label d-block">Jenis Kelamin</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="jk-l" value="Laki-laki" wire:model="data_murid.jenis_kelamin">
+                                        id="jk-l" value="Laki-laki" wire:model.defer="data_murid.jenis_kelamin">
                                     <label class="form-check-label" for="jk-l">Laki-laki</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="jk-p" value="Perempuan" wire:model="data_murid.jenis_kelamin">
+                                        id="jk-p" value="Perempuan" wire:model.defer="data_murid.jenis_kelamin">
                                     <label class="form-check-label" for="jk-p">Perempuan</label>
                                 </div>
                                 @error('data_murid.jenis_kelamin')
@@ -387,7 +389,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="tempat-lahir" class="form-label">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tempat-lahir" wire:model="data_murid.tempat_lahir">
+                                <input type="text" class="form-control" id="tempat-lahir" wire:model.defer="data_murid.tempat_lahir">
                                 @error('data_murid.tempat_lahir')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -400,7 +402,7 @@
                                 <label class="form-label">Tanggal Lahir</label>
                                 <div class="d-flex gap-2">
                                     <input type="date" class="form-control" placeholder="Tanggal Lahir" 
-                                    max="{{ now()->toDateString() }}" wire:model="data_murid.tanggal_lahir">
+                                    max="{{ now()->toDateString() }}" wire:model.defer="data_murid.tanggal_lahir">
                                 </div>
                                 @error('data_murid.tanggal_lahir')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
@@ -412,7 +414,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="agama" class="form-label">Agama</label>
-                                <input type="text" class="form-control" id="agama" wire:model="data_murid.agama">
+                                <input type="text" class="form-control" id="agama" wire:model.defer="data_murid.agama">
                                 @error('data_murid.agama')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -423,7 +425,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="anak-ke" class="form-label">Anak Ke</label>
-                                <input type="number" class="form-control" id="anak-ke" wire:model="data_murid.anak_ke">
+                                <input type="number" class="form-control" id="anak-ke" wire:model.defer="data_murid.anak_ke">
                                 @error('data_murid.anak_ke')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -434,7 +436,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="berat-badan" class="form-label">Berat Badan (kg)</label>
-                                <input type="number" class="form-control" id="berat-badan" wire:model="data_murid.berat_badan" min="0">
+                                <input type="number" class="form-control" id="berat-badan" wire:model.defer="data_murid.berat_badan" min="0">
                                 @error('data_murid.berat_badan')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -445,7 +447,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="tinggi-badan" class="form-label">Tinggi Badan (cm)</label>
-                                <input type="number" class="form-control" id="tinggi-badan" wire:model="data_murid.tinggi_badan" min="0">
+                                <input type="number" class="form-control" id="tinggi-badan" wire:model.defer="data_murid.tinggi_badan" min="0">
                                 @error('data_murid.tinggi_badan')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -456,7 +458,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="lingkar-kepala" class="form-label">Lingkar Kepala (cm)</label>
-                                <input type="number" class="form-control" id="lingkar-kepala" wire:model="data_murid.lingkar_kepala" min="0">
+                                <input type="number" class="form-control" id="lingkar-kepala" wire:model.defer="data_murid.lingkar_kepala" min="0">
                                 @error('data_murid.lingkar_kepala')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -471,7 +473,7 @@
                         <h5>Alamat</h5>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Lengkap</label>
-                            <input type="text" class="form-control" id="alamat" wire:model="data_murid.alamat_rumah">
+                            <input type="text" class="form-control" id="alamat" wire:model.defer="data_murid.alamat_rumah">
                             @error('data_murid.alamat_rumah')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -482,7 +484,7 @@
                         </div>
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Desa atau Kelurahan" wire:model="data_murid.desa_kelurahan">
+                                <input type="text" class="form-control" placeholder="Desa atau Kelurahan" wire:model.defer="data_murid.desa_kelurahan">
                                 @error('data_murid.desa_kelurahan')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -492,7 +494,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kecamatan" wire:model="data_murid.kecamatan">
+                                <input type="text" class="form-control" placeholder="Kecamatan" wire:model.defer="data_murid.kecamatan">
                                 @error('data_murid.kecamatan')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -502,7 +504,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kabupaten atau Kota" wire:model="data_murid.kota_kabupaten">
+                                <input type="text" class="form-control" placeholder="Kabupaten atau Kota" wire:model.defer="data_murid.kota_kabupaten">
                                 @error('data_murid.kota_kabupaten')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -512,7 +514,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Provinsi" wire:model="data_murid.provinsi">
+                                <input type="text" class="form-control" placeholder="Provinsi" wire:model.defer="data_murid.provinsi">
                                 @error('data_murid.provinsi')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -522,7 +524,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kode Pos" wire:model="data_murid.kode_pos">
+                                <input type="text" class="form-control" placeholder="Kode Pos" wire:model.defer="data_murid.kode_pos">
                                 @error('data_murid.kode_pos')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -538,7 +540,7 @@
                         <div class="row g-3">
                             <div class="col-md-4">
                                 <input type="text" class="form-control"
-                                    placeholder="Nama Ayah" wire:model="data_orang_tua_wali.nama_ayah">
+                                    placeholder="Nama Ayah" wire:model.defer="data_orang_tua_wali.nama_ayah">
                                 @error('data_orang_tua_wali.nama_ayah')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -549,7 +551,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" 
-                                placeholder="NIK Ayah" wire:model="data_orang_tua_wali.nik_ayah">
+                                placeholder="NIK Ayah" wire:model.defer="data_orang_tua_wali.nik_ayah">
                                 @error('data_orang_tua_wali.nik_ayah')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -560,7 +562,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control"
-                                    placeholder="Pekerjaan Ayah" wire:model="data_orang_tua_wali.pekerjaan_ayah">
+                                    placeholder="Pekerjaan Ayah" wire:model.defer="data_orang_tua_wali.pekerjaan_ayah">
                                 @error('data_orang_tua_wali.pekerjaan_ayah')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -575,7 +577,7 @@
                         <div class="row g-3">
                             <div class="col-md-4">
                                 <input type="text" class="form-control" 
-                                placeholder="Nama Ibu" wire:model="data_orang_tua_wali.nama_ibu">
+                                placeholder="Nama Ibu" wire:model.defer="data_orang_tua_wali.nama_ibu">
                             @error('data_orang_tua_wali.nama_ibu')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -586,7 +588,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" 
-                                placeholder="NIK Ibu" wire:model="data_orang_tua_wali.nik_ibu">
+                                placeholder="NIK Ibu" wire:model.defer="data_orang_tua_wali.nik_ibu">
                             @error('data_orang_tua_wali.nik_ibu')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -597,7 +599,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control"
-                                    placeholder="Pekerjaan Ibu" wire:model="data_orang_tua_wali.pekerjaan_ibu">
+                                    placeholder="Pekerjaan Ibu" wire:model.defer="data_orang_tua_wali.pekerjaan_ibu">
                                 @error('data_orang_tua_wali.pekerjaan_ibu')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -612,7 +614,7 @@
                         <div class="row g-3">
                             <div class="col-md-4">
                                 <input type="text" class="form-control"
-                                    placeholder="Nama Wali" wire:model="data_orang_tua_wali.nama_wali">
+                                    placeholder="Nama Wali" wire:model.defer="data_orang_tua_wali.nama_wali">
                                 @error('data_orang_tua_wali.nama_wali')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -623,7 +625,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" 
-                                placeholder="NIK Wali" wire:model="data_orang_tua_wali.nik_wali">
+                                placeholder="NIK Wali" wire:model.defer="data_orang_tua_wali.nik_wali">
                                 @error('data_orang_tua_wali.nik_wali')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -634,7 +636,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control"
-                                    placeholder="Pekerjaan Wali" wire:model="data_orang_tua_wali.pekerjaan_wali">
+                                    placeholder="Pekerjaan Wali" wire:model.defer="data_orang_tua_wali.pekerjaan_wali">
                                 @error('data_orang_tua_wali.pekerjaan_wali')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -659,7 +661,7 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <input type="text" class="form-control" placeholder="NPSN"
-                                wire:model="data_sekolah.npsn">
+                                wire:model.defer="data_sekolah.npsn">
                                 @error('data_sekolah.npsn')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -670,7 +672,7 @@
                             </div>
                             <div class="col-md-6">
                                 <input type="text" class="form-control"
-                                    placeholder="Nama Sekolah" wire:model="data_sekolah.nama_sekolah">
+                                    placeholder="Nama Sekolah" wire:model.defer="data_sekolah.nama_sekolah">
                                 @error('data_sekolah.nama_sekolah')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -680,7 +682,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select" wire:model="data_sekolah.status_sekolah">
+                                <select class="form-select" wire:model.defer="data_sekolah.status_sekolah">
                                     <option selected>Status Sekolah</option>
                                     <option value="Negeri">Negeri</option>
                                     <option value="Swasta">Swasta</option>
@@ -695,7 +697,7 @@
                             </div>
                             <div class="col-md-6">
                                 <input type="text" class="form-control"
-                                    placeholder="Alamat Sekolah" wire:model="data_sekolah.alamat_sekolah">
+                                    placeholder="Alamat Sekolah" wire:model.defer="data_sekolah.alamat_sekolah">
                                 @error('data_sekolah.alamat_sekolah')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -712,7 +714,7 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload KK</label>
                             <input type="file" class="form-control" placeholder="Upload KK"
-                            wire:model="data_dokumen.kartu_keluarga">
+                            wire:model.defer="data_dokumen.kartu_keluarga">
                             @error('data_dokumen.kartu_keluarga')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -724,7 +726,7 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Akta Kelahiran</label>
                             <input type="file" class="form-control"
-                                placeholder="Upload Akta Kelahiran" wire:model="data_dokumen.akta_kelahiran">
+                                placeholder="Upload Akta Kelahiran" wire:model.defer="data_dokumen.akta_kelahiran">
                             @error('data_dokumen.akta_kelahiran')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -736,7 +738,7 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload KTP Ayah</label>
                             <input type="file" class="form-control"
-                                placeholder="Upload KTP Ayah" wire:model="data_dokumen.ktp_ayah">
+                                placeholder="Upload KTP Ayah" wire:model.defer="data_dokumen.ktp_ayah">
                             @error('data_dokumen.ktp_ayah')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -748,7 +750,7 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload KTP Ibu</label>
                             <input type="file" class="form-control"
-                                placeholder="Upload KTP Ibu" wire:model="data_dokumen.ktp_ibu">
+                                placeholder="Upload KTP Ibu" wire:model.defer="data_dokumen.ktp_ibu">
                             @error('data_dokumen.ktp_ibu')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -760,7 +762,7 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Surat Rekomendasi (Opsional)</label>
                             <input type="file" class="form-control"
-                                placeholder="Upload Surat Rekomendasi (Opsional)" wire:model="data_dokumen.surat_pindah">
+                                placeholder="Upload Surat Rekomendasi (Opsional)" wire:model.defer="data_dokumen.surat_pindah">
                             @error('data_dokumen.surat_pindah')
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -780,74 +782,154 @@
     </div>
 
     {{-- modal edit --}}
-    <div class="modal fade" id="modalEditSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div wire:ignore.self class="modal fade" id="modalEditSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalEditSiswaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalTambahSiswaLabel">Edit Data Siswa</h1>
+                    <h1 class="modal-title fs-5" id="modalEditSiswaLabel">Form Tambah Data Siswa</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    @if ($pendaftar)
+                    <form wire:submit="update({{ $pendaftar->id_pendaftaran }})">
                         <h5 class="mb-3">Data Siswa</h5>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="nis" class="form-label">NIS</label>
-                                <input type="text" class="form-control" id="nis" placeholder="2025-ABCD">
-                            </div>
-                            <div class="col-md-6">
                                 <label for="nik" class="form-label">NIK</label>
-                                <input type="text" class="form-control" id="nik">
+                                <input type="text" class="form-control" id="nik"
+                                wire:model.defer="data_murid.nik">
+                                @error('data_murid.nik')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="nama-lengkap">
+                                <input type="text" class="form-control" id="nama-lengkap"
+                                wire:model.defer="data_murid.nama_lengkap">
+                                @error('data_murid.nama_lengkap')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label for="nama-lengkap" class="form-label">No Telepon</label>
+                                <input type="text" class="form-control" id="no_telepon"
+                                wire:model.defer="no_telp">
+                                @error('no_telp')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label d-block">Jenis Kelamin</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="jk-l" value="Laki-laki">
+                                        id="jk-l" value="Laki-laki" wire:model.defer="data_murid.jenis_kelamin">
                                     <label class="form-check-label" for="jk-l">Laki-laki</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="jk-p" value="Perempuan">
+                                        id="jk-p" value="Perempuan" wire:model.defer="data_murid.jenis_kelamin">
                                     <label class="form-check-label" for="jk-p">Perempuan</label>
                                 </div>
+                                @error('data_murid.jenis_kelamin')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="tempat-lahir" class="form-label">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tempat-lahir">
+                                <input type="text" class="form-control" id="tempat-lahir" wire:model.defer="data_murid.tempat_lahir">
+                                @error('data_murid.tempat_lahir')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Tanggal Lahir</label>
                                 <div class="d-flex gap-2">
-                                    <input type="text" class="form-control" placeholder="Tahun">
-                                    <input type="text" class="form-control" placeholder="Bulan">
-                                    <input type="text" class="form-control" placeholder="Tanggal">
+                                    <input type="date" class="form-control" placeholder="Tanggal Lahir" 
+                                    max="{{ now()->toDateString() }}" wire:model.defer="data_murid.tanggal_lahir">
                                 </div>
+                                @error('data_murid.tanggal_lahir')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="agama" class="form-label">Agama</label>
-                                <input type="text" class="form-control" id="agama">
+                                <input type="text" class="form-control" id="agama" wire:model.defer="data_murid.agama">
+                                @error('data_murid.agama')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="anak-ke" class="form-label">Anak Ke</label>
-                                <input type="number" class="form-control" id="anak-ke">
+                                <input type="number" class="form-control" id="anak-ke" wire:model.defer="data_murid.anak_ke">
+                                @error('data_murid.anak_ke')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="berat-badan" class="form-label">Berat Badan (kg)</label>
-                                <input type="text" class="form-control" id="berat-badan">
+                                <input type="number" class="form-control" id="berat-badan" wire:model.defer="data_murid.berat_badan" min="0">
+                                @error('data_murid.berat_badan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="tinggi-badan" class="form-label">Tinggi Badan (cm)</label>
-                                <input type="text" class="form-control" id="tinggi-badan">
+                                <input type="number" class="form-control" id="tinggi-badan" wire:model.defer="data_murid.tinggi_badan" min="0">
+                                @error('data_murid.tinggi_badan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="lingkar-kepala" class="form-label">Lingkar Kepala (cm)</label>
-                                <input type="text" class="form-control" id="lingkar-kepala">
+                                <input type="number" class="form-control" id="lingkar-kepala" wire:model.defer="data_murid.lingkar_kepala" min="0">
+                                @error('data_murid.lingkar_kepala')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -855,100 +937,310 @@
                         <h5>Alamat</h5>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Lengkap</label>
-                            <input type="text" class="form-control" id="alamat">
+                            <input type="text" class="form-control" id="alamat" wire:model.defer="data_murid.alamat_rumah">
+                            @error('data_murid.alamat_rumah')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Desa">
+                                <input type="text" class="form-control" placeholder="Desa atau Kelurahan" wire:model.defer="data_murid.desa_kelurahan">
+                                @error('data_murid.desa_kelurahan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kecamatan">
+                                <input type="text" class="form-control" placeholder="Kecamatan" wire:model.defer="data_murid.kecamatan">
+                                @error('data_murid.kecamatan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kabupaten">
+                                <input type="text" class="form-control" placeholder="Kabupaten atau Kota" wire:model.defer="data_murid.kota_kabupaten">
+                                @error('data_murid.kota_kabupaten')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Provinsi">
+                                <input type="text" class="form-control" placeholder="Provinsi" wire:model.defer="data_murid.provinsi">
+                                @error('data_murid.provinsi')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kode Pos">
+                                <input type="text" class="form-control" placeholder="Kode Pos" wire:model.defer="data_murid.kode_pos">
+                                @error('data_murid.kode_pos')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                         </div>
 
                         <hr class="my-4">
                         <h5>Data Ayah</h5>
                         <div class="row g-3">
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Nama Ayah"></div>
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="NIK Ayah">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Nama Ayah" wire:model.defer="data_orang_tua_wali.nama_ayah">
+                                @error('data_orang_tua_wali.nama_ayah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Pekerjaan Ayah"></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="NIK Ayah" wire:model.defer="data_orang_tua_wali.nik_ayah">
+                                @error('data_orang_tua_wali.nik_ayah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Pekerjaan Ayah" wire:model.defer="data_orang_tua_wali.pekerjaan_ayah">
+                                @error('data_orang_tua_wali.pekerjaan_ayah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
                         </div>
 
                         <h5 class="mt-4">Data Ibu</h5>
                         <div class="row g-3">
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="Nama Ibu">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="Nama Ibu" wire:model.defer="data_orang_tua_wali.nama_ibu">
+                            @error('data_orang_tua_wali.nama_ibu')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="NIK Ibu">
+                            @enderror
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Pekerjaan Ibu"></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="NIK Ibu" wire:model.defer="data_orang_tua_wali.nik_ibu">
+                            @error('data_orang_tua_wali.nik_ibu')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Pekerjaan Ibu" wire:model.defer="data_orang_tua_wali.pekerjaan_ibu">
+                                @error('data_orang_tua_wali.pekerjaan_ibu')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
                         </div>
 
                         <h5 class="mt-4">Data Wali</h5>
                         <div class="row g-3">
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Nama Wali"></div>
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="NIK Wali">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Nama Wali" wire:model.defer="data_orang_tua_wali.nama_wali">
+                                @error('data_orang_tua_wali.nama_wali')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Pekerjaan Wali"></div>
-                            <div class="col-md-6"><input type="text" class="form-control"
-                                    placeholder="No HP Orang Tua"></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="NIK Wali" wire:model.defer="data_orang_tua_wali.nik_wali">
+                                @error('data_orang_tua_wali.nik_wali')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Pekerjaan Wali" wire:model.defer="data_orang_tua_wali.pekerjaan_wali">
+                                @error('data_orang_tua_wali.pekerjaan_wali')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
                         </div>
 
+                        <div class="form-check mb-3 mt-4">
+                            <input class="form-check-input" type="checkbox" id="cekSekolah" 
+                            wire:change="sekolahCheck($event.target.checked)">
+                            <label class="form-check-label" for="cekSekolah">
+                                Apakah memiliki data sekolah sebelumnya?
+                            </label>
+                        </div>
+
+                        @if ($isSekolahChecked == 'buka')
                         <hr class="my-4">
                         <h5>Data Sekolah</h5>
                         <div class="row g-3">
-                            <div class="col-md-6"><input type="text" class="form-control"
-                                    placeholder="Asal Sekolah"></div>
-                            <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Jenjang Sekolah</option>
-                                    <option value="TK">TK</option>
-                                    <option value="SD">SD</option>
-                                    <option value="SMP">SMP</option>
-                                </select>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="NPSN"
+                                wire:model.defer="data_sekolah.npsn">
+                                @error('data_sekolah.npsn')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"
+                                    placeholder="Nama Sekolah" wire:model.defer="data_sekolah.nama_sekolah">
+                                @error('data_sekolah.nama_sekolah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select">
+                                <select class="form-select" wire:model.defer="data_sekolah.status_sekolah">
                                     <option selected>Status Sekolah</option>
                                     <option value="Negeri">Negeri</option>
                                     <option value="Swasta">Swasta</option>
                                 </select>
+                                @error('data_sekolah.status_sekolah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-6"><input type="text" class="form-control" placeholder="NPSN">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"
+                                    placeholder="Alamat Sekolah" wire:model.defer="data_sekolah.alamat_sekolah">
+                                @error('data_sekolah.alamat_sekolah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-6"><input type="text" class="form-control"
-                                    placeholder="Lokasi Sekolah"></div>
                         </div>
+                        @endif
 
                         <hr class="my-4">
                         <h5>Unggah Dokumen</h5>
-                        <div class="mb-3"><input type="file" class="form-control" placeholder="Upload KK">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload KK</label>
+                            <input type="file" class="form-control" placeholder="Upload KK"
+                            wire:model.defer="data_dokumen.kartu_keluarga">
+                            @error('data_dokumen.kartu_keluarga')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
-                        <div class="mb-3"><input type="file" class="form-control"
-                                placeholder="Upload Akta Kelahiran"></div>
-                        <div class="mb-3"><input type="file" class="form-control"
-                                placeholder="Upload KTP Orang Tua"></div>
-                        <div class="mb-3"><input type="file" class="form-control"
-                                placeholder="Upload Surat Rekomendasi (Opsional)"></div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Akta Kelahiran</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload Akta Kelahiran" wire:model.defer="data_dokumen.akta_kelahiran">
+                            @error('data_dokumen.akta_kelahiran')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload KTP Ayah</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload KTP Ayah" wire:model.defer="data_dokumen.ktp_ayah">
+                            @error('data_dokumen.ktp_ayah')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload KTP Ibu</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload KTP Ibu" wire:model.defer="data_dokumen.ktp_ibu">
+                            @error('data_dokumen.ktp_ibu')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Surat Rekomendasi (Opsional)</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload Surat Rekomendasi (Opsional)" wire:model.defer="data_dokumen.surat_pindah">
+                            @error('data_dokumen.surat_pindah')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>  
+                    @endif
                 </div>
             </div>
         </div>
