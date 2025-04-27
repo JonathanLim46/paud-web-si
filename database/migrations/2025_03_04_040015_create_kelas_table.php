@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('id_kelas');
             $table->string('nama_kelas');
             $table->string('tingkat_kelas');
-            $table->string('wali_murid');
+            $table->unsignedBigInteger('guru_id');
+            $table->foreign('guru_id')->references('id_guru')->on('tb_guru')->onDelete('cascade');
             $table->timestamps();
         });
     }

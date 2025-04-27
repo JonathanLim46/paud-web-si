@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Guru;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +25,7 @@ class KelasFactory extends Factory
             //
             'nama_kelas' => fake()->name(),
             'tingkat_kelas' => $kelas,
-            'wali_murid' => fake()->firstNameFemale(),
+            'guru_id' => Guru::factory(),
         ];
     }
 }
