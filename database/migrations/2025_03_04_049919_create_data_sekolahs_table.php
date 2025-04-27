@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_data_sekolah', function (Blueprint $table) {
-            $table->string('npsn')->unique()->nullable();
+            $table->string('npsn')->nullable();
             $table->unsignedBigInteger('pendaftaran_id');
             $table->foreign('pendaftaran_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
             $table->string('nama_sekolah')->nullable();
+            $table->string('status_sekolah')->nullable();
             $table->string('alamat_sekolah')->nullable();
-            $table->string('jenjang_sekolah')->nullable();
             $table->timestamps();
         });
     }

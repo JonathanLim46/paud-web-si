@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tb_data_pribadi', function (Blueprint $table) {
             $table->string('nik')->unique();
+            $table->string('nis');
             $table->unsignedBigInteger('pendaftaran_id');
             $table->foreign('pendaftaran_id')->references('id_pendaftaran')->on('tb_pendaftar')->onDelete('cascade');
             $table->string('nama_lengkap');

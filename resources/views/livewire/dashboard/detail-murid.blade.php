@@ -34,7 +34,7 @@
 @endsection
 
 <div>
-    <h3>Nama Siswa</h3>
+    <h3>Nama Siswa : {{$murid->dataPribadi->nama_lengkap}}</h3>
     <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
         <div class="mb-4">
             <nav class="form-nav" id="navDetailMurid">
@@ -49,69 +49,128 @@
             <div class="container my-4">
 
                 <div class="row g-3">
-                    <div class="col-md-6"><strong>NIS:</strong> 2025-ABCD</div>
-                    <div class="col-md-6"><strong>NIK:</strong> 1234567890123456</div>
-                    <div class="col-md-12"><strong>Nama Lengkap:</strong> Nama Siswa</div>
-                    <div class="col-md-6"><strong>Jenis Kelamin:</strong> Laki-laki</div>
-                    <div class="col-md-6"><strong>Tempat, Tanggal Lahir:</strong> Bogor, 2008-05-21</div>
-                    <div class="col-md-4"><strong>Agama:</strong> Islam</div>
-                    <div class="col-md-4"><strong>Anak Ke:</strong> 2</div>
-                    <div class="col-md-4"><strong>Berat Badan:</strong> 40 kg</div>
-                    <div class="col-md-6"><strong>Tinggi Badan:</strong> 150 cm</div>
-                    <div class="col-md-6"><strong>Lingkar Kepala:</strong> 45 cm</div>
+                    <div class="col-md-6"><strong>NIS:</strong>
+                        {{ $murid->dataPribadi->nis }}
+                    </div>
+                    <div class="col-md-6"><strong>NIK:</strong>
+                        {{ $murid->dataPribadi->nik }}
+                    </div>
+                    <div class="col-md-12"><strong>Nama Lengkap:</strong>
+                        {{ $murid->dataPribadi->nama_lengkap }}
+                    </div>
+                    <div class="col-md-6"><strong>Jenis Kelamin:</strong>
+                        {{ $murid->dataPribadi->jenis_kelamin }}
+                    </div>
+                    <div class="col-md-6"><strong>Tempat, Tanggal Lahir:</strong>
+                        {{ $murid->dataPribadi->tempat_lahir }}, {{ \Carbon\Carbon::parse($murid->tanggal_lahir)->format('d-m-Y') }}
+                    </div>
+                    <div class="col-md-4"><strong>Agama:</strong>
+                        {{ $murid->dataPribadi->agama }}
+                    </div>
+                    <div class="col-md-4"><strong>Anak Ke:</strong>
+                        {{ $murid->dataPribadi->anak_ke }}
+                    </div>
+                    <div class="col-md-4"><strong>Berat Badan:</strong>
+                        {{ $murid->dataPribadi->berat_badan }} kg
+                    </div>
+                    <div class="col-md-6"><strong>Tinggi Badan:</strong> 
+                        {{ $murid->dataPribadi->tinggi_badan }} cm
+                    </div>
+                    <div class="col-md-6"><strong>Lingkar Kepala:</strong> 
+                        {{ $murid->dataPribadi->lingkar_kepala }} cm
+                    </div>
                 </div>
 
                 <hr class="my-4">
 
                 <h5>Alamat</h5>
-                <div class="mb-2"><strong>Alamat Lengkap:</strong> Jl. Raya Dramaga No. 1</div>
+                <div class="mb-2"><strong>Alamat Lengkap:</strong> {{ $murid->dataPribadi->alamat_rumah }}</div>
                 <div class="row g-2">
-                    <div class="col-md-4"><strong>Desa:</strong> Sukadamai</div>
-                    <div class="col-md-4"><strong>Kecamatan:</strong> Dramaga</div>
-                    <div class="col-md-4"><strong>Kabupaten:</strong> Bogor</div>
-                    <div class="col-md-4"><strong>Provinsi:</strong> Jawa Barat</div>
-                    <div class="col-md-4"><strong>Kode Pos:</strong> 16680</div>
+                    <div class="col-md-4"><strong>Desa atau Kelurahan:</strong> {{ $murid->dataPribadi->desa_kelurahan }}</div>
+                    <div class="col-md-4"><strong>Kecamatan:</strong> {{ $murid->dataPribadi->kecamatan }}</div>
+                    <div class="col-md-4"><strong>Kabupaten atau Kota:</strong> {{ $murid->dataPribadi->kota_kabupaten }}</div>
+                    <div class="col-md-4"><strong>Provinsi:</strong> {{ $murid->dataPribadi->provinsi }}</div>
+                    <div class="col-md-4"><strong>Kode Pos:</strong> {{ $murid->dataPribadi->kode_pos }}</div>
                 </div>
 
                 <hr class="my-4">
 
                 <h5>Data Orang Tua</h5>
                 <div class="row g-3">
-                    <div class="col-md-4"><strong>Nama Ayah:</strong> Budi</div>
-                    <div class="col-md-4"><strong>NIK Ayah:</strong> 1234567890</div>
-                    <div class="col-md-4"><strong>Pekerjaan Ayah:</strong> Petani</div>
-                    <div class="col-md-4"><strong>Nama Ibu:</strong> Siti</div>
-                    <div class="col-md-4"><strong>NIK Ibu:</strong> 0987654321</div>
-                    <div class="col-md-4"><strong>Pekerjaan Ibu:</strong> Ibu Rumah Tangga</div>
+                    <div class="col-md-4"><strong>Nama Ayah:</strong> {{ $murid->dataOrangTua->nama_ayah }}</div>
+                    <div class="col-md-4"><strong>NIK Ayah:</strong> {{ $murid->dataOrangTua->nik_ayah }}</div>
+                    <div class="col-md-4"><strong>Pekerjaan Ayah:</strong> {{ $murid->dataOrangTua->pekerjaan_ayah }}</div>
+                    <div class="col-md-4"><strong>Nama Ibu:</strong> {{ $murid->dataOrangTua->nama_ibu }}</div>
+                    <div class="col-md-4"><strong>NIK Ibu:</strong> {{ $murid->dataOrangTua->nik_ibu }}</div>
+                    <div class="col-md-4"><strong>Pekerjaan Ibu:</strong> {{ $murid->dataOrangTua->pekerjaan_ibu }}</div>
                 </div>
 
                 <h5 class="mt-4">Data Wali</h5>
                 <div class="row g-3">
-                    <div class="col-md-4"><strong>Nama Wali:</strong> -</div>
-                    <div class="col-md-4"><strong>NIK Wali:</strong> -</div>
-                    <div class="col-md-4"><strong>Pekerjaan Wali:</strong> -</div>
-                    <div class="col-md-6"><strong>No HP Orang Tua:</strong> 08123456789</div>
+                    <div class="col-md-4"><strong>Nama Wali:</strong> 
+                        {{ $murid->dataOrangTua->nama_wali }}
+                    </div>
+                    <div class="col-md-4"><strong>NIK Wali:</strong> 
+                        {{ $murid->dataOrangTua->nik_wali }}
+                    </div>
+                    <div class="col-md-4"><strong>Pekerjaan Wali:</strong> 
+                        {{ $murid->dataOrangTua->pekerjaan_wali }}
+                    </div>
+                    <div class="col-md-6"><strong>No HP Orang Tua:</strong> {{ $murid->no_telp }}</div>
                 </div>
 
                 <hr class="my-4">
 
                 <h5>Data Sekolah</h5>
                 <div class="row g-3">
-                    <div class="col-md-6"><strong>Asal Sekolah:</strong> SDN 1 Dramaga</div>
-                    <div class="col-md-3"><strong>Jenjang Sekolah:</strong> SD</div>
-                    <div class="col-md-3"><strong>Status Sekolah:</strong> Negeri</div>
-                    <div class="col-md-6"><strong>NPSN:</strong> 20208888</div>
-                    <div class="col-md-6"><strong>Lokasi Sekolah:</strong> Dramaga</div>
+                    @if ($murid->dataSekolah)
+                        <div class="col-md-6">
+                            <strong>Nama Sekolah:</strong> {{ $murid->dataSekolah->nama_sekolah }}
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Status Sekolah:</strong> {{ $murid->dataSekolah->status_sekolah }}
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Alamat Sekolah:</strong> {{ $murid->dataSekolah->alamat_sekolah }}
+                        </div>
+                    @else
+                        <div class="col-md-12">
+                            <em>Belum ada data sekolah.</em>
+                        </div>
+                    @endif
                 </div>
 
                 <hr class="my-4">
 
                 <h5>Dokumen Terlampir</h5>
                 <ul>
-                    <li><a href="#">Lihat Kartu Keluarga (KK)</a></li>
-                    <li><a href="#">Lihat Akta Kelahiran</a></li>
-                    <li><a href="#">Lihat KTP Orang Tua</a></li>
-                    <li><a href="#">Lihat Surat Rekomendasi</a></li>
+                    <li>
+                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->kartu_keluarga) }}" target="_blank">
+                            Lihat Kartu Keluarga
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ayah) }}" target="_blank">
+                            Lihat KTP Ayah
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ibu) }}" target="_blank">
+                            Lihat KTP Ibu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->akta_kelahiran) }}" target="_blank">
+                            Lihat Akta Kelahiran
+                        </a>
+                    </li>
+                    @if ($murid->dokumen->surat_pindah)
+                    <li>
+                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->surat_pindah) }}" target="_blank">
+                            Lihat Surat Pindah
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         @elseif ($step === 'Penilaian')

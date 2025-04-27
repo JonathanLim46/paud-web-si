@@ -27,7 +27,8 @@ class DataOrangTuaFactory extends Factory
             'nik_ibu' => fake()->nik(),
             'pekerjaan_ibu' => fake()->jobTitle(),
             'nama_wali' => fake()->name(),
-            'nik_wali' => fake()->nik()
+            'nik_wali' => fake()->nik(),
+            'pekerjaan_wali' => fake()->jobTitle()
         ];
     }
 }

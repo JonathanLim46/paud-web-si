@@ -17,9 +17,17 @@ class DataPribadiFactory extends Factory
      */
     public function definition(): array
     {
+        $tahun_awal = date('y');
+        $tahun_akhir = $tahun_awal + 1;
+        $kode_sekolah = 530;
+
+        $no_urut = str_pad(fake()->unique()->numberBetween(1, 999), 3, '0', STR_PAD_LEFT);
+        $nis = "{$tahun_awal}{$tahun_akhir}{$kode_sekolah}{$no_urut}";
+
         return [
             //
             'nik' => fake()->nik(),
+            'nis' => $nis,
             'pendaftaran_id' => Pendaftar::factory(),
             'nama_lengkap' => fake()->firstName() . ' ' . fake()->lastName(),
             'jenis_kelamin' => fake()->randomElement(['Laki-Laki', 'Perempuan']),
