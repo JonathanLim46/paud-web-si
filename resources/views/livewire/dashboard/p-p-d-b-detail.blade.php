@@ -217,24 +217,24 @@
             <div class="row">
                 <div class="col-md-6 data-row"><span class="data-label">Kartu Keluarga (KK)</span><br>
                     <a
-                        href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->kartu_keluarga) }}" 
+                        href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->kartu_keluarga) }}" 
                         class="link-blue">Lihat
                     </a>
                 </div>
                 <div class="col-md-6 data-row"><span class="data-label">Akta Kelahiran</span><br>
-                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->akta_kelahiran) }}" 
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->akta_kelahiran) }}" 
                         class="link-blue">Lihat</a>
                     </div>
                 <div class="col-md-6 data-row"><span class="data-label">KTP Ayah</span><br>
-                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ayah) }}" 
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ayah) }}" 
                         class="link-blue">Lihat</a></div>
                 <div class="col-md-6 data-row"><span class="data-label">KTP Ibu</span><br>
-                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ibu) }}" 
-                        class="link-blue">Lihat</a></div>
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ibu) }}" 
+                        class="link-blue" target="_blank">Lihat</a></div>
                 @if ($pendaftar->dokumen->surat_pindah)
                 <div class="col-md-6 data-row"><span class="data-label">Surat Pindah</span><br>
-                    <a href="{{ asset('storage/data_kelas/' . $pendaftar->kelas_id . '/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->surat_pindah) }}" 
-                        class="link-blue">Lihat</a></div>
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->surat_pindah) }}" 
+                        class="link-blue" target="_blank">Lihat</a></div>
                 @endif
             </div>
         </div>

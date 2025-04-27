@@ -145,28 +145,28 @@
                 <h5>Dokumen Terlampir</h5>
                 <ul>
                     <li>
-                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->kartu_keluarga) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->kartu_keluarga) }}" target="_blank">
                             Lihat Kartu Keluarga
                         </a>
                     </li>
                     <li>
-                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ayah) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ayah) }}" target="_blank">
                             Lihat KTP Ayah
                         </a>
                     </li>
                     <li>
-                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ibu) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ibu) }}" target="_blank">
                             Lihat KTP Ibu
                         </a>
                     </li>
                     <li>
-                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->akta_kelahiran) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->akta_kelahiran) }}" target="_blank">
                             Lihat Akta Kelahiran
                         </a>
                     </li>
                     @if ($murid->dokumen->surat_pindah)
                     <li>
-                        <a href="{{ asset('storage/data_kelas/' . $murid->kelas_id . '/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->surat_pindah) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->surat_pindah) }}" target="_blank">
                             Lihat Surat Pindah
                         </a>
                     </li>

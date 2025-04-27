@@ -235,7 +235,7 @@ class KelasDetail extends Component
 
         $kelas_id = $this->kelasId;
         $namaMurid = str_replace(' ', '_', $this->data_murid['nik']);
-        $folderPath = "data_kelas/{$kelas_id}/{$namaMurid}/dokumen";
+        $folderPath = "data_pendaftar/{$namaMurid}/dokumen";
 
         // Store dokumen ke storage
         foreach ($this->data_dokumen as $field => $file) {
@@ -296,7 +296,7 @@ class KelasDetail extends Component
 
         $kelas_id = $pendaftar->kelas_id;
         $namaMurid = str_replace(' ', '_', $this->data_murid['nik']);
-        $folderPath = "data_kelas/{$kelas_id}/{$namaMurid}/dokumen";
+        $folderPath = "data_pendaftar/{$namaMurid}/dokumen";
 
         $dokumenUpdate = [];
 
@@ -331,7 +331,7 @@ class KelasDetail extends Component
         $dataPribadi = $data_target->dataPribadi; 
         if ($dataPribadi) {
             $namaMurid = str_replace(' ', '_', $dataPribadi->nik); 
-            $folderPath = "data_kelas/{$id_kelas}/{$namaMurid}";
+            $folderPath = "data_pendaftar/{$namaMurid}/dokumen";
     
             Storage::disk('public')->deleteDirectory($folderPath);
         }
