@@ -8,11 +8,6 @@
     <title>PAUD KB AL-HUSNA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Base styles */
-        body {
-            font-family: 'Brash One', sans-serif;
-        }
-
         p {
             font-size: 19px;
             color: #333;
