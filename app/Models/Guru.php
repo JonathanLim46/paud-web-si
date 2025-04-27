@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Kelas;
 use App\Models\JadwalPelajaran;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Guru extends Model
 {
@@ -25,5 +28,9 @@ class Guru extends Model
 
     public function user(): BelongsTo{
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function kelas(): HasOne{
+        return $this->hasOne(Kelas::class, 'guru_id');
     }
 }

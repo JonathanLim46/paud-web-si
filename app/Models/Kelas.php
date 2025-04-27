@@ -9,6 +9,7 @@ use App\Models\JadwalPelajaran;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kelas extends Model
@@ -21,7 +22,7 @@ class Kelas extends Model
     protected $fillable = [
         'nama_kelas',
         'tingkat_kelas',
-        'wali_murid',
+        'guru_id',
     ];
 
     // public function guru(): HasOne{
@@ -38,5 +39,9 @@ class Kelas extends Model
 
     public function jadwals(): HasMany{
         return $this->hasMany(JadwalPelajaran::class, 'kelas_id');
+    }
+
+    public function guru(): BelongsTo{
+        return $this->belongsTo(Guru::class, 'guru_id');
     }
 }

@@ -258,7 +258,7 @@
                         <tr wire:key="{{ $kelas->id_kelas }}">
                             <td>{{ $kelas->nama_kelas }}</td>
                             <td>{{ $kelas->tingkat_kelas }}</td>
-                            <td>{{ $kelas->wali_murid }}</td>
+                            <td>{{ $kelas->guru->user->name }}</td>
                             <td>
                                 <a class="btn btn-primary" wire:click="kelasDetail({{ $kelas->id_kelas }})">
                                     <i class="bi bi-eye"></i>
@@ -309,11 +309,11 @@
                         @if ($gurus)
                             <div class="mb-4">
                                 <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
-                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="wali_murid"
+                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="guru_id"
                                     required>
                                     <option value="" disabled selected>Select</option>
                                     @foreach ($gurus as $guru)
-                                        <option value="{{ $guru->user->name }}">{{ $guru->user->name }}</option>
+                                        <option value="{{ $guru->id_guru }}">{{ $guru->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -352,11 +352,11 @@
                         @if ($gurus)
                             <div class="mb-4">
                                 <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
-                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="wali_murid"
+                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="guru_id"
                                     required>
                                     <option value="" disabled selected>Select</option>
                                     @foreach ($gurus as $guru)
-                                        <option value="{{ $guru->user->name }}">{{ $guru->user->name }}</option>
+                                        <option value="{{ $guru->id_guru }}">{{ $guru->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

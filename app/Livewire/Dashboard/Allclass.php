@@ -19,7 +19,7 @@ class Allclass extends Component
  
     public $tingkat_kelas = '';
 
-    public $wali_murid = '';
+    public $guru_id = '';
 
     public $selectedKelas;
 
@@ -31,6 +31,9 @@ class Allclass extends Component
     public function openModal()
     {
         $this->gurus = Guru::all();
+        $this->nama_kelas = '';
+        $this->tingkat_kelas = '';
+        $this->guru_id = '';
     }
 
     public function openModalEdit($id)
@@ -39,7 +42,7 @@ class Allclass extends Component
         $this->selectedKelas = Kelas::findOrFail($id);
         $this->nama_kelas = $this->selectedKelas->nama_kelas;
         $this->tingkat_kelas = $this->selectedKelas->tingkat_kelas;
-        $this->wali_murid = $this->selectedKelas->wali_murid;
+        $this->guru_id = $this->selectedKelas->guru->id_guru;
     }
 
     public function openModalDelete($id)
@@ -52,7 +55,7 @@ class Allclass extends Component
         $validated = $this->validate([
             'nama_kelas' => 'required',
             'tingkat_kelas' => 'required',
-            'wali_murid' => 'required',
+            'guru_id' => 'required',
         ]);
 
         Kelas::create($validated);
@@ -66,7 +69,7 @@ class Allclass extends Component
         $validated = $this->validate([
             'nama_kelas' => 'required',
             'tingkat_kelas' => 'required',
-            'wali_murid' => 'required',
+            'guru_id' => 'required',
         ]);
 
         $data = Kelas::findOrFail($id);
@@ -93,7 +96,7 @@ class Allclass extends Component
     public function render()
     {
         return view('livewire.dashboard.allclass')->with([
-            'kelass' => Kelas::where('nama_kelas', 'like', '%'.$this->query.'%')->paginate(5),
+            'kelass' => Kelas::with('guru.user')->where('nama_kelas', 'like', '%'.$this->query.'%')->paginate(5),
         ])->layout('components.layouts.app', [
             'title' => "Kelas",
             'section_title' => "Kelas",
