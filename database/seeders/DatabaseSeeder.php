@@ -65,6 +65,17 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        $guruUser = DB::table('users')->where('username', 'guru')->first();
+
+        DB::table('tb_guru')->insert([
+            'user_id' => $guruUser->id, 
+            'jabatan' => 'Guru', 
+            'alamat_guru' => 'Jl. Pendidikan No. 1', 
+            'pendidikan' => 'S1',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         DB::table('tb_statusppdb')->insert([
             'status' => false,
         ]);

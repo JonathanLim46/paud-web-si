@@ -151,7 +151,7 @@
                 @if (Auth::user()->level == 'guru')
                 <li class="mt-2">
                     <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.kelas') ? 'active' : '' }}"
-                        href="{{ route('admin.kelas') }}">
+                        href="{{ route('guru.kelas') }}">
                         <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
                     </a>
                 </li> 
