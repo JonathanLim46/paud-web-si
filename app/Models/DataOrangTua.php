@@ -22,7 +22,8 @@ class DataOrangTua extends Model
         'nik_ibu',
         'pekerjaan_ibu',
         'nama_wali', 
-        'nik_wali'
+        'nik_wali',
+        'pekerjaan_wali'
     ];
 
     public function pendaftar() : BelongsTo {

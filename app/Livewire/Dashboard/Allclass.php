@@ -85,6 +85,11 @@ class Allclass extends Component
         return redirect('dashboard/kelas');
     }
 
+    public function kelasDetail($id)
+    {
+        return redirect()->route('admin.detail-kelas', ['id' => $id]);
+    }
+
     public function render()
     {
         return view('livewire.dashboard.allclass')->with([

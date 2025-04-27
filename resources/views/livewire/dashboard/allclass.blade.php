@@ -227,7 +227,7 @@
                 <form wire:submit="search" class="search-form">
                     <div class="search-container">
                         <input type="text" wire:model.debounce.300ms="query" class="search-input"
-                            placeholder="Cari nama atau NIS..." aria-label="Search" autocomplete="off">
+                            placeholder="Cari nama murid" aria-label="Search" autocomplete="off">
                         <button type="submit" class="search-button">
                             <i class="bi bi-search"></i>
                             <span class="search-button-text">Cari</span>
@@ -255,13 +255,15 @@
                 </thead>
                 <tbody class="text-center">
                     @foreach ($kelass as $kelas)
-                        <tr>
+                        <tr wire:key="{{ $kelas->id_kelas }}">
                             <td>{{ $kelas->nama_kelas }}</td>
                             <td>{{ $kelas->tingkat_kelas }}</td>
                             <td>{{ $kelas->wali_murid }}</td>
                             <td>
-                                <a href="{{ route('admin.detail-kelas') }}" class="btn btn-primary"><i
-                                        class="bi bi-eye"></i>Detail</a>
+                                <a class="btn btn-primary" wire:click="kelasDetail({{ $kelas->id_kelas }})">
+                                    <i class="bi bi-eye"></i>
+                                    Detail
+                                </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditKelas"
                                     class="btn btn-warning"
                                     wire:click="openModalEdit({{ $kelas->id_kelas }})">

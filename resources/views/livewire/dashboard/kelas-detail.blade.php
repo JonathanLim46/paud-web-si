@@ -166,6 +166,81 @@
             background-color: var(--gray-100);
             border-color: var(--gray-400);
         }
+
+                /* Search styling */
+                .search-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            display: flex;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .search-container:focus-within {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 1px solid #e2e8f0;
+            border-right: none;
+            border-radius: 50px 0 0 50px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #4299e1;
+        }
+
+        .search-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: #3182ce;
+        }
+
+        .search-button i {
+            font-size: 1.25rem;
+            margin-right: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .search-button-text {
+                display: none;
+            }
+
+            .search-button {
+                padding: 0 15px;
+            }
+
+            .search-button i {
+                margin-right: 0;
+            }
+
+            .search-input {
+                padding: 12px 15px;
+            }
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @endsection
@@ -181,12 +256,16 @@
                 </a>
             </div>
             <div class="col-md-6 d-flex justify-content-between">
-                <div class="search-container d-flex">
-                    <input type="text" class="form-control search-input" placeholder="Cari nama atau NIS...">
-                    <div class="search-icon">
-                        <i class="bi bi-search"></i>
+                <form wire:submit="search" class="search-form">
+                    <div class="search-container">
+                        <input type="text" wire:model.debounce.300ms="query" class="search-input"
+                            placeholder="Cari nama atau nis murid" aria-label="Search" autocomplete="off">
+                        <button type="submit" class="search-button">
+                            <i class="bi bi-search"></i>
+                            <span class="search-button-text">Cari</span>
+                        </button>
                     </div>
-                </div>
+                </form>
                 <!-- Tombol Tambah Murid -->
                 <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
                     data-bs-target="#modalTambahSiswa">
@@ -202,50 +281,43 @@
                     <tr>
                         <th>NIS</th>
                         <th>Nama Murid</th>
-                        <th>Kelas</th>
                         <th>Jenis Kelamin</th>
                         <th>Alamat</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
+                    @foreach ($murids as $murid)
                     <tr>
-                        <td>2025-001A</td>
-                        <td>Steve Guy</td>
-                        <td>A</td>
-                        <td>Laki-Laki</td>
-                        <td>Jl. Deket Rumah</td>
+                        <td>{{ $murid->dataPribadi->nis }}</td>
+                        <td>{{$murid->dataPribadi->nama_lengkap}}</td>
+                        <td>{{$murid->dataPribadi->jenis_kelamin}}</td>
+                        <td>{{$murid->dataPribadi->alamat_rumah}}</td>
                         <td>
                             <a href="{{ route('admin.detail-murid') }}" class="btn btn-primary"><i
                                     class="bi bi-eye"></i> Detail</a>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditSiswa"
-                                class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                                class="btn btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </a>
 
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteMurid"
-                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                                class="btn btn-danger" wire:click="openModal({{ $murid->id_pendaftaran }})">
+                                <i class="bi bi-trash"></i>
+                            </a>
                         </td>
                     </tr>
-                    <!-- Add more rows as necessary -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
 
-        <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i
-                            class="bi bi-chevron-left"></i></a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
-            </ul>
-        </nav>
+        {{ $murids->links('custom-pagination-links') }}
+
     </section>
 
     <!-- Modal Tambah Data Siswa -->
-    <div class="modal fade" id="modalTambahSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div wire:ignore.self class="modal fade" id="modalTambahSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalTambahSiswaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
@@ -254,65 +326,144 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <h5 class="mb-3">Data Siswa</h5>
+                    <form wire:submit="store">
+                        <h5 class="mb-3">Data Siswa {{$kelasId}}</h5>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="nis" class="form-label">NIS</label>
-                                <input type="text" class="form-control" id="nis" placeholder="2025-ABCD">
-                            </div>
-                            <div class="col-md-6">
                                 <label for="nik" class="form-label">NIK</label>
-                                <input type="text" class="form-control" id="nik">
+                                <input type="text" class="form-control" id="nik"
+                                wire:model="data_murid.nik">
+                                @error('data_murid.nik')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="nama-lengkap">
+                                <input type="text" class="form-control" id="nama-lengkap"
+                                wire:model="data_murid.nama_lengkap">
+                                @error('data_murid.nama_lengkap')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label for="nama-lengkap" class="form-label">No Telepon</label>
+                                <input type="text" class="form-control" id="no_telepon"
+                                wire:model="no_telp">
+                                @error('no_telp')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label d-block">Jenis Kelamin</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="jk-l" value="Laki-laki">
+                                        id="jk-l" value="Laki-laki" wire:model="data_murid.jenis_kelamin">
                                     <label class="form-check-label" for="jk-l">Laki-laki</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                        id="jk-p" value="Perempuan">
+                                        id="jk-p" value="Perempuan" wire:model="data_murid.jenis_kelamin">
                                     <label class="form-check-label" for="jk-p">Perempuan</label>
                                 </div>
+                                @error('data_murid.jenis_kelamin')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="tempat-lahir" class="form-label">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tempat-lahir">
+                                <input type="text" class="form-control" id="tempat-lahir" wire:model="data_murid.tempat_lahir">
+                                @error('data_murid.tempat_lahir')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Tanggal Lahir</label>
                                 <div class="d-flex gap-2">
-                                    <input type="text" class="form-control" placeholder="Tahun">
-                                    <input type="text" class="form-control" placeholder="Bulan">
-                                    <input type="text" class="form-control" placeholder="Tanggal">
+                                    <input type="date" class="form-control" placeholder="Tanggal Lahir" 
+                                    max="{{ now()->toDateString() }}" wire:model="data_murid.tanggal_lahir">
                                 </div>
+                                @error('data_murid.tanggal_lahir')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="agama" class="form-label">Agama</label>
-                                <input type="text" class="form-control" id="agama">
+                                <input type="text" class="form-control" id="agama" wire:model="data_murid.agama">
+                                @error('data_murid.agama')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="anak-ke" class="form-label">Anak Ke</label>
-                                <input type="number" class="form-control" id="anak-ke">
+                                <input type="number" class="form-control" id="anak-ke" wire:model="data_murid.anak_ke">
+                                @error('data_murid.anak_ke')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="berat-badan" class="form-label">Berat Badan (kg)</label>
-                                <input type="text" class="form-control" id="berat-badan">
+                                <input type="number" class="form-control" id="berat-badan" wire:model="data_murid.berat_badan" min="0">
+                                @error('data_murid.berat_badan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="tinggi-badan" class="form-label">Tinggi Badan (cm)</label>
-                                <input type="text" class="form-control" id="tinggi-badan">
+                                <input type="number" class="form-control" id="tinggi-badan" wire:model="data_murid.tinggi_badan" min="0">
+                                @error('data_murid.tinggi_badan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="lingkar-kepala" class="form-label">Lingkar Kepala (cm)</label>
-                                <input type="text" class="form-control" id="lingkar-kepala">
+                                <input type="number" class="form-control" id="lingkar-kepala" wire:model="data_murid.lingkar_kepala" min="0">
+                                @error('data_murid.lingkar_kepala')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -320,100 +471,309 @@
                         <h5>Alamat</h5>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Lengkap</label>
-                            <input type="text" class="form-control" id="alamat">
+                            <input type="text" class="form-control" id="alamat" wire:model="data_murid.alamat_rumah">
+                            @error('data_murid.alamat_rumah')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Desa">
+                                <input type="text" class="form-control" placeholder="Desa atau Kelurahan" wire:model="data_murid.desa_kelurahan">
+                                @error('data_murid.desa_kelurahan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kecamatan">
+                                <input type="text" class="form-control" placeholder="Kecamatan" wire:model="data_murid.kecamatan">
+                                @error('data_murid.kecamatan')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kabupaten">
+                                <input type="text" class="form-control" placeholder="Kabupaten atau Kota" wire:model="data_murid.kota_kabupaten">
+                                @error('data_murid.kota_kabupaten')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Provinsi">
+                                <input type="text" class="form-control" placeholder="Provinsi" wire:model="data_murid.provinsi">
+                                @error('data_murid.provinsi')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Kode Pos">
+                                <input type="text" class="form-control" placeholder="Kode Pos" wire:model="data_murid.kode_pos">
+                                @error('data_murid.kode_pos')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                         </div>
 
                         <hr class="my-4">
                         <h5>Data Ayah</h5>
                         <div class="row g-3">
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Nama Ayah"></div>
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="NIK Ayah">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Nama Ayah" wire:model="data_orang_tua_wali.nama_ayah">
+                                @error('data_orang_tua_wali.nama_ayah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Pekerjaan Ayah"></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="NIK Ayah" wire:model="data_orang_tua_wali.nik_ayah">
+                                @error('data_orang_tua_wali.nik_ayah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Pekerjaan Ayah" wire:model="data_orang_tua_wali.pekerjaan_ayah">
+                                @error('data_orang_tua_wali.pekerjaan_ayah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
                         </div>
 
                         <h5 class="mt-4">Data Ibu</h5>
                         <div class="row g-3">
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="Nama Ibu">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="Nama Ibu" wire:model="data_orang_tua_wali.nama_ibu">
+                            @error('data_orang_tua_wali.nama_ibu')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="NIK Ibu">
+                            @enderror
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Pekerjaan Ibu"></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="NIK Ibu" wire:model="data_orang_tua_wali.nik_ibu">
+                            @error('data_orang_tua_wali.nik_ibu')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Pekerjaan Ibu" wire:model="data_orang_tua_wali.pekerjaan_ibu">
+                                @error('data_orang_tua_wali.pekerjaan_ibu')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
                         </div>
 
                         <h5 class="mt-4">Data Wali</h5>
                         <div class="row g-3">
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Nama Wali"></div>
-                            <div class="col-md-4"><input type="text" class="form-control" placeholder="NIK Wali">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Nama Wali" wire:model="data_orang_tua_wali.nama_wali">
+                                @error('data_orang_tua_wali.nama_wali')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-4"><input type="text" class="form-control"
-                                    placeholder="Pekerjaan Wali"></div>
-                            <div class="col-md-6"><input type="text" class="form-control"
-                                    placeholder="No HP Orang Tua"></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                placeholder="NIK Wali" wire:model="data_orang_tua_wali.nik_wali">
+                                @error('data_orang_tua_wali.nik_wali')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control"
+                                    placeholder="Pekerjaan Wali" wire:model="data_orang_tua_wali.pekerjaan_wali">
+                                @error('data_orang_tua_wali.pekerjaan_wali')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
                         </div>
 
+                        <div class="form-check mb-3 mt-4">
+                            <input class="form-check-input" type="checkbox" id="cekSekolah" 
+                            wire:change="sekolahCheck($event.target.checked)">
+                            <label class="form-check-label" for="cekSekolah">
+                                Apakah memiliki data sekolah sebelumnya?
+                            </label>
+                        </div>
+
+                        @if ($isSekolahChecked == 'buka')
                         <hr class="my-4">
                         <h5>Data Sekolah</h5>
                         <div class="row g-3">
-                            <div class="col-md-6"><input type="text" class="form-control"
-                                    placeholder="Asal Sekolah"></div>
-                            <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Jenjang Sekolah</option>
-                                    <option value="TK">TK</option>
-                                    <option value="SD">SD</option>
-                                    <option value="SMP">SMP</option>
-                                </select>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="NPSN"
+                                wire:model="data_sekolah.npsn">
+                                @error('data_sekolah.npsn')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"
+                                    placeholder="Nama Sekolah" wire:model="data_sekolah.nama_sekolah">
+                                @error('data_sekolah.nama_sekolah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select">
+                                <select class="form-select" wire:model="data_sekolah.status_sekolah">
                                     <option selected>Status Sekolah</option>
                                     <option value="Negeri">Negeri</option>
                                     <option value="Swasta">Swasta</option>
                                 </select>
+                                @error('data_sekolah.status_sekolah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-6"><input type="text" class="form-control" placeholder="NPSN">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"
+                                    placeholder="Alamat Sekolah" wire:model="data_sekolah.alamat_sekolah">
+                                @error('data_sekolah.alamat_sekolah')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
-                            <div class="col-md-6"><input type="text" class="form-control"
-                                    placeholder="Lokasi Sekolah"></div>
                         </div>
+                        @endif
 
                         <hr class="my-4">
                         <h5>Unggah Dokumen</h5>
-                        <div class="mb-3"><input type="file" class="form-control" placeholder="Upload KK">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload KK</label>
+                            <input type="file" class="form-control" placeholder="Upload KK"
+                            wire:model="data_dokumen.kartu_keluarga">
+                            @error('data_dokumen.kartu_keluarga')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
                         </div>
-                        <div class="mb-3"><input type="file" class="form-control"
-                                placeholder="Upload Akta Kelahiran"></div>
-                        <div class="mb-3"><input type="file" class="form-control"
-                                placeholder="Upload KTP Orang Tua"></div>
-                        <div class="mb-3"><input type="file" class="form-control"
-                                placeholder="Upload Surat Rekomendasi (Opsional)"></div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Akta Kelahiran</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload Akta Kelahiran" wire:model="data_dokumen.akta_kelahiran">
+                            @error('data_dokumen.akta_kelahiran')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload KTP Ayah</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload KTP Ayah" wire:model="data_dokumen.ktp_ayah">
+                            @error('data_dokumen.ktp_ayah')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload KTP Ibu</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload KTP Ibu" wire:model="data_dokumen.ktp_ibu">
+                            @error('data_dokumen.ktp_ibu')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Surat Rekomendasi (Opsional)</label>
+                            <input type="file" class="form-control"
+                                placeholder="Upload Surat Rekomendasi (Opsional)" wire:model="data_dokumen.surat_pindah">
+                            @error('data_dokumen.surat_pindah')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>
@@ -593,8 +953,9 @@
             </div>
         </div>
     </div>
+
     {{-- modal filter --}}
-    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModal" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -602,22 +963,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Isi filter: jenis kelamin, status diterima, tanggal, dll -->
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label">Kelas</label>
-                            <select wire:model="filter.status" class="form-select">
-                                <option value="">Semua</option>
-                                <option value="">A</option>
-                                <option value="">B</option>
-                                <option value="">C</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
                             <label class="form-label">Jenis Kelamin</label>
-                            <select wire:model="filter.status" class="form-select">
-                                <option value="">Laki - Laki</option>
-                                <option value="">Perempuan</option>
+                            <select wire:model="filterGender" class="form-select">
+                                <option value="Laki-Laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                                <option value="">Reset</option>
                             </select>
                         </div>
                     </div>
@@ -630,8 +982,9 @@
             </div>
         </div>
     </div>
+
     {{-- modal delete --}}
-    <div class="modal fade" id="modalDeleteMurid" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div wire:ignore.self class="modal fade" id="modalDeleteMurid" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalDeleteMuridLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -643,14 +996,12 @@
                     <p class="fs-5">Apakah Anda yakin ingin menghapus data murid ini?</p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+                    @if ($selectedData)
+                    <form wire:submit="delete({{ $selectedData->id_pendaftaran }})">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-danger">Hapus</button>
-                    </form> --}}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                    @endif
                 </div>
             </div>
         </div>

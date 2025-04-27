@@ -20,7 +20,7 @@ class DataSekolah extends Model
         'pendaftaran_id',
         'nama_sekolah',
         'alamat_sekolah',
-        'jenjang_sekolah'
+        'status_sekolah'
     ];
 
     public function pendaftar() : BelongsTo
