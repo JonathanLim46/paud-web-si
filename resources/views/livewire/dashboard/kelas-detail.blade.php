@@ -267,11 +267,13 @@
                     </div>
                 </form>
                 <!-- Tombol Tambah Murid -->
+                @if (Auth::user()->level == 'admin')
                 <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
-                    data-bs-target="#modalTambahSiswa" wire:click="resetForm">
-                    <i class="fa-solid fa-plus"></i>
-                    Tambah Murid
-                </button>
+                data-bs-target="#modalTambahSiswa" wire:click="resetForm">
+                <i class="fa-solid fa-plus"></i>
+                Tambah Murid
+                </button> 
+                @endif
             </div>
         </div>
 
@@ -297,16 +299,20 @@
                             <a wire:click="muridDetail({{ $murid->kelas_id }}, {{ $murid->id_pendaftaran }})" class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Detail
                             </a>
-
+                            
+                            @if (Auth::user()->level == 'admin')
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditSiswa"
                                 class="btn btn-warning" wire:click="openModalEdit({{ $murid->id_pendaftaran }})">
                                 <i class="bi bi-pencil"></i>
                             </a>
+                            @endif
 
+                            @if (Auth::user()->level == 'admin')
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteMurid"
                                 class="btn btn-danger" wire:click="openModal({{ $murid->id_pendaftaran }})">
                                 <i class="bi bi-trash"></i>
                             </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

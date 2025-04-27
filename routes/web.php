@@ -45,6 +45,8 @@ Route::middleware(['auth', 'ceklevel:admin,guru'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('dashboard/profile/{id}/edit', [UserController::class, 'edit'])->name('akun.edit');
     Route::put('dashboard/profile/{id}', [UserController::class, 'update'])->name('akun.update');
+    Route::get('dashboard/kelas/{id}/kelasdetail', App\Livewire\Dashboard\KelasDetail::class)->name('admin.detail-kelas');
+    Route::get('dashboard/kelas/{id_kelas}/murid/{id_murid}/', App\Livewire\Dashboard\DetailMurid::class)->name('admin.detail-murid');
 });
 
 Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
@@ -53,9 +55,11 @@ Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
     Route::get('dashboard/ppdbetail/{id}', App\Livewire\Dashboard\PPDBDetail::class)->name('admin.ppdb.detail');
     Route::get('dashboard/guru', App\Livewire\Dashboard\GuruPage::class)->name('admin.guru');
     Route::get('dashboard/kelas', App\Livewire\Dashboard\AllClass::class)->name('admin.kelas');
-    Route::get('dashboard/kelas/{id}/kelasdetail', App\Livewire\Dashboard\KelasDetail::class)->name('admin.detail-kelas');
-    Route::get('dashboard/kelas/{id_kelas}/murid/{id_murid}/', App\Livewire\Dashboard\DetailMurid::class)->name('admin.detail-murid');
     Route::get('dashboard/profilsekolah/galeri', App\LiveWire\Dashboard\Gallery::class)->name('admin.profilsekolah.gallery');
     Route::get('dashboard/profilsekolah/aktivitas', App\LiveWire\Dashboard\Activity::class)->name('admin.profilsekolah.aktivitas');
     Route::get('dashboard/profilsekolah/faq', App\LiveWire\Dashboard\Faqs::class)->name('admin.profilsekolah.faq');
+});
+
+Route::middleware(['auth', 'ceklevel:guru'])->group(function () {
+    Route::get('dashboard/kelas/guru', App\Livewire\Dashboard\Guru\KelasPage::class)->name('guru.kelas');
 });
