@@ -8,7 +8,7 @@ use App\Http\Controllers\GalleryController;
 
 Route::get('/', function () {
     return view('CompanyProfile.home');
-});
+})->name('company.home');
 Route::get('tentang-kami', function () {
     return view('tentang');
 });
