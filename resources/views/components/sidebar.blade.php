@@ -114,6 +114,7 @@
             </a>
         </li>
 
+        @if (Auth::user()->level == 'admin')
         <!-- PPDB -->
         <li class="nav-item mb-2">
             <a class="nav-link sidebar-link d-flex align-items-center rounded-pill ps-3 py-3 {{ request()->routeIs('admin.PPDB') ? 'active' : '' }}"
@@ -122,6 +123,7 @@
                 <span class="ms-3 fw-medium">PPDB</span>
             </a>
         </li>
+        @endif
 
         <!-- Data Sekolah Expand -->
         <li class="nav-item mb-2">
@@ -132,6 +134,7 @@
                 <i class="fa-solid fa-chevron-down ms-auto"></i>
             </a>
             <ul class="submenu ps-4 mt-2" style="display: none;">
+                @if (Auth::user()->level == 'admin')
                 <li>
                     <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.guru') ? 'active' : '' }}"
                         href="{{ route('admin.guru') }}">
@@ -144,6 +147,15 @@
                         <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
                     </a>
                 </li>
+                @endif
+                @if (Auth::user()->level == 'guru')
+                <li class="mt-2">
+                    <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.kelas') ? 'active' : '' }}"
+                        href="{{ route('admin.kelas') }}">
+                        <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
+                    </a>
+                </li> 
+                @endif
             </ul>
         </li>
 
