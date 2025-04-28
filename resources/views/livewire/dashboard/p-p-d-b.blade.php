@@ -311,7 +311,19 @@
                             <span class="status-badge status-pending">Tahap Verifikasi</span>
                             @endif
                         </td>
-                        <td><a href="{{ route('admin.ppdb.detail', $pendaftar->id_pendaftaran) }}" class="btn btn-warning"><i class="bi bi-eye me-1"></i> Detail</a></td>
+                        <td>
+                            <a href="{{ route('admin.ppdb.detail', $pendaftar->id_pendaftaran) }}" 
+                                class="btn btn-warning">
+                                <i class="bi bi-eye me-1"></i>
+                                Detail
+                            </a>
+                            @if ($pendaftar->diterima === 0)
+                            <a  wire:click="openModal({{ $pendaftar->id_pendaftaran }})" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeletePendaftar">
+                                <i class="bi bi-eye me-1"></i>
+                                Hapus
+                            </a>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -353,6 +365,29 @@
               <button type="button" class="btn btn-primary" wire:click="applyFilter" data-bs-dismiss="modal">Terapkan</button>
             </div>
           </div>
+        </div>
+    </div>
+
+    {{-- modal delete  --}}
+    <div wire:ignore.self class="modal fade" id="modalDeletePendaftar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDeletePendaftar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeletePendaftarLabel">Konfirmasi Hapus</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fs-5">Apakah Anda yakin ingin menghapus data guru ini?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    @if ($selectedIdPendaftar)
+                    <form wire:submit="delete({{ $pendaftar->id_pendaftaran }})">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>  
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
     

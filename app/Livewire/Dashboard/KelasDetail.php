@@ -331,7 +331,7 @@ class KelasDetail extends Component
         $dataPribadi = $data_target->dataPribadi; 
         if ($dataPribadi) {
             $namaMurid = str_replace(' ', '_', $dataPribadi->nik); 
-            $folderPath = "data_pendaftar/{$namaMurid}/dokumen";
+            $folderPath = "data_pendaftar/{$namaMurid}";
     
             Storage::disk('public')->deleteDirectory($folderPath);
         }

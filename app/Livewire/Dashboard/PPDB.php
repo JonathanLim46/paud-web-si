@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Pendaftar;
 use App\Models\StatusPPDB;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class PPDB extends Component
 {
@@ -20,6 +21,8 @@ class PPDB extends Component
         'status' => '',
         'tanggal' => '',
     ];
+
+    public $selectedIdPendaftar;
 
     public function toggleSwitch()
     {
@@ -46,6 +49,29 @@ class PPDB extends Component
     public function applyFilter()
     {
         $this->render();
+    }
+
+    public function openModal($id)
+    {
+        $this->selectedIdPendaftar = $id;
+    }
+
+    public function delete($id)
+    {
+        $pendaftar = Pendaftar::findOrFail($id);
+
+        $dataPribadi = $pendaftar->dataPribadi;
+        if ($dataPribadi) {
+            $namaMurid = str_replace(' ', '_', $dataPribadi->nik);
+            $folderPath = "data_pendaftar/{$namaMurid}";
+    
+            Storage::disk('public')->deleteDirectory($folderPath);
+        }
+
+        $pendaftar->delete();
+
+        session()->flash('success', 'Data berhasil dihapus');
+        return redirect()->route('admin.PPDB');
     }
 
     public function render()
