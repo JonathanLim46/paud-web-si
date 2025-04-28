@@ -523,7 +523,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" wire:click="store" class="btn btn-primary">Simpan</button>
+                        <button type="button" wire:click="store" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -546,4 +546,4 @@
                 </div>
             </div>
             @endif
-            </div>
+</div>

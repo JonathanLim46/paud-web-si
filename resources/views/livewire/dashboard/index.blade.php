@@ -58,7 +58,7 @@
                     <div class="card-body p-0">
                         <div class="row h-100">
                             <div class="col d-flex flex-column">
-                                <header>{{ $gurus }}</header>
+                                <header>{{ $gurus->count() }}</header>
                                 <p class="mt-auto title-card">Guru</p>
                             </div>
                             <div class="col d-flex">
@@ -73,44 +73,53 @@
         </section>
     @endif
 
-    @if (Auth::user()->level == 'guru')
         <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
             <header class="fw-bold fs-5 header-info">Jadwal Mengajar</header>
+            @if (Auth::user()->level == 'admin')
             <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
                 data-bs-target="#modalAddKelas">
                 <i class="fa-solid fa-plus"></i>
                 Tambah Jadwal
             </button>
+            <button type="button" class="btn btn-outline-danger mt-2" data-bs-toggle="modal"
+                data-bs-target="#modalDeleteJadwal">
+                <i class="fa-solid fa-plus"></i>
+                Delete Jadwal
+            </button>
+            @endif
             <table class="mt-4 table table-bordered text-center align-middle">
                 <thead>
                     <th scope="col" class="col">Hari</th>
-                    @foreach ($jadwals->unique('kelas_id') as $kelas)
-                        <th scope="col" class="col">{{ $kelas->kelas->tingkat_kelas }}</th>
+                    @foreach ($kelass as $kelas)
+                        <th scope="col" class="col">{{ $kelas->nama_kelas }} - {{$kelas->tingkat_kelas}}</th>
                     @endforeach
-                    <th scope="col" class="col">Aksi</th>
                 </thead>
                 <tbody>
-                    @foreach ($jadwals->groupBy('hari_id') as $hari_id => $jadwalGroup)
+                    @foreach ($jadwals->groupBy('hari_id')->sortKeys() as $hari_id => $jadwalGroup)
                         <tr>
-                            <td>{{ $jadwals->firstWhere('hari_id', $hari_id)->hari->nama_hari }}</td>
-                            @foreach ($jadwals->unique('kelas_id') as $kelas)
+                            {{-- Baris Hari --}}
+                            <td>{{ $jadwalGroup->first()->hari->nama_hari }}</td>
+                
+                            {{-- Kolom Kelas --}}
+                            @foreach ($kelass as $kelas)
                                 <td>
-                                    @foreach ($jadwalGroup->where('kelas_id', $kelas->kelas_id) as $jadwal)
-                                        @if ($loop->first)
-                                            <p style="display:inline;">{{ $jadwal->guru->user->name }}</p>
-                                        @elseif($loop->parent->first)
-                                            <p style="display:inline;">& {{ $jadwal->guru->user->name }}</p>
-                                        @endif
-                                    @endforeach
+                                    @php
+                                        // Ambil semua jadwal yang sesuai hari + kelas
+                                        $guruList = $jadwalGroup->where('kelas_id', $kelas->id_kelas);
+                                    @endphp
+                
+                                    @if ($guruList->isNotEmpty())
+                                        @foreach ($guruList as $jadwal)
+                                            <p style="display:inline;">
+                                                {{ !$loop->first ? '& ' : '' }}{{ $jadwal->guru->user->name }}
+                                            </p>
+                                        @endforeach
+                                    @else
+                                        {{-- Kalau tidak ada jadwal di hari+kelas ini --}}
+                                        <p style="display:inline;">-</p>
+                                    @endif
                                 </td>
                             @endforeach
-                            <td>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditKelas"
-                                    class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalDeleteJadwal"
-                                    class="btn btn-danger"><i class="bi bi-trash"></i></a>
-
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -218,10 +227,9 @@
                 </table>
             @endif
         </section>
-    @endif
 
     {{-- add modal --}}
-    <div class="modal fade" id="modalAddKelas" tabindex="-1" aria-labelledby="modalAddKelas" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalAddKelas" tabindex="-1" aria-labelledby="modalAddKelas" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -229,106 +237,100 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Hari</label>
-                            <select class="form-select">
-                                <option value="">Senin</option>
-                                <option value="">Selasa</option>
-                                <option value="">Rabu</option>
-                                <option value="">Kamis</option>
-                                <option value="">Jumat</option>
-                                <option value="">Sabtu</option>
-                                <option value="">Minggu</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nama Kelas</label>
-                            <select class="form-select">
-                                <option value="">A</option>
-                                <option value="">B</option>
-                                <option value="">C</option>
-
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Nama Guru</label>
-                            <select class="form-select">
-                                <option value="">Tirtayasa Kenes Saragih S.Sos</option>
-                                <option value="">Mustofa Gamblang Rajata S.Pt </option>
-
-                            </select>
-                        </div>
-
+                        <form wire:submit="store">
+                            <div class="col-md-6">
+                                <label class="form-label">Hari</label>
+                                <select class="form-select" wire:model.defer="hari_id">
+                                    <option value="" selected>Pilih hari</option>
+                                    @foreach ($haris as $hari)
+                                    <option value="{{ $hari->id_hari }}">{{$hari->nama_hari}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nama Kelas</label>
+                                <select class="form-select" wire:model.defer="kelas_id">
+                                    <option value="" selected>Pilih kelas</option>
+                                    @foreach ($kelass as $kelas)
+                                    <option value="{{ $kelas->id_kelas }}">{{$kelas->nama_kelas}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Nama Guru</label>
+                                <select class="form-select" wire:model.defer="guru_id">
+                                    <option value="" selected>Pilih kelas</option>
+                                    @foreach ($gurus as $guru)
+                                    <option value="{{ $guru->id_guru }}">{{$guru->user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary"
+                                    data-bs-dismiss="modal">Tambah</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary" wire:click="applyFilter"
-                        data-bs-dismiss="modal">Tambah</button>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- edit modal --}}
-    <div class="modal fade" id="modalEditKelas" tabindex="-1" aria-labelledby="modalEditKelas" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalDeleteJadwal" tabindex="-1" aria-labelledby="modalDeleteJadwal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="filterModalLabel">Edit Jadwal</h5>
+                    <h5 class="modal-title fw-bold" id="filterModalLabel">Delete Jadwal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="row g-3">
-                        <div class="col-md-12">
-                            <label class="form-label">Hari</label>
-                            <select class="form-select">
-                                <option value="">Senin</option>
-                                <option value="">Selasa</option>
-                                <option value="">Rabu</option>
-                                <option value="">Kamis</option>
-                                <option value="">Jumat</option>
-                                <option value="">Sabtu</option>
-                                <option value="">Minggu</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label">Nama Guru Kelas A</label>
-                            <select class="form-select">
-                                <option value="">Tirtayasa Kenes Saragih S.Sos</option>
-                                <option value="">Mustofa Gamblang Rajata S.Pt </option>
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Nama Guru Kelas B</label>
-                            <select class="form-select">
-                                <option value="">Tirtayasa Kenes Saragih S.Sos</option>
-                                <option value="">Mustofa Gamblang Rajata S.Pt </option>
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Nama Guru Kelas C</label>
-                            <select class="form-select">
-                                <option value="">Tirtayasa Kenes Saragih S.Sos</option>
-                                <option value="">Mustofa Gamblang Rajata S.Pt </option>
-                            </select>
-                        </div>
-
-
+                        <form wire:submit="delete">
+                            <div class="col-md-6">
+                                <label class="form-label">Hari</label>
+                                <select class="form-select" wire:model.live="hari_id">
+                                    <option value="" selected>Pilih hari</option>
+                                    @foreach ($haris as $hari)
+                                    <option value="{{ $hari->id_hari }}">{{$hari->nama_hari}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nama Kelas</label>
+                                <select class="form-select" wire:model.live="kelas_id">
+                                    <option value="" selected>Pilih kelas</option>
+                                    @if (!empty($filteredKelass))
+                                    @foreach ($filteredKelass as $kelas)
+                                    <option value="{{ $kelas->id_kelas }}">{{$kelas->nama_kelas}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Nama Guru</label>
+                                <select class="form-select" wire:model.defer="guru_id">
+                                    <option value="" selected>Pilih kelas</option>
+                                    @if (!empty($filteredGurus))
+                                    @foreach ($filteredGurus as $guru)
+                                    <option value="{{ $guru->id_guru }}">{{$guru->user->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary"
+                                    data-bs-dismiss="modal">Tambah</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary" wire:click="applyFilter"
-                        data-bs-dismiss="modal">Tambah</button>
                 </div>
             </div>
         </div>
     </div>
+
     {{-- modal delete --}}
     <div class="modal fade" id="modalDeleteJadwal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="modalDeleteJadwal" aria-hidden="true">
