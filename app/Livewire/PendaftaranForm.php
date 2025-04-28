@@ -190,9 +190,7 @@ class PendaftaranForm extends Component
             'pendaftaran_id' => $pendaftar->id_pendaftaran
         ]));
 
-        session()->flash('success', 'Data berhasil disimpan.');
-
-        return redirect()->route('company.home');
+        return redirect()->route('dashboard');
     }
 
     public function sekolahCheck($value)
