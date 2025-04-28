@@ -154,6 +154,11 @@ class PendaftaranForm extends Component
         $sekolahData = $validatedData['data_sekolah'];
         $dokumenData = $validatedData['data_dokumen'];
 
+        if (DataPribadi::where('nik', $this->data_murid['nik'])->exists()) {
+            session()->flash('error', 'NIK sudah terdaftar. Gunakan NIK lain.');
+            return;
+        }
+
         $namaMurid = str_replace(' ', '_', $this->data_murid['nik']);
         $folderPath = "data_pendaftar/{$namaMurid}/dokumen";
 
@@ -190,7 +195,8 @@ class PendaftaranForm extends Component
             'pendaftaran_id' => $pendaftar->id_pendaftaran
         ]));
 
-        return redirect()->route('dashboard');
+        session()->flash('berhasilDaftar', 'Berhasil Daftar');
+        return redirect()->route('company.formDaftar');
     }
 
     public function sekolahCheck($value)

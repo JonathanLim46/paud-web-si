@@ -3,7 +3,12 @@
     <div class="text-center mb-4 mt-5">
         <h2 class="judul">FORM PENDAFTARAN ONLINE</h2>
         <h2 class="judul">PAID KB AL HUSNA</h2>
-
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+          <strong>{{ session('error') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>                  
+        @endif
         @if ($statusPPDB === 0)
             <div class="ppdb-closed-container container text-center">
                 <div class="ppdb-closed-content">

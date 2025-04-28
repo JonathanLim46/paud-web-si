@@ -311,7 +311,7 @@
                 </div>
                 <!-- Footer dengan tombol yang lebih menarik -->
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal" onclick="window.location.href='{{ route('company.home') }}'">
                         <i class="bi bi-house-door me-1"></i> Kembali ke Beranda
                     </button>
                 </div>
@@ -327,6 +327,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
+    @if (session('berhasilDaftar'))
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const myModal = new bootstrap.Modal(document.getElementById('modalThankYou'));
+        myModal.show();
+    });
+    </script>
+    @endif
+
     @livewireScripts
 </body>
 
