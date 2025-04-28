@@ -420,7 +420,16 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="agama" class="form-label">Agama</label>
-                                <input type="text" class="form-control" id="agama" wire:model.defer="data_murid.agama">
+                                <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model.defer="data_murid.agama"
+                                    required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen Protestan">Kristen Protestan</option>
+                                    <option value="Kristen Katolik">Kristen Katolik</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddha">Buddha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                </select>
                                 @error('data_murid.agama')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>

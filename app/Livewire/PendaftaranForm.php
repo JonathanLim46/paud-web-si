@@ -68,7 +68,7 @@ class PendaftaranForm extends Component
     ];
 
     protected $rules = [
-        'no_telp' => 'required|string|min:10|max:15',
+        'no_telp' => 'required|string|min:10|max:12',
     
         // data murid
         'data_murid.nik' => 'required|numeric|digits:16',
@@ -106,11 +106,11 @@ class PendaftaranForm extends Component
         'data_sekolah.status_sekolah' => 'nullable|in:Negeri,Swasta',
     
         // data dokumen (file)
-        'data_dokumen.kartu_keluarga' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        'data_dokumen.ktp_ayah' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        'data_dokumen.ktp_ibu' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        'data_dokumen.akta_kelahiran' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-        'data_dokumen.surat_pindah' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        'data_dokumen.kartu_keluarga' => 'required|file|mimes:pdf|max:2048',
+        'data_dokumen.ktp_ayah' => 'required|file|mimes:pdf|max:2048',
+        'data_dokumen.ktp_ibu' => 'required|file|mimes:pdf|max:2048',
+        'data_dokumen.akta_kelahiran' => 'required|file|mimes:pdf|max:2048',
+        'data_dokumen.surat_pindah' => 'nullable|file|mimes:pdf|max:2048',
     ];
 
     public $statusPPDB, $isSekolahChecked, $kelasId;
