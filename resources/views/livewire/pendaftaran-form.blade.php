@@ -523,7 +523,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="button" wire:click="store" class="btn btn-primary">Simpan</button>
+                        <button type="button" wire:click="store" class="btn col-md-5 btn-success mt-3">Kirim</button>
                     </div>
                 </div>
             </div>

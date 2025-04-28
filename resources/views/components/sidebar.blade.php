@@ -1,9 +1,14 @@
 <style>
     .sidebar {
+        position: sticky;
+        /* yang awalnya tidak ada */
+        top: 0;
+        /* supaya lengket dari atas */
         min-height: 100vh;
         border-right: 1px solid rgba(0, 0, 0, 0.05);
         overflow-y: auto;
     }
+
 
     .divider-custom {
         display: flex;
@@ -115,14 +120,14 @@
         </li>
 
         @if (Auth::user()->level == 'admin')
-        <!-- PPDB -->
-        <li class="nav-item mb-2">
-            <a class="nav-link sidebar-link d-flex align-items-center rounded-pill ps-3 py-3 {{ request()->routeIs('admin.PPDB') ? 'active' : '' }}"
-                href="{{ route('admin.PPDB') }}">
-                <i class="fa-solid fa-table-cells-large"></i>
-                <span class="ms-3 fw-medium">PPDB</span>
-            </a>
-        </li>
+            <!-- PPDB -->
+            <li class="nav-item mb-2">
+                <a class="nav-link sidebar-link d-flex align-items-center rounded-pill ps-3 py-3 {{ request()->routeIs('admin.PPDB') ? 'active' : '' }}"
+                    href="{{ route('admin.PPDB') }}">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span class="ms-3 fw-medium">PPDB</span>
+                </a>
+            </li>
         @endif
 
         <!-- Data Sekolah Expand -->
@@ -135,26 +140,26 @@
             </a>
             <ul class="submenu ps-4 mt-2" style="display: none;">
                 @if (Auth::user()->level == 'admin')
-                <li>
-                    <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.guru') ? 'active' : '' }}"
-                        href="{{ route('admin.guru') }}">
-                        <i class="fa-solid fa-user-tie fa-sm me-2"></i>Guru
-                    </a>
-                </li>
-                <li class="mt-2">
-                    <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.kelas') ? 'active' : '' }}"
-                        href="{{ route('admin.kelas') }}">
-                        <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
-                    </a>
-                </li>
+                    <li>
+                        <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.guru') ? 'active' : '' }}"
+                            href="{{ route('admin.guru') }}">
+                            <i class="fa-solid fa-user-tie fa-sm me-2"></i>Guru
+                        </a>
+                    </li>
+                    <li class="mt-2">
+                        <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.kelas') ? 'active' : '' }}"
+                            href="{{ route('admin.kelas') }}">
+                            <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
+                        </a>
+                    </li>
                 @endif
                 @if (Auth::user()->level == 'guru')
-                <li class="mt-2">
-                    <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.kelas') ? 'active' : '' }}"
-                        href="{{ route('guru.kelas') }}">
-                        <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
-                    </a>
-                </li> 
+                    <li class="mt-2">
+                        <a class="nav-link sidebar-sublink d-flex align-items-center {{ request()->routeIs('admin.kelas') ? 'active' : '' }}"
+                            href="{{ route('guru.kelas') }}">
+                            <i class="fa-solid fa-door-open fa-sm me-2"></i>Kelas
+                        </a>
+                    </li>
                 @endif
             </ul>
         </li>
