@@ -63,6 +63,18 @@
     </style>
 @endsection
 <div>
+    @if ($success_status)
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <strong>{{ $message_status_error }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  
+    @endif
+    @if ($error_status)
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <strong>{{ $message_status_error }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  
+    @endif
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="card-profile">
             <div class="d-flex justify-content-between align-items-center mb-4">
