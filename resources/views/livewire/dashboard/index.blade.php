@@ -257,7 +257,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="form-label">Nama Guru</label>
                                 <select class="form-select" wire:model.defer="guru_id">
                                     <option value="" selected>Pilih kelas</option>
@@ -308,7 +308,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="form-label">Nama Guru</label>
                                 <select class="form-select" wire:model.defer="guru_id">
                                     <option value="" selected>Pilih kelas</option>
@@ -321,8 +321,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary"
-                                    data-bs-dismiss="modal">Tambah</button>
+                                <button type="submit" class="btn btn-danger"
+                                    data-bs-dismiss="modal">Delete Jadwal</button>
                             </div>
                         </form>
                     </div>

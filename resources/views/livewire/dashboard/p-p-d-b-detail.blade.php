@@ -64,39 +64,45 @@
 @endsection
 <div>
     @if ($success_status)
-    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-        <strong>{{ $message_status_error }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>  
+        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            <strong>{{ $message_status_error }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
     @if ($error_status)
-    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-        <strong>{{ $message_status_error }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>  
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <strong>{{ $message_status_error }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
     <section class="mt-4 p-5 info-dashboard shadow-sm">
         <div class="card-profile">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4 class="fw-semibold mb-0">Data Pribadi</h4>
+                <div class="ms-auto d-flex gap-2">
+                    <a href="https://wa.me/+6281389372857?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20Anda." target="_blank" class="btn btn-success">Whatsapp</a>
 
-                <div class="dropdown">
-                    <button
-                        class="btn dropdown-toggle {{ $status === 'Diterima' ? 'status-diterima' : ($status === 'Ditolak' ? 'status-ditolak' : 'status-pending') }}"
-                        type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Status: {{ $status ?? '--' }}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="statusDropdown">
-                        <li><a class="dropdown-item"
-                                wire:click="setStatus('Diterima', {{ $pendaftar->id_pendaftaran }})">Diterima</a></li>
-                        <li><a class="dropdown-item"
-                                wire:click="setStatus('Ditolak', {{ $pendaftar->id_pendaftaran }})">Ditolak</a></li>
-                        <li><a class="dropdown-item"
-                                wire:click="setStatus('Tahap Verifikasi', {{ $pendaftar->id_pendaftaran }})">Tahap
-                                Verifikasi</a></li>
-                    </ul>
+                    <div class="dropdown">
+                        <button
+                            class="btn dropdown-toggle {{ $status === 'Diterima' ? 'status-diterima' : ($status === 'Ditolak' ? 'status-ditolak' : 'status-pending') }}"
+                            type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Status: {{ $status ?? '--' }}
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                            <li><a class="dropdown-item"
+                                    wire:click="setStatus('Diterima', {{ $pendaftar->id_pendaftaran }})">Diterima</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    wire:click="setStatus('Ditolak', {{ $pendaftar->id_pendaftaran }})">Ditolak</a></li>
+                            <li><a class="dropdown-item"
+                                    wire:click="setStatus('Tahap Verifikasi', {{ $pendaftar->id_pendaftaran }})">Tahap
+                                    Verifikasi</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
 
             <!-- Data Pribadi -->
             <div class="row">
@@ -172,6 +178,11 @@
                             {{ $pendaftar->dataOrangTua->pekerjaan_ayah }}
                         </span>
                     </div>
+                    <div class="data-row"><span class="data-label">Nomer Whatsapp</span><br>
+                        <span class="data-value">
+                            {{ $pendaftar->no_telp }}
+                        </span>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="data-row"><span class="data-label">Nama Ibu</span><br>
@@ -189,6 +200,7 @@
                             {{ $pendaftar->dataOrangTua->pekerjaan_ibu }}
                         </span>
                     </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="data-row"><span class="data-label">Nama Wali</span><br>
@@ -211,42 +223,44 @@
 
             <!-- Data Sekolah -->
             @if ($pendaftar->dataSekolah)
-            <div class="section-title">Data Sekolah</div>
-            <div class="row">
-                <div class="col-md-4 data-row"><span class="data-label">NPSN</span><br><span
-                        class="data-value">{{ $pendaftar->dataSekolah->npsn }}</span></div>
-                <div class="col-md-4 data-row"><span class="data-label">Nama Sekolah</span><br><span
-                        class="data-value">{{ $pendaftar->dataSekolah->nama_sekolah }}</span></div>
-                <div class="col-md-4 data-row"><span class="data-label">Status Sekolah</span><br><span
-                        class="data-value">{{ $pendaftar->dataSekolah->status_sekolah }}</span></div>
-                <div class="col-md-6 data-row"><span class="data-label">Alamat Sekolah</span><br><span
-                        class="data-value">{{ $pendaftar->dataSekolah->alamat_sekolah }}</span></div>
-            </div>
+                <div class="section-title">Data Sekolah</div>
+                <div class="row">
+                    <div class="col-md-4 data-row"><span class="data-label">NPSN</span><br><span
+                            class="data-value">{{ $pendaftar->dataSekolah->npsn }}</span></div>
+                    <div class="col-md-4 data-row"><span class="data-label">Nama Sekolah</span><br><span
+                            class="data-value">{{ $pendaftar->dataSekolah->nama_sekolah }}</span></div>
+                    <div class="col-md-4 data-row"><span class="data-label">Status Sekolah</span><br><span
+                            class="data-value">{{ $pendaftar->dataSekolah->status_sekolah }}</span></div>
+                    <div class="col-md-6 data-row"><span class="data-label">Alamat Sekolah</span><br><span
+                            class="data-value">{{ $pendaftar->dataSekolah->alamat_sekolah }}</span></div>
+                </div>
             @endif
 
             <!-- Dokumen Persyaratan -->
             <div class="section-title">Dokumen Persyaratan</div>
             <div class="row">
                 <div class="col-md-6 data-row"><span class="data-label">Kartu Keluarga (KK)</span><br>
-                    <a
-                        href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->kartu_keluarga) }}" 
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->kartu_keluarga) }}"
                         class="link-blue">Lihat
                     </a>
                 </div>
                 <div class="col-md-6 data-row"><span class="data-label">Akta Kelahiran</span><br>
-                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->akta_kelahiran) }}" 
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->akta_kelahiran) }}"
                         class="link-blue">Lihat</a>
-                    </div>
+                </div>
                 <div class="col-md-6 data-row"><span class="data-label">KTP Ayah</span><br>
-                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ayah) }}" 
-                        class="link-blue">Lihat</a></div>
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ayah) }}"
+                        class="link-blue">Lihat</a>
+                </div>
                 <div class="col-md-6 data-row"><span class="data-label">KTP Ibu</span><br>
-                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ibu) }}" 
-                        class="link-blue" target="_blank">Lihat</a></div>
+                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->ktp_ibu) }}"
+                        class="link-blue" target="_blank">Lihat</a>
+                </div>
                 @if ($pendaftar->dokumen->surat_pindah)
-                <div class="col-md-6 data-row"><span class="data-label">Surat Pindah</span><br>
-                    <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->surat_pindah) }}" 
-                        class="link-blue" target="_blank">Lihat</a></div>
+                    <div class="col-md-6 data-row"><span class="data-label">Surat Pindah</span><br>
+                        <a href="{{ asset('storage/data_pendaftar/' . $pendaftar->dataPribadi->nik . '/dokumen/' . $pendaftar->dokumen->surat_pindah) }}"
+                            class="link-blue" target="_blank">Lihat</a>
+                    </div>
                 @endif
             </div>
         </div>

@@ -539,7 +539,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Tambah Guru</button>
+                            <button type="submit" class="btn btn-warning">Simpan</button>
                         </div>
                     </form>
                     @endif
