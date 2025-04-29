@@ -34,7 +34,7 @@
 @endsection
 
 <div>
-    <h3>Nama Siswa : {{$murid->dataPribadi->nama_lengkap}}</h3>
+    <h3>Nama Siswa : {{ $murid->dataPribadi->nama_lengkap }}</h3>
     <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
         <div class="mb-4">
             <nav class="form-nav" id="navDetailMurid">
@@ -62,7 +62,8 @@
                         {{ $murid->dataPribadi->jenis_kelamin }}
                     </div>
                     <div class="col-md-6"><strong>Tempat, Tanggal Lahir:</strong>
-                        {{ $murid->dataPribadi->tempat_lahir }}, {{ \Carbon\Carbon::parse($murid->tanggal_lahir)->format('d-m-Y') }}
+                        {{ $murid->dataPribadi->tempat_lahir }},
+                        {{ \Carbon\Carbon::parse($murid->tanggal_lahir)->format('d-m-Y') }}
                     </div>
                     <div class="col-md-4"><strong>Agama:</strong>
                         {{ $murid->dataPribadi->agama }}
@@ -73,10 +74,10 @@
                     <div class="col-md-4"><strong>Berat Badan:</strong>
                         {{ $murid->dataPribadi->berat_badan }} kg
                     </div>
-                    <div class="col-md-6"><strong>Tinggi Badan:</strong> 
+                    <div class="col-md-6"><strong>Tinggi Badan:</strong>
                         {{ $murid->dataPribadi->tinggi_badan }} cm
                     </div>
-                    <div class="col-md-6"><strong>Lingkar Kepala:</strong> 
+                    <div class="col-md-6"><strong>Lingkar Kepala:</strong>
                         {{ $murid->dataPribadi->lingkar_kepala }} cm
                     </div>
                 </div>
@@ -86,9 +87,11 @@
                 <h5>Alamat</h5>
                 <div class="mb-2"><strong>Alamat Lengkap:</strong> {{ $murid->dataPribadi->alamat_rumah }}</div>
                 <div class="row g-2">
-                    <div class="col-md-4"><strong>Desa atau Kelurahan:</strong> {{ $murid->dataPribadi->desa_kelurahan }}</div>
+                    <div class="col-md-4"><strong>Desa atau Kelurahan:</strong>
+                        {{ $murid->dataPribadi->desa_kelurahan }}</div>
                     <div class="col-md-4"><strong>Kecamatan:</strong> {{ $murid->dataPribadi->kecamatan }}</div>
-                    <div class="col-md-4"><strong>Kabupaten atau Kota:</strong> {{ $murid->dataPribadi->kota_kabupaten }}</div>
+                    <div class="col-md-4"><strong>Kabupaten atau Kota:</strong>
+                        {{ $murid->dataPribadi->kota_kabupaten }}</div>
                     <div class="col-md-4"><strong>Provinsi:</strong> {{ $murid->dataPribadi->provinsi }}</div>
                     <div class="col-md-4"><strong>Kode Pos:</strong> {{ $murid->dataPribadi->kode_pos }}</div>
                 </div>
@@ -99,21 +102,23 @@
                 <div class="row g-3">
                     <div class="col-md-4"><strong>Nama Ayah:</strong> {{ $murid->dataOrangTua->nama_ayah }}</div>
                     <div class="col-md-4"><strong>NIK Ayah:</strong> {{ $murid->dataOrangTua->nik_ayah }}</div>
-                    <div class="col-md-4"><strong>Pekerjaan Ayah:</strong> {{ $murid->dataOrangTua->pekerjaan_ayah }}</div>
+                    <div class="col-md-4"><strong>Pekerjaan Ayah:</strong> {{ $murid->dataOrangTua->pekerjaan_ayah }}
+                    </div>
                     <div class="col-md-4"><strong>Nama Ibu:</strong> {{ $murid->dataOrangTua->nama_ibu }}</div>
                     <div class="col-md-4"><strong>NIK Ibu:</strong> {{ $murid->dataOrangTua->nik_ibu }}</div>
-                    <div class="col-md-4"><strong>Pekerjaan Ibu:</strong> {{ $murid->dataOrangTua->pekerjaan_ibu }}</div>
+                    <div class="col-md-4"><strong>Pekerjaan Ibu:</strong> {{ $murid->dataOrangTua->pekerjaan_ibu }}
+                    </div>
                 </div>
 
                 <h5 class="mt-4">Data Wali</h5>
                 <div class="row g-3">
-                    <div class="col-md-4"><strong>Nama Wali:</strong> 
+                    <div class="col-md-4"><strong>Nama Wali:</strong>
                         {{ $murid->dataOrangTua->nama_wali }}
                     </div>
-                    <div class="col-md-4"><strong>NIK Wali:</strong> 
+                    <div class="col-md-4"><strong>NIK Wali:</strong>
                         {{ $murid->dataOrangTua->nik_wali }}
                     </div>
-                    <div class="col-md-4"><strong>Pekerjaan Wali:</strong> 
+                    <div class="col-md-4"><strong>Pekerjaan Wali:</strong>
                         {{ $murid->dataOrangTua->pekerjaan_wali }}
                     </div>
                     <div class="col-md-6"><strong>No HP Orang Tua:</strong> {{ $murid->no_telp }}</div>
@@ -145,31 +150,36 @@
                 <h5>Dokumen Terlampir</h5>
                 <ul>
                     <li>
-                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->kartu_keluarga) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->kartu_keluarga) }}"
+                            target="_blank">
                             Lihat Kartu Keluarga
                         </a>
                     </li>
                     <li>
-                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ayah) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ayah) }}"
+                            target="_blank">
                             Lihat KTP Ayah
                         </a>
                     </li>
                     <li>
-                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ibu) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->ktp_ibu) }}"
+                            target="_blank">
                             Lihat KTP Ibu
                         </a>
                     </li>
                     <li>
-                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->akta_kelahiran) }}" target="_blank">
+                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->akta_kelahiran) }}"
+                            target="_blank">
                             Lihat Akta Kelahiran
                         </a>
                     </li>
                     @if ($murid->dokumen->surat_pindah)
-                    <li>
-                        <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->surat_pindah) }}" target="_blank">
-                            Lihat Surat Pindah
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ asset('storage/data_pendaftar/' . $murid->dataPribadi->nik . '/dokumen/' . $murid->dokumen->surat_pindah) }}"
+                                target="_blank">
+                                Lihat Surat Pindah
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
@@ -209,7 +219,87 @@
                     cursor: pointer;
                 }
             </style>
-            <div class="container mb-4">
+            <div>
+                <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Aspek Perkembangan</th>
+                            <th>Baik</th>
+                            <th>Cukup</th>
+                            <th>Perlu Dilatih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($aspekTexts as $key => $aspek)
+                            {{-- HEADER BESAR & SUBHEADER --}}
+                            @if ($key == 1)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">I. NILAI-NILAI AGAMA DAN MORAL</td>
+                                </tr>
+                            @endif
+
+                            @if ($key == 6)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">II. FISIK MOTORIK</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">1. Motorik Kasar</td>
+                                </tr>
+                            @endif
+
+                            @if ($key == 11)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">2. Motorik Halus</td>
+                                </tr>
+                            @endif
+
+                            @if ($key == 16)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">3. Kesehatan dan Perilaku Keselamatan</td>
+                                </tr>
+                            @endif
+
+                            @if ($key == 25)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">III. KOGNITIF</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">1. Belajar dan Pemecahan Masalah</td>
+                                </tr>
+                            @endif
+
+                            @if ($key == 29)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">2. Berpikir Logis</td>
+                                </tr>
+                            @endif
+
+                            @if ($key == 37)
+                                <tr>
+                                    <td colspan="5" class="judul-seksi">3. Berpikir Simbolik</td>
+                                </tr>
+                            @endif
+
+                            {{-- Soal --}}
+                            <tr>
+                                <td>{{ $key }}</td>
+                                <td style="text-align: left;">{{ $aspek }}</td>
+                                <td><input type="radio" wire:model="nilai.{{ $key }}" value="baik"></td>
+                                <td><input type="radio" wire:model="nilai.{{ $key }}" value="cukup"></td>
+                                <td><input type="radio" wire:model="nilai.{{ $key }}" value="perlu_dilatih">
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+                <button wire:click="exportPdf" style="margin-top: 20px; padding: 10px 20px;">Export ke PDF</button>
+            </div>
+
+
+            {{-- <div class="container mb-4">
                 <div class="text-center mb-3">
                     <h5 class="fw-bold mb-1">PERKEMBANGAN ANAK DIDIK</h5>
                     <h6 class="fw-bold">SEMESTER GANJIL</h6>
@@ -1024,7 +1114,7 @@
 
 
                 </tbody>
-            </table>
+            </table> --}}
         @endif
     </section>
 </div>
