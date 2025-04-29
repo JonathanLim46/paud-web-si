@@ -31,14 +31,25 @@ class Index extends Component
         $this->step = $step;
     }
 
+    public function openTambah()
+    {
+        $this->hari_id = '';
+        $this->kelas_id = '';
+        $this->guru_id = '';
+    }
+
     public function store()
     {
         $validated = $this->validate();
 
-        JadwalPelajaran::create($validated);
+        JadwalPelajaran::create([
+            'hari_id' => $this->hari_id,
+            'kelas_id' => $this->kelas_id,
+            'guru_id' => $this->guru_id,
+        ]);
 
         session()->flash('success', 'Berhasil menambahkan jadwal baru');
-        return redirect()->route('company.home');
+        return redirect()->route('dashboard');
     }
 
     public function updated($property)

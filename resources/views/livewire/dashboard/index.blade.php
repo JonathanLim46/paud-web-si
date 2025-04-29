@@ -77,7 +77,7 @@
             <header class="fw-bold fs-5 header-info">Jadwal Mengajar</header>
             @if (Auth::user()->level == 'admin')
             <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
-                data-bs-target="#modalAddKelas">
+                data-bs-target="#modalAddKelas" wire:click="openTambah">
                 <i class="fa-solid fa-plus"></i>
                 Tambah Jadwal
             </button>
@@ -237,11 +237,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row g-3">
-                        <form wire:submit="store">
+                    <form wire:submit.prevent="store">
+                        <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Hari</label>
-                                <select class="form-select" wire:model.defer="hari_id">
+                                <select class="form-select" wire:model.live="hari_id">
                                     <option value="" selected>Pilih hari</option>
                                     @foreach ($haris as $hari)
                                     <option value="{{ $hari->id_hari }}">{{$hari->nama_hari}}</option>
@@ -250,7 +250,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Nama Kelas</label>
-                                <select class="form-select" wire:model.defer="kelas_id">
+                                <select class="form-select" wire:model.live="kelas_id">
                                     <option value="" selected>Pilih kelas</option>
                                     @foreach ($kelass as $kelas)
                                     <option value="{{ $kelas->id_kelas }}">{{$kelas->nama_kelas}}</option>
@@ -259,7 +259,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Nama Guru</label>
-                                <select class="form-select" wire:model.defer="guru_id">
+                                <select class="form-select" wire:model.live="guru_id">
                                     <option value="" selected>Pilih kelas</option>
                                     @foreach ($gurus as $guru)
                                     <option value="{{ $guru->id_guru }}">{{$guru->user->name}}</option>
@@ -269,10 +269,10 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                 <button type="submit" class="btn btn-primary"
-                                    data-bs-dismiss="modal">Tambah</button>
-                            </div>
-                        </form>
-                    </div>
+                                    >Tambah</button>
+                            </div> 
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -287,7 +287,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-3">
-                        <form wire:submit="delete">
+                        <form wire:submit.prevent="delete">
                             <div class="col-md-6">
                                 <label class="form-label">Hari</label>
                                 <select class="form-select" wire:model.live="hari_id">
@@ -326,32 +326,6 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- modal delete --}}
-    <div class="modal fade" id="modalDeleteJadwal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="modalDeleteJadwal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalDeleteGuruLabel">Konfirmasi Hapus</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <p class="fs-5">Apakah Anda yakin ingin menghapus data Jadwal ini?</p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    {{-- <form action="{{ route('guru.destroy', ['id' => 'ID_GURU']) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                    </form> --}}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Hapus</button>
                 </div>
             </div>
         </div>
