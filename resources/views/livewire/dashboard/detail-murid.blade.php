@@ -217,11 +217,12 @@
                     transform: scale(1.2);
                     accent-color: #101C36;
                     cursor: pointer;
+                    text-align: center;
                 }
             </style>
             <div>
                 <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
-                    <thead>
+                    <thead class="sticky-top">
                         <tr>
                             <th>No</th>
                             <th>Aspek Perkembangan</th>
@@ -285,9 +286,18 @@
                             <tr>
                                 <td>{{ $key }}</td>
                                 <td style="text-align: left;">{{ $aspek }}</td>
-                                <td><input type="radio" wire:model="nilai.{{ $key }}" value="baik"></td>
-                                <td><input type="radio" wire:model="nilai.{{ $key }}" value="cukup"></td>
-                                <td><input type="radio" wire:model="nilai.{{ $key }}" value="perlu_dilatih">
+                                <td onclick="this.querySelector('input').click()"
+                                    style="cursor: pointer; text-align: center;">
+                                    <input type="radio" wire:model="nilai.{{ $key }}" value="baik">
+                                </td>
+                                <td onclick="this.querySelector('input').click()"
+                                    style="cursor: pointer; text-align: center;">
+                                    <input type="radio" wire:model="nilai.{{ $key }}" value="cukup">
+                                </td>
+                                <td onclick="this.querySelector('input').click()"
+                                    style="cursor: pointer; text-align: center;">
+                                    <input type="radio" wire:model="nilai.{{ $key }}"
+                                        value="perlu_dilatih">
                                 </td>
                             </tr>
                         @endforeach
@@ -295,7 +305,22 @@
                     </tbody>
                 </table>
 
-                <button wire:click="exportPdf" style="margin-top: 20px; padding: 10px 20px;">Export ke PDF</button>
+                <button wire:click="exportPdf"
+                    style="
+                    margin-top: 20px; 
+                    padding: 10px 20px; 
+                    background-color: #4F46E5; 
+                    color: white; 
+                    border: none; 
+                    border-radius: 4px; 
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background-color 0.2s;
+                "
+                    onmouseover="this.style.backgroundColor='#4338CA'"
+                    onmouseout="this.style.backgroundColor='#4F46E5'">
+                    Export ke PDF
+                </button>
             </div>
 
 
