@@ -348,6 +348,11 @@
                                         aria-label="Close"></button>
                                 </div>
                                 @enderror
+                                @if ($errors->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('error') }}
+                                </div>
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
@@ -797,7 +802,7 @@
     </div>
 
     {{-- modal edit --}}
-    <div wire:ignore.self class="modal fade" id="modalEditSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="modalEditSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalEditSiswaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">

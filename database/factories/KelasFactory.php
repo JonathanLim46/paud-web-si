@@ -23,7 +23,7 @@ class KelasFactory extends Factory
         self::$toggle = !self::$toggle;
         return [
             //
-            'nama_kelas' => fake()->name(),
+            'nama_kelas' => fake()->randomElement(['Mandiri', 'Kreatif', 'Ceria']),
             'tingkat_kelas' => $kelas,
             'guru_id' => Guru::factory(),
         ];
