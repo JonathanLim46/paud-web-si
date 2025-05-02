@@ -99,11 +99,11 @@ class KelasDetail extends Component
         'data_murid.kode_pos' => 'required|string|max:10',
     
         // data orang tua dan wali
-        'data_orang_tua_wali.nama_ayah' => 'required|string|max:255',
-        'data_orang_tua_wali.nik_ayah' => 'required|numeric|digits:16',
+        'data_orang_tua_wali.nama_ayah' => 'nullable|string|max:255',
+        'data_orang_tua_wali.nik_ayah' => 'nullable|numeric|digits:16',
         'data_orang_tua_wali.pekerjaan_ayah' => 'nullable|string|max:255',
-        'data_orang_tua_wali.nama_ibu' => 'required|string|max:255',
-        'data_orang_tua_wali.nik_ibu' => 'required|numeric|digits:16',
+        'data_orang_tua_wali.nama_ibu' => 'nullable|string|max:255',
+        'data_orang_tua_wali.nik_ibu' => 'nullable|numeric|digits:16',
         'data_orang_tua_wali.pekerjaan_ibu' => 'nullable|string|max:255',
         'data_orang_tua_wali.nama_wali' => 'nullable|string|max:255',
         'data_orang_tua_wali.nik_wali' => 'nullable|numeric|digits:16',
@@ -232,6 +232,11 @@ class KelasDetail extends Component
         $orangTuaData = $validatedData['data_orang_tua_wali'];
         $sekolahData = $validatedData['data_sekolah'];
         $dokumenData = $validatedData['data_dokumen'];
+
+        if (DataPribadi::where('nik', $this->data_murid['nik'])->exists()) {
+            $this->addError('error', 'NIK sudah terdaftar. Gunakan NIK lain.');
+            return;
+        }
 
         $kelas_id = $this->kelasId;
         $namaMurid = str_replace(' ', '_', $this->data_murid['nik']);
