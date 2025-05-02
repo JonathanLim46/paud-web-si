@@ -73,9 +73,9 @@
         </section>
     @endif
 
-        <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
-            <header class="fw-bold fs-5 header-info">Jadwal Mengajar</header>
-            @if (Auth::user()->level == 'admin')
+    <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
+        <header class="fw-bold fs-5 header-info">Jadwal Mengajar</header>
+        @if (Auth::user()->level == 'admin')
             <button type="button" class="btn btn-outline-success mt-2" data-bs-toggle="modal"
                 data-bs-target="#modalAddKelas" wire:click="openTambah">
                 <i class="fa-solid fa-plus"></i>
@@ -86,150 +86,151 @@
                 <i class="fa-solid fa-plus"></i>
                 Delete Jadwal
             </button>
-            @endif
-            <table class="mt-4 table table-bordered text-center align-middle">
-                <thead>
-                    <th scope="col" class="col">Hari</th>
-                    @foreach ($kelass as $kelas)
-                        <th scope="col" class="col">{{ $kelas->nama_kelas }} - {{$kelas->tingkat_kelas}}</th>
-                    @endforeach
-                </thead>
-                <tbody>
-                    @foreach ($jadwals->groupBy('hari_id')->sortKeys() as $hari_id => $jadwalGroup)
-                        <tr>
-                            {{-- Baris Hari --}}
-                            <td>{{ $jadwalGroup->first()->hari->nama_hari }}</td>
-                
-                            {{-- Kolom Kelas --}}
-                            @foreach ($kelass as $kelas)
-                                <td>
-                                    @php
-                                        // Ambil semua jadwal yang sesuai hari + kelas
-                                        $guruList = $jadwalGroup->where('kelas_id', $kelas->id_kelas);
-                                    @endphp
-                
-                                    @if ($guruList->isNotEmpty())
-                                        @foreach ($guruList as $jadwal)
-                                            <p style="display:inline;">
-                                                {{ !$loop->first ? '& ' : '' }}{{ $jadwal->guru->user->name }}
-                                            </p>
-                                        @endforeach
-                                    @else
-                                        {{-- Kalau tidak ada jadwal di hari+kelas ini --}}
-                                        <p style="display:inline;">-</p>
-                                    @endif
-                                </td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </section>
+        @endif
+        <table class="mt-4 table table-bordered text-center align-middle">
+            <thead>
+                <th scope="col" class="col">Hari</th>
+                @foreach ($kelass as $kelas)
+                    <th scope="col" class="col">{{ $kelas->nama_kelas }} - {{ $kelas->tingkat_kelas }}</th>
+                @endforeach
+            </thead>
+            <tbody>
+                @foreach ($jadwals->groupBy('hari_id')->sortKeys() as $hari_id => $jadwalGroup)
+                    <tr>
+                        {{-- Baris Hari --}}
+                        <td>{{ $jadwalGroup->first()->hari->nama_hari }}</td>
 
-        <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
-            <header class="fw-bold fs-5 header-info">Metode Pembelajaran Per-Bulan</header>
+                        {{-- Kolom Kelas --}}
+                        @foreach ($kelass as $kelas)
+                            <td>
+                                @php
+                                    // Ambil semua jadwal yang sesuai hari + kelas
+                                    $guruList = $jadwalGroup->where('kelas_id', $kelas->id_kelas);
+                                @endphp
+
+                                @if ($guruList->isNotEmpty())
+                                    @foreach ($guruList as $jadwal)
+                                        <p style="display:inline;">
+                                            {{ !$loop->first ? '& ' : '' }}{{ $jadwal->guru->user->name }}
+                                        </p>
+                                    @endforeach
+                                @else
+                                    {{-- Kalau tidak ada jadwal di hari+kelas ini --}}
+                                    <p style="display:inline;">-</p>
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </section>
+
+    <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
+        <header class="fw-bold fs-5 header-info">Metode Pembelajaran Per-Bulan</header>
+        <table class="mt-4 table table-bordered table-metode w-50">
+            <thead>
+                <th scope="col" class="col">Minggu</th>
+                <th scope="col" class="col">Metode</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>STEAM</td>
+                </tr>
+                <th scope="row">2</th>
+                <td>Sentra (bahan alam, persiapan, imtak)</td>
+                </tr>
+                <th scope="row">3</th>
+                <td>STEAM</td>
+                </tr>
+                <th scope="row">4</th>
+                <td>Sentra (bahan alam, persiapan, imtak)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
+        <header class="fw-bold fs-5 header-info">Jadwal Sastra</header>
+        {{-- Step Navigation --}}
+        <div class="mb-4">
+            <nav class="form-nav" id="minggu">
+                <a href="#minggu" wire:click.prevent="setStep('Minggu2')"
+                    class="nav-link {{ $step === 'Minggu2' ? 'active' : '' }}">Minggu 2</a>
+                <a href="#minggu" wire:click.prevent="setStep('Minggu4')"
+                    class="nav-link {{ $step === 'Minggu4' ? 'active' : '' }}">Minggu 4</a>
+            </nav>
+        </div>
+
+        @if ($step === 'Minggu2')
             <table class="mt-4 table table-bordered table-metode w-50">
                 <thead>
-                    <th scope="col" class="col">Minggu</th>
-                    <th scope="col" class="col">Metode</th>
+                    <tr>
+                        <th scope="col" class="col">Hari</th>
+                        <th scope="col" class="col">A Mandiri</th>
+                        <th scope="col" class="col">A Kreatif</th>
+                        <th scope="col" class="col">B Ceria</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>STEAM</td>
+                        <th scope="row">Rabu</th>
+                        <td style="background-color: #fef2b7">Bahan Alam</td>
+                        <td style="background-color: #b6e0f7">Imtak</td>
+                        <td style="background-color: #f8d1f4">Persiapan</td>
                     </tr>
-                    <th scope="row">2</th>
-                    <td>Sentra (bahan alam, persiapan, imtak)</td>
+                    <tr>
+                        <th scope="row">Kamis</th>
+                        <td style="background-color: #f8d1f4">Persiapan</td>
+                        <td style="background-color: #fef2b7">Bahan Alam</td>
+                        <td style="background-color: #b6e0f7">Imtak</td>
                     </tr>
-                    <th scope="row">3</th>
-                    <td>STEAM</td>
-                    </tr>
-                    <th scope="row">4</th>
-                    <td>Sentra (bahan alam, persiapan, imtak)</td>
+                    <tr>
+                        <th scope="row">Jumat</th>
+                        <td style="background-color: #b6e0f7">Imtak</td>
+                        <td style="background-color: #f8d1f4">Persiapan</td>
+                        <td style="background-color: #fef2b7">Bahan Alam</td>
                     </tr>
                 </tbody>
             </table>
-        </section>
-
-        <section class="mt-3 p-4 info-dashboard shadow-sm rounded-4">
-            <header class="fw-bold fs-5 header-info">Jadwal Sastra</header>
-            {{-- Step Navigation --}}
-            <div class="mb-4">
-                <nav class="form-nav" id="minggu">
-                    <a href="#minggu" wire:click.prevent="setStep('Minggu2')"
-                        class="nav-link {{ $step === 'Minggu2' ? 'active' : '' }}">Minggu 2</a>
-                    <a href="#minggu" wire:click.prevent="setStep('Minggu4')"
-                        class="nav-link {{ $step === 'Minggu4' ? 'active' : '' }}">Minggu 4</a>
-                </nav>
-            </div>
-
-            @if ($step === 'Minggu2')
-                <table class="mt-4 table table-bordered table-metode w-50">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col">Hari</th>
-                            <th scope="col" class="col">A Mandiri</th>
-                            <th scope="col" class="col">A Kreatif</th>
-                            <th scope="col" class="col">B Ceria</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Rabu</th>
-                            <td style="background-color: #fef2b7">Bahan Alam</td>
-                            <td style="background-color: #b6e0f7">Imtak</td>
-                            <td style="background-color: #f8d1f4">Persiapan</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Kamis</th>
-                            <td style="background-color: #f8d1f4">Persiapan</td>
-                            <td style="background-color: #fef2b7">Bahan Alam</td>
-                            <td style="background-color: #b6e0f7">Imtak</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jumat</th>
-                            <td style="background-color: #b6e0f7">Imtak</td>
-                            <td style="background-color: #f8d1f4">Persiapan</td>
-                            <td style="background-color: #fef2b7">Bahan Alam</td>
-                        </tr>
-                    </tbody>
-                </table>
-            @elseif ($step === 'Minggu4')
-                <table class="mt-4 table table-bordered table-metode w-50">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col">Hari</th>
-                            <th scope="col" class="col">A Mandiri</th>
-                            <th scope="col" class="col">A Kreatif</th>
-                            <th scope="col" class="col">B Ceria</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Rabu</th>
-                            <td style="background-color: #fef2b7">Seni</td>
-                            <td style="background-color: #b6e0f7">Masak</td>
-                            <td style="background-color: #f8d1f4">Role Play</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Kamis</th>
-                            <td style="background-color: #f8d1f4">Role Play</td>
-                            <td style="background-color: #fef2b7">Seni</td>
-                            <td style="background-color: #b6e0f7">Masak</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jumat</th>
-                            <td style="background-color: #b6e0f7">Masak</td>
-                            <td style="background-color: #f8d1f4">Role Play</td>
-                            <td style="background-color: #fef2b7">Seni</td>
-                        </tr>
-                    </tbody>
-                </table>
-            @endif
-        </section>
+        @elseif ($step === 'Minggu4')
+            <table class="mt-4 table table-bordered table-metode w-50">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col">Hari</th>
+                        <th scope="col" class="col">A Mandiri</th>
+                        <th scope="col" class="col">A Kreatif</th>
+                        <th scope="col" class="col">B Ceria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Rabu</th>
+                        <td style="background-color: #fef2b7">Seni</td>
+                        <td style="background-color: #b6e0f7">Masak</td>
+                        <td style="background-color: #f8d1f4">Role Play</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Kamis</th>
+                        <td style="background-color: #f8d1f4">Role Play</td>
+                        <td style="background-color: #fef2b7">Seni</td>
+                        <td style="background-color: #b6e0f7">Masak</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Jumat</th>
+                        <td style="background-color: #b6e0f7">Masak</td>
+                        <td style="background-color: #f8d1f4">Role Play</td>
+                        <td style="background-color: #fef2b7">Seni</td>
+                    </tr>
+                </tbody>
+            </table>
+        @endif
+    </section>
 
     {{-- add modal --}}
-    <div wire:ignore.self class="modal fade" id="modalAddKelas" tabindex="-1" aria-labelledby="modalAddKelas" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalAddKelas" tabindex="-1" aria-labelledby="modalAddKelas"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -244,7 +245,7 @@
                                 <select class="form-select" wire:model.live="hari_id">
                                     <option value="" selected>Pilih hari</option>
                                     @foreach ($haris as $hari)
-                                    <option value="{{ $hari->id_hari }}">{{$hari->nama_hari}}</option>
+                                        <option value="{{ $hari->id_hari }}">{{ $hari->nama_hari }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -253,7 +254,7 @@
                                 <select class="form-select" wire:model.live="kelas_id">
                                     <option value="" selected>Pilih kelas</option>
                                     @foreach ($kelass as $kelas)
-                                    <option value="{{ $kelas->id_kelas }}">{{$kelas->nama_kelas}}</option>
+                                        <option value="{{ $kelas->id_kelas }}">{{ $kelas->nama_kelas }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -262,15 +263,15 @@
                                 <select class="form-select" wire:model.live="guru_id">
                                     <option value="" selected>Pilih kelas</option>
                                     @foreach ($gurus as $guru)
-                                    <option value="{{ $guru->id_guru }}">{{$guru->user->name}}</option>
+                                        <option value="{{ $guru->id_guru }}">{{ $guru->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary"
-                                    >Tambah</button>
-                            </div> 
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -278,7 +279,8 @@
         </div>
     </div>
 
-    <div wire:ignore.self class="modal fade" id="modalDeleteJadwal" tabindex="-1" aria-labelledby="modalDeleteJadwal" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modalDeleteJadwal" tabindex="-1"
+        aria-labelledby="modalDeleteJadwal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -287,43 +289,47 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-3">
-                        <form wire:submit.prevent="delete">
-                            <div class="col-md-6">
+                        <div class="col-md-6">
+
+                            <form wire:submit.prevent="delete">
+
                                 <label class="form-label">Hari</label>
                                 <select class="form-select" wire:model.live="hari_id">
                                     <option value="" selected>Pilih hari</option>
                                     @foreach ($haris as $hari)
-                                    <option value="{{ $hari->id_hari }}">{{$hari->nama_hari}}</option>
+                                        <option value="{{ $hari->id_hari }}">{{ $hari->nama_hari }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Nama Kelas</label>
-                                <select class="form-select" wire:model.live="kelas_id">
-                                    <option value="" selected>Pilih kelas</option>
-                                    @if (!empty($filteredKelass))
+
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nama Kelas</label>
+                            <select class="form-select" wire:model.live="kelas_id">
+                                <option value="" selected>Pilih kelas</option>
+                                @if (!empty($filteredKelass))
                                     @foreach ($filteredKelass as $kelas)
-                                    <option value="{{ $kelas->id_kelas }}">{{$kelas->nama_kelas}}</option>
+                                        <option value="{{ $kelas->id_kelas }}">{{ $kelas->nama_kelas }}
+                                        </option>
                                     @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Nama Guru</label>
-                                <select class="form-select" wire:model.defer="guru_id">
-                                    <option value="" selected>Pilih kelas</option>
-                                    @if (!empty($filteredGurus))
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nama Guru</label>
+                            <select class="form-select" wire:model.defer="guru_id">
+                                <option value="" selected>Pilih kelas</option>
+                                @if (!empty($filteredGurus))
                                     @foreach ($filteredGurus as $guru)
-                                    <option value="{{ $guru->id_guru }}">{{$guru->user->name}}</option>
+                                        <option value="{{ $guru->id_guru }}">{{ $guru->user->name }}</option>
                                     @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-danger"
-                                    data-bs-dismiss="modal">Delete Jadwal</button>
-                            </div>
+                                @endif
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete
+                                Jadwal</button>
+                        </div>
                         </form>
                     </div>
                 </div>

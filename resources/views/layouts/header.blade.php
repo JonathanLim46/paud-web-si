@@ -23,6 +23,7 @@
     .nav-link {
         color: #333 !important;
         font-weight: 500;
+        font-size: 20px;
         position: relative;
         padding: 10px 0;
         margin: 0 8px;

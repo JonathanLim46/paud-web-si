@@ -1,4 +1,53 @@
 @section('styles')
+    <style>
+        .ppdb-closed-container {
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-top: 80px;
+            max-width: 700px;
+            border-top: 4px solid #ff0101;
+        }
+
+        .ppdb-closed-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ppdb-icon {
+            background-color: #ebf5ff;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .ppdb-icon i {
+            font-size: 2.5rem;
+            color: #3b82f6;
+        }
+
+        .ppdb-title {
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .ppdb-message {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
     <link rel="stylesheet" href="{{ asset('css/dashboard_profil_styles.css') }}">
 @endsection
 <div>
@@ -27,7 +76,12 @@
                 </div>
             @endforeach
         @else
-            <p>*tambahkan gambar terlebih dahulu.</p>
+            <div class="ppdb-closed-container container text-center">
+                <div class="ppdb-closed-content">
+                    <h3 class="ppdb-title">Belum ada Aktivitas</h3>
+                    <p class="ppdb-message">Silahkan Menambah Aktivitas untuk di tampilkan di Company Profile </p>
+                </div>
+            </div>
         @endif
     </div>
 

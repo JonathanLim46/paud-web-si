@@ -23,7 +23,7 @@
         th,
         td {
             border: 1px solid #333;
-            padding: 10px;
+            padding: 5px;
             text-align: left;
         }
 
@@ -156,7 +156,8 @@
             </div> --}}
             <div class="content clearfix">
                 <div class="logo-container">
-                    <img style="margin-top: 50px" src="{{ public_path('images/page-layout/logo_tidak_text.png') }}" width="100px" height="100px" alt="Logo">
+                    <img style="margin-top: 50px" src="{{ public_path('images/page-layout/logo_tidak_text.png') }}"
+                        width="100px" height="100px" alt="Logo">
 
                 </div>
                 <div class="header-text">
@@ -170,12 +171,16 @@
             <div class="divider"></div>
         </div>
     </div>
-
+    @php
+        $baik = 0;
+        $cukup = 0;
+        $platih = 0;
+    @endphp
     <h3 style="text-align: center;">Rapor Perkembangan Anak</h3>
-    <p>Nama Siswa      : {{ $pendaftar->dataPribadi->nama_lengkap }}</p>
-    <p>Nomer Induk     : {{ $pendaftar->dataPribadi->nis }}</p>
-    <p>Berat Badan     : {{ $pendaftar->dataPribadi->berat_badan }}</->
-    <p>Tinggi Badan    : {{ $pendaftar->dataPribadi->tinggi_badan}}</p>
+    <p>Nama Siswa : {{ $pendaftar->dataPribadi->nama_lengkap }}</p>
+    <p>Nomer Induk : {{ $pendaftar->dataPribadi->nis }}</p>
+    <p>Berat Badan : {{ $pendaftar->dataPribadi->berat_badan }}</->
+    <p>Tinggi Badan : {{ $pendaftar->dataPribadi->tinggi_badan }}</p>
 
     <table>
         <thead>
@@ -300,23 +305,40 @@
                 <tr>
                     <td>{{ $key }}</td>
                     <td style="text-align: left;">{{ $aspek }}</td>
-                    <td style="text-align: center; font-size: 20px; vertical-align: middle; height: 40px;">
+                    <td style="text-align: center; font-size: 25px; vertical-align: middle; height: 30px;">
                         @if (($data['nilai' . $key] ?? null) == 'baik')
                             ✔️
+                            @php
+                                $baik += 1;
+                            @endphp
                         @endif
                     </td>
-                    <td style="text-align: center; font-size: 20px; vertical-align: middle; height: 40px;">
+                    <td style="text-align: center; font-size: 25px; vertical-align: middle; height: 30px;">
                         @if (($data['nilai' . $key] ?? null) == 'cukup')
                             ✔️
+                            @php
+                                $cukup += 1;
+                            @endphp
                         @endif
                     </td>
-                    <td style="text-align: center; font-size: 20px; vertical-align: middle; height: 40px;">
+                    <td style="text-align: center; font-size: 25px; vertical-align: middle; height: 30px;">
                         @if (($data['nilai' . $key] ?? null) == 'perlu_dilatih')
                             ✔️
+                            @php
+                                $platih += 1;
+                            @endphp
                         @endif
                     </td>
                 </tr>
             @endforeach
+
+
+            @php
+                $total = 82; // Total jumlah soal
+                $baikPercentage = ($baik / $total) * 100;
+                $cukupPercentage = ($cukup / $total) * 100;
+                $platihPercentage = ($platih / $total) * 100;
+            @endphp
 
             {{-- Kesimpulan --}}
             <tr>
@@ -325,9 +347,12 @@
             <tr>
                 <td colspan="5">
                     <ul>
-                        <li>Tingkat Pencapaian Perkembangan BAIK : 39/82 (47,56%)</li>
-                        <li>Tingkat Pencapaian Perkembangan CUKUP : 39/82 (47,56%)</li>
-                        <li>Tingkat Pencapaian Perkembangan PERLU DILATIH : 4/82 (4,88%)</li>
+                        <li>Tingkat Pencapaian Perkembangan BAIK : {{ $baik }} / {{ $total }}
+                            ({{ number_format($baikPercentage, 2) }}%)</li>
+                        <li>Tingkat Pencapaian Perkembangan CUKUP : {{ $cukup }} / {{ $total }}
+                            ({{ number_format($cukupPercentage, 2) }}%)</li>
+                        <li>Tingkat Pencapaian Perkembangan PERLU DILATIH : {{ $platih }} / {{ $total }}
+                            ({{ number_format($platihPercentage, 2) }}%)</li>
                     </ul>
                     <strong>Deskripsi:</strong>
                     <div class="deskripsi-box"></div>
@@ -347,6 +372,29 @@
         </tbody>
     </table>
 
+
+    {{-- buat form ttd disini --}}
+    <div style="font-family: Arial, sans-serif; width: 100%; padding: 15px;">
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 45%;">
+                    <div class="signature-area">
+                        <div style="margin-bottom: 5px;">Kepala Sekolah</div>
+                        <div style="height: 60px; border-bottom: 1px solid #000; margin-bottom: 10px;"></div>
+                        <div>____________________</div>
+                    </div>
+                </td>
+                <td style="width: 10%;"></td>
+                <td style="width: 45%;">
+                    <div class="signature-area">
+                        <div style="margin-bottom: 5px;">Guru Wali Kelas</div>
+                        <div style="height: 60px; border-bottom: 1px solid #000; margin-bottom: 10px;"></div>
+                        <div>____________________</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>
