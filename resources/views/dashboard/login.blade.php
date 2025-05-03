@@ -8,6 +8,8 @@
     <script src="https://kit.fontawesome.com/02c07b0853.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js" integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+" crossorigin="anonymous"></script>
     <link href="{{ asset('css/menu_styles.css') }}" rel="stylesheet">
 </head>
 
@@ -19,9 +21,15 @@
             <img src="{{ asset('images/page-layout/LOGO.png') }}" class="img-fluid mb-4" alt="">
             <div class="content">
                 <header>
-                    <h2 class="fw-bold">Login</h1>
+                    <h2 class="fw-bold">Masuk</h1>
                         <p class="fs-6">Masuk kedalam akun Anda</p>
                 </header>
+                @if (session('gagalLogin'))
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                  <strong>{{ session('gagalLogin') }}</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>                  
+                @endif
                 <form method="POST" action="{{ route('authenticate') }}">
                     @csrf
                     <div class="form-input mb-3 mt-4">

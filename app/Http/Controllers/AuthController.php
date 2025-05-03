@@ -23,8 +23,8 @@ class AuthController extends Controller
             return redirect()->intended('dashboard');
         }
 
-        dd('failed login');
-
+        session()->flash('gagalLogin', 'Terdapat krediensial yang tidak cocok, silahkan login kembali.');
+        return redirect()->route('login');
     }
 
     public function logout(Request $request){
