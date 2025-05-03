@@ -184,60 +184,7 @@
         <h2 class="text-center mb-4"><span class="orange">Seputar pendaftaran</span></h2>
 
 
-        <div class="faq-container">
-            <!-- FAQ Item 1 -->
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div>Bagaimana jika saya mengalami kesulitan saat mengisi formulir pendaftaran online?</div>
-                    <div class="arrow-icon">▼</div>
-                </div>
-                <div class="faq-answer">
-                    <p>Jika mengalami kendala saat mengisi formulir, silakan hubungi tim administrasi PAUD KB AL-HUSNA
-                        melalui nomor WhatsApp atau email yang tercantum di website.</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-
-            <!-- FAQ Item 2 -->
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div>Apakah ada batasan usia untuk mendaftar?</div>
-                    <div class="arrow-icon">▼</div>
-                </div>
-                <div class="faq-answer">
-                    <p>PAUD KB AL-HUSNA menerima peserta didik sesuai dengan kategori usia yang telah ditentukan.
-                        Informasi lebih lanjut mengenai batasan usia dapat dilihat di halaman pendaftaran.</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-
-            <!-- FAQ Item 3 -->
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div>Apakah PAUD KB AL-HUSNA menerima peserta didik dari berbagai latar belakang agama?</div>
-                    <div class="arrow-icon">▼</div>
-                </div>
-                <div class="faq-answer">
-                    <p>Ya, PAUD KB AL-HUSNA adalah lembaga pendidikan inklusif yang menerima peserta didik dari berbagai
-                        latar belakang agama, dengan tetap mengedepankan nilai-nilai keislaman dalam pembelajaran.</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-
-            <!-- FAQ Item 4 -->
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div>Berapa biaya pendaftaran di PAUD KB AL-HUSNA?</div>
-                    <div class="arrow-icon">▼</div>
-                </div>
-                <div class="faq-answer">
-                    <p>Biaya pendaftaran di PAUD KB AL-HUSNA sebesar Rp 250.000 yang mencakup biaya formulir dan infaq
-                        bangunan. Informasi lebih detail dapat dilihat pada brosur pendaftaran atau menghubungi bagian
-                        administrasi.</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-        </div>
+        <livewire:company.showfaq/>
     </div>
 
     @include('layouts.join')
