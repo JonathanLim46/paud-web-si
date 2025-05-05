@@ -97,7 +97,14 @@ class DetailMurid extends Component
         83 => 'Membuat karya seperti bentuk sesungguhnya dengan berbagai bahan (kertas, plastisin, balok, dll)',
     ];
 
+    public $semester = 'Ganjil';
+
     public $kelas_id, $murid_id, $murid;
+
+    public function setSemester($semester)
+    {
+        $this->semester = $semester;
+    }
 
     public function setStep($step)
     {
@@ -117,6 +124,7 @@ class DetailMurid extends Component
         // kirim juga aspekTexts
         $pdf = Pdf::loadView('pdf.rapor', [
             'data' => $data,
+            'semester' => $this->semester,
             'aspekTexts' => $this->aspekTexts,
             'pendaftar' => $pendaftar
         ])

@@ -27,10 +27,7 @@
             text-align: left;
         }
 
-        th {
-            background-color: #dbefff;
-            text-align: center;
-        }
+
 
         .judul-seksi {
             background-color: #f0f8ff;
@@ -177,19 +174,29 @@
         $platih = 0;
     @endphp
     <h3 style="text-align: center;">Rapor Perkembangan Anak</h3>
+    <h1 style="text-align: center;">Semester {{ $semester }}</h1>
     <p>Nama Siswa : {{ $pendaftar->dataPribadi->nama_lengkap }}</p>
     <p>Nomer Induk : {{ $pendaftar->dataPribadi->nis }}</p>
     <p>Berat Badan : {{ $pendaftar->dataPribadi->berat_badan }}</->
     <p>Tinggi Badan : {{ $pendaftar->dataPribadi->tinggi_badan }}</p>
-
     <table>
         <thead>
             <tr>
-                <th>No</th>
-                <th>Aspek Perkembangan</th>
-                <th>Baik</th>
-                <th>Cukup</th>
-                <th>Perlu Dilatih</th>
+                @if ($semester === 'Ganjil')
+                    <th style="background-color :#40adce; text-align:center">No</th>
+                    <th style="background-color :#40adce; text-align:center">Aspek Perkembangan</th>
+                    <th style="background-color :#40adce; text-align:center">Baik</th>
+                    <th style="background-color :#40adce; text-align:center">Cukup</th>
+                    <th style="background-color :#40adce; text-align:center">Perlu Dilatih</th>
+                @else
+                    <!-- Tampilkan kolom lainnya jika semester bukan Ganjil -->
+                    <th style="background-color :#f88c44; text-align:center">No</th>
+                    <th style="background-color :#f88c44; text-align:center">Aspek Perkembangan</th>
+                    <th style="background-color :#f88c44; text-align:center">Baik</th>
+                    <th style="background-color :#f88c44; text-align:center">Cukup</th>
+                    <th style="background-color :#f88c44; text-align:center">Perlu Dilatih</th>
+                @endif
+
             </tr>
         </thead>
         <tbody>

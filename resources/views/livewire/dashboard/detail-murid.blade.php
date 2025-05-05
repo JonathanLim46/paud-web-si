@@ -188,7 +188,7 @@
                 table {
                     width: 100%;
                     border-collapse: collapse;
-                    margin-top: 2rem;
+                    margin-top: 7rem;
                     font-family: 'Poppins', sans-serif;
                 }
 
@@ -219,8 +219,72 @@
                     cursor: pointer;
                     text-align: center;
                 }
+
+                /* Styling untuk dropdown semester */
+                .dropdown .btn {
+                    border: none;
+                    padding: 8px 16px;
+                    font-weight: 500;
+                    color: white;
+                    border-radius: 4px;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+
+                /* Warna untuk semester ganjil - biru */
+                .semester-ganjil {
+                    background-color: #40adce;
+                }
+
+                .semester-ganjil:hover,
+                .semester-ganjil:focus {
+                    background-color: #3698b5;
+                    box-shadow: 0 3px 8px rgba(64, 173, 206, 0.3);
+                }
+
+                /* Warna untuk semester genap - oranye */
+                .semester-genap {
+                    background-color: #f88c44;
+                }
+
+                .semester-genap:hover,
+                .semester-genap:focus {
+                    background-color: #e67b33;
+                    box-shadow: 0 3px 8px rgba(248, 140, 68, 0.3);
+                }
+
+                /* Styling untuk dropdown menu */
+                .dropdown-menu {
+                    border: none;
+                    border-radius: 4px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    padding: 8px 0;
+                }
+
+                .dropdown-item {
+                    padding: 8px 16px;
+                    cursor: pointer;
+                }
+
+                .dropdown-item:hover {
+                    background-color: #f5f5f5;
+                }
             </style>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle {{ $semester === 'Ganjil' ? 'semester-ganjil' : 'semester-genap' }}"
+                    type="button" id="semesterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Semester: {{ $semester ?? '--' }}
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="semesterDropdown">
+                    <li><a class="dropdown-item" wire:click="setSemester('Ganjil')">Ganjil</a>
+                    </li>
+                    <li><a class="dropdown-item" wire:click="setSemester('Genap')">Genap</a></li>
+                </ul>
+            </div>
             <div>
+
+
                 <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
                     <thead class="sticky-top">
                         <tr>
