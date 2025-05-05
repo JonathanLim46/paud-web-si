@@ -68,7 +68,7 @@ class PendaftaranForm extends Component
     ];
 
     protected $rules = [
-        'no_telp' => 'required|string|min:10|max:12',
+        'no_telp' => 'required|regex:/^[89][0-9]{8,11}$/',
     
         // data murid
         'data_murid.nik' => 'required|numeric|digits:16',
@@ -148,6 +148,8 @@ class PendaftaranForm extends Component
     {
         $validatedData = $this->validate();
 
+        $noTelp = $this->formatPhoneNumber($validatedData['no_telp']);
+
         $noTelp = $validatedData['no_telp'];
         $dataPribadi = $validatedData['data_murid'];
         $orangTuaData = $validatedData['data_orang_tua_wali'];
@@ -197,6 +199,17 @@ class PendaftaranForm extends Component
 
         session()->flash('berhasilDaftar', 'Berhasil Daftar');
         return redirect()->route('company.formDaftar');
+    }
+
+    private function formatPhoneNumber($phoneNumber)
+    {
+        $phoneNumber = preg_replace('/[^0-9+]/', '', $phoneNumber);
+    
+        if (substr($phoneNumber, 0, 3) !== '+62') {
+            $phoneNumber = '+62' . ltrim($phoneNumber, '0');
+        }
+    
+        return $phoneNumber;
     }
 
     public function sekolahCheck($value)

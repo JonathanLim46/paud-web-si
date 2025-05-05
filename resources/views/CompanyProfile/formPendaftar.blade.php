@@ -277,6 +277,16 @@
     .ppdb-icon {
         animation: pulse 2s infinite ease-in-out;
     }
+
+    .input-group-text {
+        width: 70px; /* Adjust the width to fit +62 */
+        height: 50px;
+    }
+
+    .form-control {
+        flex-grow: 1; /* Makes the input take up the remaining space */
+    }
+
 </style>
 @livewireStyles
 
@@ -291,7 +301,34 @@
 
     @include('layouts.footer')
 
-
+    <div class="modal fade" id="modalThankYou" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalThankYouLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <!-- Header dengan warna latar belakang yang lebih menarik -->
+                <div class="modal-header bg-success text-white">
+                    <h1 class="modal-title fs-5" id="modalThankYouLabel">Pendaftaran Berhasil</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <!-- Body dengan animasi dan pesan yang lebih menarik -->
+                <div class="modal-body text-center py-4">
+                    <div class="mb-3">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="mb-2">Selamat!</h4>
+                    <p class="fs-5 mb-1">Terimakasih telah mendaftar ke PAUD KB-AL Husna</p>
+                    <p class="text-muted">Data pendaftaran Anda telah kami terima dan akan segera diproses</p>
+                </div>
+                <!-- Footer dengan tombol yang lebih menarik -->
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal" onclick="window.location.href='{{ route('company.home') }}'">
+                        <i class="bi bi-house-door me-1"></i> Kembali ke Beranda
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
