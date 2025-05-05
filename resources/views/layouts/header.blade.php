@@ -4,21 +4,21 @@
         padding: 30px 0;
         transition: all 0.3s ease;
     }
-    
+
     .navbar.scrolled {
         padding: 8px 0;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
-    
+
     .navbar-brand img {
-        height: 50px; 
+        height: 50px;
         transition: height 0.3s ease;
     }
-    
+
     .navbar.scrolled .navbar-brand img {
         height: 40px;
     }
-    
+
     /* Navigation Links */
     .nav-link {
         color: #333 !important;
@@ -29,7 +29,7 @@
         margin: 0 8px;
         transition: color 0.3s ease;
     }
-    
+
     /* Underline Animation for Links */
     .nav-link::after {
         content: '';
@@ -41,24 +41,24 @@
         background-color: #f26522;
         transition: width 0.3s ease;
     }
-    
+
     .nav-link:hover::after,
     .nav-link.active::after {
         width: 100%;
     }
-    
-    .nav-link:hover, 
+
+    .nav-link:hover,
     .nav-link.active {
         color: #f26522 !important;
     }
-    
+
     /* Dropdown Menu */
     .dropdown-menu {
         border-radius: 8px;
         margin-top: 10px;
         padding: 0.5rem 0;
     }
-    
+
     /* Add arrow to dropdown */
     .dropdown-menu::before {
         content: '';
@@ -69,20 +69,20 @@
         border-right: 8px solid transparent;
         border-bottom: 8px solid white;
     }
-    
+
     .dropdown-item {
         padding: 10px 16px;
         transition: all 0.3s ease-in-out;
         border-left: 3px solid transparent;
     }
-    
+
     .dropdown-item:hover {
         color: #F26419 !important;
         background-color: rgba(242, 100, 25, 0.05);
         padding-left: 20px;
         border-left: 3px solid #f26522;
     }
-    
+
     /* Registration Button */
     .btn-daftar {
         background-color: #f26522;
@@ -96,30 +96,30 @@
         text-transform: uppercase;
         font-size: 14px;
     }
-    
+
     .btn-daftar:hover {
         background-color: #d3541f;
         border-color: #d3541f;
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(242, 101, 34, 0.3);
     }
-    
+
     /* Responsive Adjustments */
     @media (max-width: 991.98px) {
         .navbar-nav {
             text-align: center;
             padding: 20px 0;
         }
-        
+
         .nav-link {
             padding: 10px;
             margin: 5px 0;
         }
-        
+
         .nav-link::after {
             bottom: 5px;
         }
-        
+
         .dropdown-menu {
             text-align: center;
             border: none;
@@ -127,13 +127,16 @@
             background-color: rgba(242, 101, 34, 0.05);
             border-radius: 5px;
         }
-        
+
         .dropdown-menu::before {
             display: none;
         }
     }
-</style>
 
+    .dropdown-toggle::after {
+        display: none !important;
+    }
+</style>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
@@ -144,7 +147,8 @@
         </a>
 
         <!-- Toggle Button (Mobile) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -155,8 +159,10 @@
                     <a class="nav-link" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle " href="#" id="tentangKamiDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Tentang Kami
+                        <span aria-hidden="true" class="ms-1">&#9662;</span>
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="tentangKamiDropdown">
                         <li><a class="dropdown-item py-2" href="/profil">Profil Sekolah</a></li>
@@ -191,27 +197,27 @@
             navbar.classList.remove('scrolled');
         }
     });
-    
+
     // Highlight current page in navigation
     document.addEventListener('DOMContentLoaded', function() {
         const currentLocation = location.pathname;
         const menuItems = document.querySelectorAll('.navbar-nav .nav-link');
         const menuLength = menuItems.length;
-        
+
         for (let i = 0; i < menuLength; i++) {
             if (menuItems[i].getAttribute('href') === currentLocation) {
                 menuItems[i].classList.add('active');
             }
         }
-        
+
         // Add accessibility for dropdown menu
         const dropdownToggle = document.querySelector('.dropdown-toggle');
         const dropdownMenu = document.querySelector('.dropdown-menu');
-        
+
         dropdownToggle.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 dropdownMenu.classList.toggle('show');
-                dropdownToggle.setAttribute('aria-expanded', 
+                dropdownToggle.setAttribute('aria-expanded',
                     dropdownToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
             }
         });
