@@ -74,7 +74,19 @@
                             </div>
                             <div class="mb-3">
                                 <label for="no-hp-orang-tua" class="form-label">No HP Orang Tua</label>
-                                <input type="text" class="form-control" id="no-hp-orang-tua" wire:model.defer="no_telp">
+                                <div class="input-group">
+                                    <!-- Bagian +62 (kode negara) -->
+                                    <span class="input-group-text" id="basic-addon1">+62</span>
+                            
+                                    <!-- Input untuk nomor telepon -->
+                                    <input type="text" class="form-control" id="no_telepon" wire:model.defer="no_telp" placeholder="Contoh: 81234567890" maxlength="11">
+                                </div>
+                                @error('no_telp')
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @enderror
                             </div>
                             <!-- Jenis Kelamin -->
                             <div class="mb-3">

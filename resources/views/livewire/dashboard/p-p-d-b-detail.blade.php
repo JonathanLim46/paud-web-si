@@ -80,7 +80,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4 class="fw-semibold mb-0">Data Pribadi</h4>
                 <div class="ms-auto d-flex gap-2">
-                    <a href="https://wa.me/+6281389372857?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20Anda." target="_blank" class="btn btn-success">Whatsapp</a>
+                    <a href="https://wa.me/62{{ $pendaftar->no_telp }}?text=Halo,%20terima%20kasih%20telah%20mendaftar%20PPDB%20di%20PAUD%20KB%20AL%20HUSNA.%20Kami%20ingin%20mengonfirmasi%20bahwa%20data%20pendaftaran%20Anda%20telah%20kami%20terima.%20Apakah%20Bapak/Ibu%20bersedia%20melanjutkan%20ke%20proses%20pendaftaran%20ulang?" target="_blank" class="btn btn-success">Whatsapp</a>
 
                     <div class="dropdown">
                         <button

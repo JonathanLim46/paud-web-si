@@ -368,8 +368,11 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">No Telepon</label>
-                                <input type="text" class="form-control" id="no_telepon"
-                                wire:model.defer="no_telp">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">+62</span>
+                    
+                                    <input type="text" class="form-control" id="no_telepon" wire:model.defer="no_telp" placeholder="Contoh: 81234567890" maxlength="11">
+                                </div>
                                 @error('no_telp')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -802,7 +805,7 @@
     </div>
 
     {{-- modal edit --}}
-    <div class="modal fade" id="modalEditSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div wire:ignore.self class="modal fade" id="modalEditSiswa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalEditSiswaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
@@ -841,8 +844,11 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="nama-lengkap" class="form-label">No Telepon</label>
-                                <input type="text" class="form-control" id="no_telepon"
-                                wire:model.defer="no_telp">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">+62</span>
+                    
+                                    <input type="text" class="form-control" id="no_telepon" wire:model.defer="no_telp" placeholder="Contoh: 81234567890" maxlength="11">
+                                </div>
                                 @error('no_telp')
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     <strong>{{ $message }}</strong>
