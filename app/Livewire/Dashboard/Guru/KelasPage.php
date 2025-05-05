@@ -23,6 +23,9 @@ class KelasPage extends Component
         $kelass = Kelas::with('guru')
             ->where('guru_id', $guru->id_guru ?? 0)
             ->paginate(10);
-        return view('livewire.dashboard.guru.kelas-page', compact('kelass'));
+        return view('livewire.dashboard.guru.kelas-page', compact('kelass'))->layout('components.layouts.app', [
+            'title' => "Kelas",
+            'section_title' => "Kelas",
+        ]);
     }
 }
