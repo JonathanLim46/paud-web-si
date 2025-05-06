@@ -60,7 +60,7 @@
 
     <div class="container penerimaan mt-5">
         <h2 class="judul">
-            <span class="blue">Galeri</span><span class="orange">KB Al-Husna</span>
+            <span class="blue">Galeri </span><span class="orange">KB Al-Husna</span>
         </h2>
 
         <div class="announcement-box">
