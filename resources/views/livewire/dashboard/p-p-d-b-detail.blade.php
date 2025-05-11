@@ -81,6 +81,26 @@
                 <h4 class="fw-semibold mb-0">Data Pribadi</h4>
                 <div class="ms-auto d-flex gap-2">
                     <a href="https://wa.me/62{{ $pendaftar->no_telp }}?text=Halo,%20terima%20kasih%20telah%20mendaftar%20PPDB%20di%20PAUD%20KB%20AL%20HUSNA.%20Kami%20ingin%20mengonfirmasi%20bahwa%20data%20pendaftaran%20Anda%20telah%20kami%20terima.%20Apakah%20Bapak/Ibu%20bersedia%20melanjutkan%20ke%20proses%20pendaftaran%20ulang?" target="_blank" class="btn btn-success">Whatsapp</a>
+                    
+                    @if ($status == 'Diterima')
+                    <div class="dropdown">
+                        <button
+                            class="btn dropdown-toggle btn-outline-secondary"
+                            type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Kelas: {{ $pendaftar->kelas->nama_kelas ?? 'Tentukan Kelas' }}
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                            @foreach ($all_kelas as $kelas)
+                            <li><a class="dropdown-item"
+                                    wire:click="setKelas({{ $kelas->id_kelas }}, {{ $pendaftar->id_pendaftaran }})">
+                                    {{ $kelas->nama_kelas }}
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
                     <div class="dropdown">
                         <button
