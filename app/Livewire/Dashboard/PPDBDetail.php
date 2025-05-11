@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Models\Kelas;
 use Livewire\Component;
 use App\Models\Pendaftar;
 use App\Models\DataPribadi;
@@ -10,13 +11,15 @@ use Livewire\Notifications\Notification;
 class PPDBDetail extends Component
 {
 
-    public $status, $pendaftar, $message_status_error;
+    public $status, $pendaftar, $message_status_error, $all_kelas;
 
     public $error_status, $success_status = false;
 
     public function mount($id)
     {
-        $this->pendaftar = Pendaftar::with('dataPribadi', 'dataOrangTua', 'dokumen', 'dataSekolah')->findOrFail($id);
+        $this->pendaftar = Pendaftar::with('dataPribadi', 'dataOrangTua', 'dokumen', 'dataSekolah', 'kelas')->findOrFail($id);
+        
+        $this->all_kelas = Kelas::all();
 
         if (is_null($this->pendaftar->diterima)) {
             $this->status = "Tahap Verifikasi"; 
@@ -25,6 +28,17 @@ class PPDBDetail extends Component
         } elseif ($this->pendaftar->diterima == 0) {
             $this->status = "Ditolak"; 
         }
+    }
+
+    public function setKelas($kelas_id, $id_pendaftar){
+        $pendaftar = Pendaftar::findOrFail($id_pendaftar);
+        $pendaftar->update([
+            'kelas_id' => $kelas_id,
+        ]);
+
+        $this->pendaftar = Pendaftar::with('kelas')->findOrFail($id_pendaftar);
+        $this->success_status = true;
+        $this->message_status_error = 'Status berhasil diperbarui.';
     }
 
     public function setStatus($newStatus, $id)

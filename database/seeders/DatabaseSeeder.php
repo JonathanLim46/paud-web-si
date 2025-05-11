@@ -26,23 +26,26 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(3)->create();
 
-        // DB::table('tb_hari')->insert([
-        //     [
-        //         'nama_hari' => 'Senin',
-        //     ],
-        //     [
-        //         'nama_hari' => 'Selasa',
-        //     ],
-        //     [
-        //         'nama_hari' => 'Rabu',
-        //     ],
-        //     [
-        //         'nama_hari' => 'Kamis',
-        //     ],
-        //     [
-        //         'nama_hari' => 'Jumat',
-        //     ],
-        // ]);
+        $images = [
+            'aktivitas_1.png',
+            'aktivitas_2.png',
+            'aktivitas_3.png',
+            'aktivitas_4.png',
+            'aktivitas_5.png',
+            'aktivitas_6.png',
+        ];
+
+        foreach($images as $image){
+            DB::table('tb_galeri')->insert([
+                'foto_galeri' => $image,
+            ]);
+        }
+        
+        foreach($images as $image){
+            DB::table('tb_aktivitas')->insert([
+                'foto_aktivitas' => $image,
+            ]);
+        }
 
         DB::table('users')->insert([
             [

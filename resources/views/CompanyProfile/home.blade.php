@@ -10,7 +10,6 @@
     <style>
         p {
             font-size: 19px;
-            color: #333;
             line-height: 1.8;
             margin-bottom: 20px;
         }
