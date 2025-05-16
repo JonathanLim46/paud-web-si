@@ -374,6 +374,7 @@
                             <label for="jabatan" class="form-label fw-bold">Jabatan</label>
                             <select wire:model="jabatanGuru" class="form-select">
                                 <option value="" selected>Pilih Jabatan</option>
+                                <option value="Ketua Yayasan">Ketua Yayasan</option>
                                 <option value="Guru">Guru</option>
                             </select>
                             @error('jabatanGuru')
@@ -497,6 +498,7 @@
                             <label for="jabatan" class="form-label fw-bold">Jabatan</label>
                             <select wire:model="jabatanGuru" class="form-select">
                                 <option value="" selected>Pilih Jabatan</option>
+                                <option value="Ketua Yayasan">Ketua Yayasan</option>
                                 <option value="Guru">Guru</option>
                             </select>
                             @error('jabatanGuru')

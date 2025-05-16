@@ -115,8 +115,7 @@
                                 aria-label="Close"></button>
                         </div>
                         @endif
-                        <input type="file" class="form-control mt-4 mb-4" id="image-input" name="image"
-                            wire:model="image">
+                        <input type="file" accept="image/*" class="form-control mt-4 mb-4" wire:model="image">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">
                             Tambahkan Gambar
@@ -156,7 +155,7 @@
                                         aria-label="Close"></button>
                                 </div>
                         @endif
-                        <input type="file" class="form-control mt-4 mb-4" id="image-input" name="image"
+                        <input type="file" accept="image/*" class="form-control mt-4 mb-4" id="image-input" name="image"
                             wire:model="image">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">

@@ -72,7 +72,7 @@ class PendaftaranForm extends Component
     
         // data murid
         'data_murid.nik' => 'required|numeric|digits:16',
-        'data_murid.nama_lengkap' => 'required|string|max:255',
+        'data_murid.nama_lengkap' => ['required', 'string', 'max:255', 'regex:/^[\pL\s\'\-]+$/u'],
         'data_murid.jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
         'data_murid.tempat_lahir' => 'required|string|max:255',
         'data_murid.tanggal_lahir' => 'required|date|before_or_equal:today',
@@ -80,7 +80,7 @@ class PendaftaranForm extends Component
         'data_murid.anak_ke' => 'required|numeric|min:1',
         'data_murid.berat_badan' => 'required|numeric|min:0',
         'data_murid.tinggi_badan' => 'required|numeric|min:0',
-        'data_murid.lingkar_kepala' => 'nullable|numeric|min:0',
+        'data_murid.lingkar_kepala' => 'required|numeric|min:0',
         'data_murid.alamat_rumah' => 'required|string|max:500',
         'data_murid.desa_kelurahan' => 'required|string|max:255',
         'data_murid.kecamatan' => 'required|string|max:255',
