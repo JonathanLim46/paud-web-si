@@ -303,15 +303,19 @@
                         </div>
                         <div class="mb-4">
                             <label for="kelas" class="form-label fw-bold">Kelas</label>
-                            <input type="text" class="form-control" id="kelas" name="kelas"
-                                placeholder="Kelas berapa?" wire:model="tingkat_kelas" required>
+                            <select class="form-select" id="tingkat_kelas" name="tingkat_kelas" wire:model="tingkat_kelas"
+                                required>
+                                <option value="" disabled selected>Pilih Tingkat Kelas</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                            </select>
                         </div>
                         @if ($gurus)
                             <div class="mb-4">
                                 <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
                                 <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="guru_id"
                                     required>
-                                    <option value="" disabled selected>Select</option>
+                                    <option value="" disabled selected>Pilih Wali Kelas</option>
                                     @foreach ($gurus as $guru)
                                         <option value="{{ $guru->id_guru }}">{{ $guru->user->name }}</option>
                                     @endforeach
@@ -346,15 +350,19 @@
                         </div>
                         <div class="mb-4">
                             <label for="kelas" class="form-label fw-bold">Kelas</label>
-                            <input type="text" class="form-control" id="kelas" name="kelas"
-                                placeholder="Kelas berapa?" wire:model="tingkat_kelas" required>
+                            <select class="form-select" id="tingkat_kelas" name="tingkat_kelas" wire:model="tingkat_kelas"
+                                required>
+                                <option value="" disabled selected>Pilih Tingkat Kelas</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                            </select>
                         </div>
                         @if ($gurus)
                             <div class="mb-4">
                                 <label for="pilihGuru" class="form-label fw-bold">Wali Kelas</label>
                                 <select class="form-select" id="pilihGuru" name="pilihGuru" wire:model="guru_id"
                                     required>
-                                    <option value="" disabled selected>Select</option>
+                                    <option value="" disabled selected>Pilih Wali Kelas</option>
                                     @foreach ($gurus as $guru)
                                         <option value="{{ $guru->id_guru }}">{{ $guru->user->name }}</option>
                                     @endforeach

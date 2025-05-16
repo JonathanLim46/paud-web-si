@@ -35,12 +35,24 @@
                     <div class="form-input mb-3 mt-4">
                         <input type="text" class="form-control" id="username" placeholder="Username"
                             name="username">
+                        @error('username')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-input mb-3 input-group">
                         <input type="password" class="form-control" id="password" placeholder="Password"
                             name="password">
                         <i class="fa-solid fa-eye icon-toggle-password" id="toggle-password"></i>
                     </div>
+                    @error('password')
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                    @enderror
                     <button type="submit" class="btn btn-primary w-100 btn-lg mt-2">Log In</button>
                 </form>
             </div>

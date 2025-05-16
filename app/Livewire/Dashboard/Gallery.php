@@ -17,6 +17,13 @@ class Gallery extends Component
     #[RULE('max:2048', message: 'Ukuran file maksimal 2MB')]
     public $image;
 
+    public function rules()
+    {
+        return [
+            'image' => 'required|image|max:2048',
+        ];
+    }
+
     public $title = 'Dashboard - Galeri';
 
     public $idImage;

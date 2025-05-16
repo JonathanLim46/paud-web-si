@@ -110,7 +110,7 @@
                             </div>
                             @endif
                             <input type="file" class="form-control mt-4 mb-4" id="image-input" name="image"
-                                wire:model="image">
+                                wire:model="image" accept="image/*">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">
                                 Tambahkan Gambar
@@ -150,7 +150,7 @@
                                     </div>
                             @endif
                             <input type="file" class="form-control mt-4 mb-4" id="image-input" name="image"
-                                wire:model="image">
+                                wire:model="image" accept="image/*">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">
                                 Perbarui Gambar
