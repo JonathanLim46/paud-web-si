@@ -101,6 +101,29 @@
         width: 100%;
         border-radius: 8px;
     }
+
+    @media (max-width: 576px) {
+
+        /* Biar judul dan section lebih rapat */
+        .penerimaan.mt-5 {
+            margin-bottom: 10px !important;
+        }
+
+        .penerimaan h2.judul {
+            margin-bottom: 10px !important;
+        }
+
+        /* Perkecil padding di content-section biar nggak kebanyakan white space */
+        .content-section {
+            padding-top: 10px !important;
+            padding-bottom: 18px !important;
+        }
+
+        /* Hilangin margin top default di section pertama setelah judul */
+        .content-section:first-of-type {
+            margin-top: 0 !important;
+        }
+    }
 </style>
 
 <body>

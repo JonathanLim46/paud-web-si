@@ -193,6 +193,22 @@
             padding-right: 15px;
         }
     }
+
+    @media (max-width: 576px) {
+        .guru-section .row {
+            padding-left: 50px !important;
+            padding-right: 50px !important;
+        }
+        .penjelasan{
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+        }
+        .guru-card {
+            margin-left: 0;
+            margin-right: 0;
+            border-radius: 12px;
+        }
+    }
 </style>
 
 <body>
@@ -207,7 +223,7 @@
             </div>
 
             <!-- Right side: Text content -->
-            <div class="col-md-6">
+            <div class="col-md-6 penjelasan">
                 <div class="text-content">
                     <h3 class="mb-4">Sejarah KB AL-HUSNA</h3>
 
@@ -324,28 +340,28 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3 col-6">
+            <div class="col-md-3 col-sm-12">
                 <div class="guru-card">
                     <img src="{{ asset('images/page-profile/guru_heraMiranti.png') }}" alt="Hera Miranti"
                         class="guru-image">
                     <h5 class="guru-name">Hera Miranti</h5>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-3 col-sm-12">
                 <div class="guru-card">
                     <img src="{{ asset('images/page-profile/guru_niningMulyani.png') }}" alt="Nining Mulyani"
                         class="guru-image">
                     <h5 class="guru-name">Nining Mulyani</h5>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-3 col-sm-12">
                 <div class="guru-card">
                     <img src="{{ asset('images/page-profile/guru_lulu.png') }}" alt="Lulu Zaima Awaly S.pd"
                         class="guru-image">
                     <h5 class="guru-name">Lulu Zaima Awaly S.pd</h5>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-3 col-sm-12">
                 <div class="guru-card">
                     <img src="{{ asset('images/page-profile/guru_emi.png') }}" alt="Emi Liriyanti" class="guru-image">
                     <h5 class="guru-name">Emi Liriyanti</h5>

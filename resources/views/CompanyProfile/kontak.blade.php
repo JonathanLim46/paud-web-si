@@ -58,6 +58,45 @@
         margin-top: 100px;
         margin-bottom: 50px;
     }
+
+    @media (max-width: 768px) {
+        .map-container {
+            padding-bottom: 40% !important;
+            min-height: 230px !important;
+        }
+
+        .map-container iframe {
+            height: 100% !important;
+            min-height: 230px !important;
+            border-radius: 16px !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .map-container {
+            padding-bottom: 60% !important;
+            min-height: 200px !important;
+        }
+
+        .map-container iframe {
+            min-height: 200px !important;
+            border-radius: 12px !important;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .container-hubungi {
+            margin-top: 18px !important;
+            /* Dari 100px jadi 18px */
+            margin-bottom: 16px !important;
+            padding-top: 14px !important;
+            padding-bottom: 8px !important;
+        }
+
+        .fw-bold.mb-5 {
+            margin-bottom: 14px !important;
+        }
+    }
 </style>
 
 <body>
@@ -97,6 +136,27 @@
             <div class="col-md-6">
                 <img src="{{ asset('images/page-kontak/gambar_kontak.png') }}" class="img-fluid rounded shadow-sm"
                     alt="Sekolah">
+            </div>
+        </div>
+    </div>
+    <div class="container mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card shadow-sm rounded-4 border-0 mb-2">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-geo-alt-fill fs-3 text-primary me-3"></i>
+                        <div>
+                            <h6 class="mb-1 fw-bold">Lokasi PAUD KB AL-HUSNA</h6>
+                            <div class="small text-muted mb-2">
+                                Kp. Pasir Muncang RT 01 RW 03 Desa Sukamanah, Megamendung, Bogor
+                            </div>
+                            <a href="https://maps.app.goo.gl/iACff62nFfRngcCg9" target="_blank" rel="noopener"
+                                class="btn btn-sm btn-primary rounded-3 px-3">
+                                <i class="bi bi-map"></i> Lihat di Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

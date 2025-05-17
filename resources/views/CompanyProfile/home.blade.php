@@ -302,11 +302,49 @@
             padding-top: 250px !important;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .program-img-container {
-                width: 180px;
-                height: 180px;
+        /* Tablet dan mobile: hide semua dekorasi hero */
+        @media (max-width: 991.98px) {
+
+            .hero-section .cloud,
+            .hero-section .rocket,
+            .hero-section .star,
+            .hero-section .hill,
+            .hero-section .plant,
+            .floating-kids {
+                display: none !important;
+            }
+
+            .hero-section .container {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+
+            /* Height tetap, tidak diubah */
+        }
+
+        /* Mobile-only (optional tweak padding/font) */
+        @media (max-width: 575.98px) {
+            .hero-section .container {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+
+            .hero-section h1 {
+                font-size: 1.18rem !important;
+                line-height: 1.22 !important;
+            }
+
+            .hero-section p {
+                font-size: 1rem !important;
+            }
+
+            .tentang-section {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            .btn-lihat {
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -371,25 +409,25 @@
             <div class="col-lg-6">
                 <div class="gallery-container">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="img-wrapper">
                                 <img src="{{ asset('images/page-home/tentang1.png') }}" alt="Gedung KB Al-Husna"
                                     class="img-fluid">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="img-wrapper">
                                 <img src="{{ asset('images/page-home/tentang2.png') }}"
                                     alt="Aktivitas kelas KB Al-Husna" class="img-fluid">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="img-wrapper">
                                 <img src="{{ asset('images/page-home/tentang3.png') }}"
                                     alt="Aktivitas bermain KB Al-Husna" class="img-fluid">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="img-wrapper">
                                 <img src="{{ asset('images/page-home/tentang4.png') }}"
                                     alt="Aktivitas outdoor KB Al-Husna" class="img-fluid">
