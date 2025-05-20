@@ -579,19 +579,19 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="img-wrapper">
-                                <img src="{{ asset('images/page-home/gambar_fasilitas1.png') }}"
-                                    alt="Gedung KB Al-Husna" class="img-fluid">
+                                <img src="{{ asset('images/page-home/gedung.png') }}" alt="Gedung KB Al-Husna"
+                                    class="img-fluid">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="img-wrapper">
-                                <img src="{{ asset('images/page-home/gambar_fasilitas2.png') }}"
+                                <img src="{{ asset('images/page-home/ruang_kantor.jpg') }}"
                                     alt="Aktivitas bermain KB Al-Husna" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="img-wrapper">
-                                <img src="{{ asset('images/page-home/gambar_fasilitas2.png') }}"
+                                <img src="{{ asset('images/page-home/ruang_kelas.jpg') }}"
                                     alt="Aktivitas outdoor KB Al-Husna" class="img-fluid">
                             </div>
                         </div>

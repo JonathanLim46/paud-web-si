@@ -199,10 +199,12 @@
             padding-left: 50px !important;
             padding-right: 50px !important;
         }
-        .penjelasan{
+
+        .penjelasan {
             padding-left: 20px !important;
             padding-right: 20px !important;
         }
+
         .guru-card {
             margin-left: 0;
             margin-right: 0;
@@ -392,7 +394,7 @@
                 <!-- Facility 1 -->
                 <div class="col-md-6">
                     <div class="facility-card">
-                        <img src="{{ asset('images/page-profile/placeholder.jpg') }}"
+                        <img src="{{ asset('images/page-profile/ruang_kantor.jpg') }}"
                             alt="Ruang Guru dan Administrasi" class="facility-image">
                         <h5 class="facility-name">RUANG GURU DAN ADMINISTRASI</h5>
                     </div>
@@ -401,7 +403,7 @@
                 <!-- Facility 2 -->
                 <div class="col-md-6">
                     <div class="facility-card">
-                        <img src="{{ asset('images/page-profile/placeholder.jpg') }}" alt="Ruang Kelas"
+                        <img src="{{ asset('images/page-profile/ruang_kelas.jpg') }}" alt="Ruang Kelas"
                             class="facility-image">
                         <h5 class="facility-name">RUANG KELAS</h5>
                     </div>
@@ -410,8 +412,7 @@
                 <!-- Facility 3 -->
                 <div class="col-md-6">
                     <div class="facility-card">
-                        <img src="{{ asset('images/page-profile/placeholder.jpg') }}" alt="Aula"
-                            class="facility-image">
+                        <img src="{{ asset('images/page-profile/AULA.jpg') }}" alt="Aula" class="facility-image">
                         <h5 class="facility-name">AULA</h5>
                     </div>
                 </div>
@@ -419,7 +420,7 @@
                 <!-- Facility 4 -->
                 <div class="col-md-6">
                     <div class="facility-card">
-                        <img src="{{ asset('images/page-profile/placeholder.jpg') }}" alt="Halaman"
+                        <img src="{{ asset('images/page-profile/gedung.png') }}" alt="Halaman"
                             class="facility-image">
                         <h5 class="facility-name">HALAMAN</h5>
                     </div>
