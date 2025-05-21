@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Hari;
+use App\Models\Guru;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Hari;
 use App\Models\User;
 use App\Models\Kelas;
 use Illuminate\Support\Str;
@@ -155,6 +156,39 @@ class DatabaseSeeder extends Seeder
         $namaHari = [['nama_hari' => 'Senin'], ['nama_hari' => 'Selasa'], ['nama_hari' => 'Rabu'], ['nama_hari' => 'Kamis'], ['nama_hari' => 'Jumat']];
         DB::table('tb_hari')->insert($namaHari);
 
+        $data_jadwal = [
+            ['username' => 'herahusna', 'hari' => 'senin', 'kelas' => 'mandiri'],
+            ['username' => 'nininghusna', 'hari' => 'senin', 'kelas' => 'mandiri'],
+            ['username' => 'herahusna', 'hari' => 'selasa', 'kelas' => 'mandiri'],
+            ['username' => 'nininghusna', 'hari' => 'selasa', 'kelas' => 'mandiri'],
+            ['username' => 'herahusna', 'hari' => 'rabu', 'kelas' => 'mandiri'],
+            ['username' => 'nininghusna', 'hari' => 'rabu', 'kelas' => 'mandiri'],
+            ['username' => 'emyhusna', 'hari' => 'kamis', 'kelas' => 'mandiri'],
+            ['username' => 'luluhusna', 'hari' => 'jumat', 'kelas' => 'mandiri'],
+            ['username' => 'luluhusna', 'hari' => 'senin', 'kelas' => 'kreatif'],
+            ['username' => 'luluhusna', 'hari' => 'selasa', 'kelas' => 'kreatif'],
+            ['username' => 'luluhusna', 'hari' => 'rabu', 'kelas' => 'kreatif'],
+            ['username' => 'herahusna', 'hari' => 'kamis', 'kelas' => 'kreatif'],
+            ['username' => 'nininghusna', 'hari' => 'kamis', 'kelas' => 'kreatif'],
+            ['username' => 'emyhusna', 'hari' => 'jumat', 'kelas' => 'kreatif'],
+            ['username' => 'emyhusna', 'hari' => 'senin', 'kelas' => 'ceria'],
+            ['username' => 'emyhusna', 'hari' => 'selasa', 'kelas' => 'ceria'],
+            ['username' => 'emyhusna', 'hari' => 'rabu', 'kelas' => 'ceria'],
+            ['username' => 'luluhusna', 'hari' => 'kamis', 'kelas' => 'ceria'],
+            ['username' => 'herahusna', 'hari' => 'jumat', 'kelas' => 'ceria'],
+            ['username' => 'nininghusna', 'hari' => 'jumat', 'kelas' => 'ceria'],
+        ];
+
+        foreach($data_jadwal as $jadwal){
+            $guru_id = User::where('username', $jadwal['username'])->first();
+            $kelas_id = Kelas::where('nama_kelas', $jadwal['kelas'])->first();
+            $hari_id = Hari::where('nama_hari', $jadwal['hari'])->first();
+            DB::table('tb_jadwal_pelajaran')->insert([
+                'guru_id' => $guru_id->guru->id_guru,
+                'kelas_id' => $kelas_id->id_kelas ,
+                'hari_id' => $hari_id->id_hari,
+            ]);
+        }
 
         DB::table('tb_statusppdb')->insert([
             'status' => false,
