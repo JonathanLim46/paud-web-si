@@ -94,6 +94,10 @@
             transform: translateX(0);
         }
     }
+
+    .sidebar .nav-item {
+        margin-bottom: -25px !important;
+    }
 </style>
 
 <aside class="col-2 pt-4 sidebar bg-white shadow-sm">
@@ -179,7 +183,7 @@
 
     <div class="mt-5 text-center px-3">
         <div class="admin-info rounded-3 p-3">
-            <div class="small text-muted">Admin Panel</div>
+            <div class="small text-muted">{{ ucfirst(Auth::user()->level) }} Panel</div>
             <div class="text-primary fw-medium">{{ Auth::user()->name ?? 'Admin' }}</div>
         </div>
     </div>
