@@ -150,7 +150,7 @@
                             <div class="small text-muted mb-2">
                                 Kp. Pasir Muncang RT 01 RW 03 Desa Sukamanah, Megamendung, Bogor
                             </div>
-                            <a href="https://maps.app.goo.gl/iACff62nFfRngcCg9" target="_blank" rel="noopener"
+                            <a href="https://maps.app.goo.gl/74GkKuGZgf14iif9A" target="_blank" rel="noopener"
                                 class="btn btn-sm btn-primary rounded-3 px-3">
                                 <i class="bi bi-map"></i> Lihat di Google Maps
                             </a>
@@ -164,9 +164,9 @@
     <div class="container">
         <div class="map-container">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15853.705005473212!2d106.807296!3d-6.593825949999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c5b7d47f9df3%3A0x7a8423915ade7301!2sHotel%20Salak%20The%20Heritage!5e0!3m2!1sid!2sid!4v1741418641783!5m2!1sid!2sid"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.7127483542963!2d106.89709169999999!3d-6.6824626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c99fd5777dab%3A0x6ce9b3ccde6926ae!2sGg.%20Haji%20Zein!5e0!3m2!1sid!2sid!4v1747982886599!5m2!1sid!2sid"
+                style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 
