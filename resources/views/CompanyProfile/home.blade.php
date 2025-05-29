@@ -346,6 +346,25 @@
             .btn-lihat {
                 margin-bottom: 20px;
             }
+
+            .program-section .carousel-inner .row {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                /* Buat geser horizontal (scroll snap bisa, opsional) */
+            }
+
+            .program-section .carousel-inner .col-md-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            /* .carousel-control-next {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            } */
+
+            .carousel-control-prev {}
         }
     </style>
 </head>
@@ -448,7 +467,7 @@
 
             <div id="programCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <!-- First slide -->
+                    <!-- Slide 1 -->
                     <div class="carousel-item active">
                         <div class="row justify-content-center">
                             <div class="col-md-4 mb-4 mb-md-0">
@@ -464,6 +483,11 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
                             <div class="col-md-4 mb-4 mb-md-0">
                                 <div class="program-card">
                                     <div class="program-img-container">
@@ -475,56 +499,14 @@
                                         Kegiatan ini tujuannya adalah mengenalkan budaya Sunda melalui bahasa, pakaian
                                         adat, seni, dan permainan tradisional untuk menanamkan kecintaan terhadap
                                         warisan budaya sejak dini.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="program-card">
-                                    <div class="program-img-container">
-                                        <img src="{{ asset('images/page-home/kelas_adventure.png') }}"
-                                            class="program-img" alt="Adventure Class">
-                                    </div>
-                                    <h3 class="program-title">Adventure Class</h3>
-                                    <p class="program-description">
-                                        Kegiatan ini mengajak anak-anak belajar sambil bermain melalui eksplorasi alam,
-                                        tantangan motorik, dan permainan edukatif untuk mengembangkan kemandirian serta
-                                        kreativitas mereka.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Second slide -->
-                    <div class="carousel-item active">
+                    <!-- Slide 3 -->
+                    <div class="carousel-item">
                         <div class="row justify-content-center">
-                            <div class="col-md-4 mb-4 mb-md-0">
-                                <div class="program-card">
-                                    <div class="program-img-container">
-                                        <img src="{{ asset('images/page-home/kelas_sentra.png') }}"
-                                            class="program-img" alt="Kelas Sentra">
-                                    </div>
-                                    <h3 class="program-title">Kelas Sentra</h3>
-                                    <p class="program-description">
-                                        Model pembelajaran sentra memberikan kesempatan bagi anak untuk belajar melalui
-                                        pengalaman langsung di berbagai area tematik.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4 mb-md-0">
-                                <div class="program-card">
-                                    <div class="program-img-container">
-                                        <img src="{{ asset('images/page-home/kelas_kamis_nyunda.png') }}"
-                                            class="program-img" alt="Kamis Nyunda">
-                                    </div>
-                                    <h3 class="program-title">Kamis Nyunda</h3>
-                                    <p class="program-description">
-                                        Kegiatan ini tujuannya adalah mengenalkan budaya Sunda melalui bahasa, pakaian
-                                        adat, seni, dan permainan tradisional untuk menanamkan kecintaan terhadap
-                                        warisan budaya sejak dini.
-                                    </p>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="program-card">
                                     <div class="program-img-container">
@@ -557,6 +539,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Activities Section -->
     <div class="activities-header mt-4">
